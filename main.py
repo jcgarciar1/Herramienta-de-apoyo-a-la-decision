@@ -130,7 +130,13 @@ html.Div([
                    'uppercase', 'fontSize': '15px'}),
     html.Div(id='container-button-timestamp')
 ],style={'textAlign': 'center'}),
-
+html.Div(
+    [
+        html.I(className="fas fa-question-circle fa-lg", id="target-ocupaciones"),
+        dbc.Tooltip("Pie-Chart que muestra las ocupaciones de las personas tomadas en cuenta en el estudio", target="target-ocupaciones"),
+    ],
+    className="p-5 text-muted"
+),
             html.Div([
 
                 # Table container
@@ -216,6 +222,13 @@ html.Div([
                    'uppercase', 'fontSize': '15px'}),
     html.Div(id='container-button-timestamp4')
 ],style={'textAlign': 'center'}),
+html.Div(
+    [
+        html.I(className="fas fa-question-circle fa-lg", id="target-localidad"),
+        dbc.Tooltip("Histograma que muestra la localdiad de las personas tomadas en cuenta en el estudio", target="target-localidad"),
+    ],
+    className="p-5 text-muted"
+),
 html.Div([
 
         # Table container
@@ -247,7 +260,7 @@ dcc.Tab(label='Patrones de transporte', children=[
 html.Div(
     [
         html.I(className="fas fa-question-circle fa-lg", id="targethisto"),
-        dbc.Tooltip("Histograma que muestra la cantidad de personas que usan determinado método de transporte", target="targethisto"),
+        dbc.Tooltip("Diagrama de barras apiladas que muestra los principales aspectos a mejorar discriminados por el tipo de transporte", target="targethisto"),
     ],
     className="p-5 text-muted"
 ),
@@ -260,7 +273,7 @@ html.Div([
 html.Div(
     [
         html.I(className="fas fa-question-circle fa-lg", id="targetsun"),
-        dbc.Tooltip("Sunburst Graph que muestra la cantidad de personas que usan determinado método de transporte", target="targetsun"),
+        dbc.Tooltip("Sunburst Graph que muestra la cantidad de personas que usan determinado método de transporte para ir a su actividad principal", target="targetsun"),
     ],
     className="p-5 text-muted"
 ),
@@ -270,6 +283,40 @@ html.Div([
 html.Div([
     dcc.Graph(id='Preferencia Transporte3'),
 ], style={'width': '49%', 'display': 'inline-block'}),
+html.Div(
+    [
+        html.I(className="fas fa-question-circle fa-lg", id="targetdiagram"),
+        dbc.Tooltip("Diagrama que muestra que transporte utilizan para diferentes actividades", target="targetdiagram"),
+    ],
+    className="p-5 text-muted"
+),
+html.Div([
+    dcc.Graph(
+        id='alter'
+    )
+],style={'width': '49%', 'display': 'inline-block'}),
+html.Div([
+    dcc.Graph(
+        id='alter2'
+    )
+],style={'width': '49%', 'display': 'inline-block'}),
+html.Div(
+    [
+        html.I(className="fas fa-question-circle fa-lg", id="targetdiagram2"),
+        dbc.Tooltip("Diagrama que muestra que transporte utilizan para diferentes actividades", target="targetdiagram2"),
+    ],
+    className="p-5 text-muted"
+),
+html.Div([
+    dcc.Graph(
+        id='alter3'
+    )
+],style={'width': '49%', 'display': 'inline-block'}),
+html.Div([
+    dcc.Graph(
+        id='alter4'
+    )
+],style={'width': '49%', 'display': 'inline-block'}),
 html.Div([
     html.H1("Transmicable")
 ]),
@@ -278,17 +325,7 @@ html.Div([
 ], style={'width': '49%', 'display': 'inline-block'}),
 html.Div([
     dcc.Graph(id='Pie-Cable2'),
-], style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='dificil'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='dificil2'
-    )
-],style={'width': '49%', 'display': 'inline-block'})
+], style={'width': '49%', 'display': 'inline-block'})
     ]),
 dcc.Tab(label='Análisis de tiempo', children=[
 html.Div(
@@ -660,7 +697,7 @@ def update_preferencias(localidad,sex):
     sitp = dff[["T1_Q39"]].value_counts()
     y_val4 = (list(map(lambda x: x[0], list(sitp.index))))
     x_val4 = list(sitp[y_val4])
-    fig = go.Figure()
+    fig = go.Figure(layout=go.Layout(title=go.layout.Title(text="Aspectos a mejorar por tipo de transporte")))
     fig.add_trace(go.Bar(
         y=y_val,
         x=x_val,
@@ -707,7 +744,7 @@ def update_preferencias(localidad,sex):
     fig.update_layout(barmode='stack',yaxis={'categoryorder':'total descending'},
         autosize=False,
         height=700,
-        width = 950,
+        width = 900,
         margin=dict(
             l=50,
             r=50,
@@ -769,7 +806,7 @@ def update_preferenciasSun(localidad,sex):
     dff["Count"] = 1
     cuenta = dff.groupby("transporte").agg({"id": "count"}).sort_values("id")
     dff = dff[dff["transporte"].isin(cuenta[cuenta.id >= 10].index)]
-    fig = px.sunburst(dff, path=['Categoria', 'transporte'], values='Count',color_discrete_sequence=['#32373B','#C83E4D','#4381C1','#59CD90','#D295BF'])
+    fig = px.sunburst(dff, path=['Categoria', 'transporte'], values='Count',color_discrete_sequence=['#32373B','#C83E4D','#4381C1','#59CD90','#D295BF'],title = "Tipo de transporte utilizado para ir a su actividad principal")
     return fig,fig
 
 
@@ -789,10 +826,7 @@ def transmicable(localidad,sex):
     fig = px.pie(resp, values='T1_Q116', names='index', title='¿Ha utilizado el TransMicable?',opacity=0.7,color_discrete_sequence=['#32373B','#C83E4D'])
     return fig,fig
 
-@app.callback([
-    Output("dificil", "figure"),
-    Output("dificil2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
+
 def dificil(localidad,sex):
     colors = ['rgba(38, 24, 74, 0.8)', 'rgba(71, 58, 131, 0.8)',
               'rgba(122, 120, 168, 0.8)', 'rgba(164, 163, 204, 0.85)',
@@ -857,46 +891,56 @@ def dificil(localidad,sex):
         x_data.append(agregar)
     #x_data = list(map(lambda x: list(map(lambda y: y / sum(x), x)), x_data))
     fig = go.Figure()
-    fig.add_trace(go.Bar(
-        y=list(diccio.values()),
-        x=x_data[0],
-        name=top_labels[0],
-        orientation='h',
 
-    ))
     fig.add_trace(go.Bar(
         y=list(diccio.values()),
         x=x_data[1],
         name=top_labels[1],
         orientation='h',
-
+        marker=dict(
+            color='rgba(200, 62, 77, 0.6)',
+            line=dict(color='rgba(200, 62, 77, 0.6)', width=4)
+        )
     ))
     fig.add_trace(go.Bar(
         y=list(diccio.values()),
         x=x_data[2],
         name=top_labels[2],
         orientation='h',
-
+        marker=dict(
+            color='rgba(58, 71, 80, 0.6)',
+            line=dict(color='rgba(58, 71, 80, 0.6)', width=4)
+        )
     ))
     fig.add_trace(go.Bar(
         y=list(diccio.values()),
         x=x_data[3],
         name=top_labels[3],
         orientation='h',
-
+marker=dict(
+            color='rgba(49,163,84, 0.6)',
+            line=dict(color='rgba(49,163,84, 0.6)', width=4)
+        )
     ))
     fig.add_trace(go.Bar(
         y=list(diccio.values()),
         x=x_data[4],
         name=top_labels[4],
         orientation='h',
-
+        marker=dict(
+            color='rgba(49,130,189, 0.6)',
+            line=dict(color='rgba(49,130,189, 0.6)', width=4)
+        )
     ))
     fig.add_trace(go.Bar(
         y=list(diccio.values()),
         x=x_data[5],
         name=top_labels[5],
         orientation='h',
+        marker=dict(
+            color='rgba(230, 194, 41, 0.6)',
+            line=dict(color='rgba(230, 194, 41, 0.6)', width=4)
+        )
 
     ))
     fig.add_trace(go.Bar(
@@ -904,6 +948,10 @@ def dificil(localidad,sex):
         x=x_data[6],
         name=top_labels[6],
         orientation='h',
+        marker=dict(
+            color='rgba(198, 156, 114, 0.6)',
+            line=dict(color='rgba( 198, 156, 114, 0.6)', width=4)
+        )
 
     ))
 
@@ -911,7 +959,7 @@ def dificil(localidad,sex):
     fig.update_layout(barmode='stack',yaxis={'categoryorder':'total descending'},
         autosize=False,
         height=700,
-        width = 950,
+        width = 900,
         margin=dict(
             l=50,
             r=50,
@@ -921,8 +969,207 @@ def dificil(localidad,sex):
         ))
     return fig,fig
 
+@app.callback([
+    Output("alter", "figure"),
+    Output("alter2", "figure")],
+    [Input("dropdown", "value")], Input('dropdown2', 'value'))
+def dificil(localidad,sex):
+    colors = ['rgba(38, 24, 74, 0.8)', 'rgba(71, 58, 131, 0.8)',
+              'rgba(122, 120, 168, 0.8)']
+    top_labels = ["Transporte<br>Publico","Transporte<br>Privado","Transporte<br>Activo"]
+    y_data = ['Diligencias y tramites', 'Recreación o deporte ', 'Socializar', 'Atención de salud',
+                  'Compras y mercado',"Llevar o recoger a alguien","Otro"]
+    dff = encuestas
+    if sex != "Ambos":
+        dff = dff[dff["Género"] == sex]
+    if localidad != "Ambos":
+        dff = dff[dff["T1_localidad"] == localidad]
+
+    dff = dff[["T1_Q34_1","T1_Q34_2","T1_Q34_3","T1_Q34_4","T1_Q34_5","T1_Q34_6","T1_Q34_7"]]
+    diccio = {}
+    publico = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    privado = [11, 14, 15, 16, 17, 18, 19]
+    otros = [12, 13, 20]
+    for i in publico:
+        diccio[i] = "Transporte Publico"
+    for i in privado:
+        diccio[i] = "Transporte Privado"
+    for i in otros:
+        diccio[i] = "Transporte Activo"
+    nombres = []
+    for columna in dff.columns:
+        nombre = "categoria_" + columna
+        nombres.append(nombre)
+        dff[nombre] = dff[columna].replace(diccio)
+
+    x_data = []
+    for columna in nombres:
+        agregar = []
+        for nombre in ["Transporte Publico","Transporte Privado","Transporte Activo"]:
+            agregar.append(len(dff[dff[columna] == nombre]))
+        x_data.append(agregar)
+    x_data = list(map(lambda x: list(map(lambda y: int((y / sum(x))*100), x)), x_data))
+    fig = go.Figure(layout=go.Layout( title=go.layout.Title(text="Tipo de actividad vs Tipo de transporte")))
+
+    for i in range(0, len(x_data[0])):
+        for xd, yd in zip(x_data, y_data):
+            fig.add_trace(go.Bar(
+                x=[xd[i]], y=[yd],
+                orientation='h',
+                marker=dict(
+                    color=colors[i],
+                    line=dict(color='rgb(248, 248, 249)', width=1)
+                )
+            ))
+    fig.update_layout(
+        xaxis=dict(
+            showgrid=False,
+            showline=False,
+            showticklabels=False,
+            zeroline=False,
+            domain=[0.15, 1]
+        ),
+        yaxis=dict(
+            showgrid=False,
+            showline=False,
+            showticklabels=False,
+            zeroline=False,
+        ),
+        barmode='stack',
+        paper_bgcolor='rgb(248, 248, 255)',
+        plot_bgcolor='rgb(248, 248, 255)',
+        margin=dict(l=120, r=10, t=140, b=80),
+        showlegend=False,
+    )
+
+    annotations = []
+
+    for yd, xd in zip(y_data, x_data):
+        # labeling the y-axis
+        annotations.append(dict(xref='paper', yref='y',
+                                x=0.14, y=yd,
+                                xanchor='right',
+                                text=str(yd),
+                                font=dict(family='Arial', size=14,
+                                          color='rgb(67, 67, 67)'),
+                                showarrow=False, align='right'))
+        # labeling the first percentage of each bar (x_axis)
+        annotations.append(dict(xref='x', yref='y',
+                                x=xd[0] / 2, y=yd,
+                                text=str(xd[0]) + '%',
+                                font=dict(family='Arial', size=14,
+                                          color='rgb(248, 248, 255)'),
+                                showarrow=False))
+        # labeling the first Likert scale (on the top)
+        if yd == y_data[-1]:
+            annotations.append(dict(xref='x', yref='paper',
+                                    x=xd[0] / 2, y=1.2,
+                                    text=top_labels[0],
+                                    font=dict(family='Arial', size=14,
+                                              color='rgb(67, 67, 67)'),
+                                    showarrow=False))
+        space = xd[0]
+        for i in range(1, len(xd)):
+            # labeling the rest of percentages for each bar (x_axis)
+            annotations.append(dict(xref='x', yref='y',
+                                    x=space + (xd[i] / 2), y=yd,
+                                    text=str(xd[i]) + '%',
+                                    font=dict(family='Arial', size=14,
+                                              color='rgb(248, 248, 255)'),
+                                    showarrow=False))
+            # labeling the Likert scale
+            if yd == y_data[-1]:
+                annotations.append(dict(xref='x', yref='paper',
+                                        x=space +1.8+ (xd[i] / 2), y=1.2,
+                                        text=top_labels[i],
+                                        font=dict(family='Arial', size=14,
+                                                  color='rgb(67, 67, 67)'),
+                                        showarrow=False))
+            space += xd[i]
 
 
+
+    fig.update_layout(
+            annotations=annotations
+        )
+    return fig,fig
+
+@app.callback([
+    Output("alter3", "figure"),
+    Output("alter4", "figure")],
+    [Input("dropdown", "value")], Input('dropdown2', 'value'))
+def dificil(localidad,sex):
+    colors = ['rgba(38, 24, 74, 0.8)', 'rgba(71, 58, 131, 0.8)',
+              'rgba(122, 120, 168, 0.8)']
+    top_labels = ["Transporte<br>Publico","Transporte<br>Privado","Transporte<br>Activo"]
+    y_data = ['Diligencias y tramites', 'Recreación o deporte ', 'Socializar', 'Atención de salud',
+                  'Compras y mercado',"Llevar o recoger a alguien","Otro"]
+    dff = encuestas
+    if sex != "Ambos":
+        dff = dff[dff["Género"] == sex]
+    if localidad != "Ambos":
+        dff = dff[dff["T1_localidad"] == localidad]
+
+    dff = dff[["T1_Q34_1","T1_Q34_2","T1_Q34_3","T1_Q34_4","T1_Q34_5","T1_Q34_6","T1_Q34_7"]]
+    diccio = {}
+    publico = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    privado = [11, 14, 15, 16, 17, 18, 19]
+    otros = [12, 13, 20]
+    for i in publico:
+        diccio[i] = "Transporte Publico"
+    for i in privado:
+        diccio[i] = "Transporte Privado"
+    for i in otros:
+        diccio[i] = "Transporte Activo"
+    nombres = []
+    for columna in dff.columns:
+        nombre = "categoria_" + columna
+        nombres.append(nombre)
+        dff[nombre] = dff[columna].replace(diccio)
+    diccio = {1: "Buses del SITP (azul, naranja o vinotinto",
+              2: "SITP provisionales",
+              3: "Público tradicional (Bus, buseta, Microbus/Colectivo",
+              4: "Transmilenio",
+              5: "Alimentador",
+              6: "TransmiCable",
+              7: "Taxi",
+              8: "Mototaxi/Bicitaxi",
+              9: "Taxi Pirata",
+              10: "Vehiculo Pirata",
+              11: "Transporte especial informal",
+              12: "Bicicleta",
+              13: "Bicicleta con motor",
+              14: "Moto como conductor",
+              15: "Moto como pasajero",
+              16: "Vehiculo privado como conductor",
+              17: "Vehiculo privado como pasajero",
+              18: "Bus privado",
+              19: "Uber",
+              20: "A pie"}
+
+    dff = dff.replace(diccio)
+
+    grande = pd.concat(
+        [dff["categoria_T1_Q34_1"], dff["categoria_T1_Q34_2"], dff["categoria_T1_Q34_3"], dff["categoria_T1_Q34_4"],
+         dff["categoria_T1_Q34_5"], dff["categoria_T1_Q34_6"], dff["categoria_T1_Q34_7"]])
+    chiquito = pd.concat(
+        [dff["T1_Q34_1"], dff["T1_Q34_2"], dff["T1_Q34_3"], dff["T1_Q34_4"], dff["T1_Q34_5"], dff["T1_Q34_6"],
+         dff["T1_Q34_7"]])
+    tamanio = len(dff["categoria_T1_Q34_1"])
+    dff = pd.DataFrame()
+    dff["grande"] = grande
+    dff["chiquito"] = chiquito
+    lista = ['Diligencias y tramites', 'Recreación o deporte ', 'Socializar', 'Atención de salud',
+             'Compras y mercado', "Llevar o recoger a alguien", "Otro"]
+    tipo = [lista[0]] * tamanio + [lista[1]] * tamanio + [lista[2]] * tamanio + [lista[3]] * tamanio + [
+        lista[4]] * tamanio + [lista[5]] * tamanio + [lista[6]] * tamanio
+    dff["tipo"] = tipo
+    dff = dff[(dff != 97) & (dff != 98)].dropna()
+
+    dff["Count"] = 1
+    fig = px.sunburst(dff, path=['tipo', 'grande','chiquito'], values='Count',color_discrete_sequence=['#32373B','#C83E4D','#4381C1','#59CD90','#D295BF'],title = "Tipo de actividad vs Tipo de transporte")
+
+    return fig,fig
 
 
 if __name__ == '__main__':
