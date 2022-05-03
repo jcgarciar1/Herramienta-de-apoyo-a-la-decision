@@ -1,10 +1,13 @@
 import pandas as pd
+import numpy as np
 import dash_bootstrap_components as dbc
 from dash import Dash, html, dcc, dash_table,callback_context
 import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
-
+from plotly.subplots import make_subplots
+import json
+import datetime
 #df = pd.read_excel('movimientos_acelerometria.xlsx')
 
 # Run this app with `python app.py` and
@@ -19,31 +22,63 @@ from dash.dependencies import Input, Output
 # see https://plotly.com/python/px-arguments/ for more options
 
 
-#fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
-#df.groupby("Tipo").agg({})
-
-#fig = px.bar(df, x=df["Tipo"].unique(), y=df.groupby(["Tipo","sexo"])['distancia_casa'].mean().reset_index()[df.groupby(["Tipo","sexo"])['distancia_casa'].mean().reset_index()['sexo'] == "F"],color="sexo", barmode="group")
-
-#
-
-df2 = pd.read_excel('tiempo_lugares.xlsx')
-encuestas = pd.read_csv('t1-transmicable.csv', encoding='ISO-8859-1',sep = ";")
-demograficos = pd.read_excel('ResumenParticipantes.xlsx',sheet_name = "participants_202004291506")
-demograficos["Zona"] = demograficos["Zona"].replace({"Ciudad Bolívar" : "Ciudad Bolivar", "San Cristóbal": "San Cristobal"})
-encuestas = demograficos.merge(encuestas, left_on = "id1", right_on = "T1_ID")
-tiempo_movimiento = pd.read_excel('tiempo_movimiento.xlsx')
 
 
+#Lectura de datos de encuestas
+#T1
 
-diccio = {1:"Trabajando",2:"No trabajó pero tenía trabajo",3:"Buscando trabajo",4:"Estudiando",5:"Oficios del hogar",6:"Incapacitado permanente",7:"Otros"}
-encuestas = encuestas.replace({"T1_Q15":diccio})
-
-colors = {
-    'background': '#ede2e1',
-    'text': '#7FDBFF'
-}
+encuestast1 = pd.read_csv("modos_t1_resumido.csv")
+#T2
+encuestast2 = pd.read_csv("modos_t2_resumido.csv")
 
 
+#Modos de transporte
+
+#Tiempo movimientos
+#tiempo_movimiento = pd.read_excel('tiempo_movimiento.xlsx')
+
+#Incidencias
+#incidencias = pd.read_excel("incidencias_lugares.xlsx",sheet_name="incidencias_lugares")
+
+#Tiempo lugares
+#tiempo_lugares = pd.read_excel("tiempo_lugares.xlsx")
+
+#Lugares Acerelometria
+#lugares_acele = pd.read_excel("lugares_acelerometria.xlsx")
+#lugares_acele = lugares_acele[(lugares_acele["PA"] != 'invalid') & (lugares_acele["Tipo_total"] != "Unknown")]
+
+#Locaciones (Lat Lon) acelerometria
+#acelerometria = pd.read_excel("movimientos_acelerometria.xlsx")
+
+primeros = pd.read_csv("primeros.csv")
+primeros.hora_inicio = primeros.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+
+primerost2 = pd.read_csv("primerosT2.csv")
+primerost2.hora_inicio = primerost2.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+
+ultimos = pd.read_csv("ultimos.csv")
+ultimos.hora_fin = ultimos.hora_fin.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+
+ultimost2 = pd.read_csv("ultimosT2.csv")
+ultimost2.hora_fin = ultimost2.hora_fin.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+
+localidades = set(pd.read_csv("localidades.csv")["0"])
+
+viajes_promedio = pd.read_csv("viajes_diarios_promedioT1.csv")
+viajes_promedioT2 = pd.read_csv("viajes_diarios_promedioT2.csv")
+
+tiempos = pd.read_csv("tiempos_tipo.csv")
+tiemposT2 = pd.read_csv("tiempos_tipoT2.csv")
+
+tiempos_viaje = pd.read_csv("tiempo_viajes_T1.csv")
+tiempos_viaje.hora_inicio = tiempos_viaje.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+
+tiempos_viajeT2 = pd.read_csv("tiempo_viajes_T2.csv")
+tiempos_viajeT2.hora_inicio = tiempos_viajeT2.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+
+with open('bogota.json', 'r') as openfile:
+    # Reading from json file
+    bog_regions_geo = json.load(openfile)
 
 def generate_table(max_rows=10):
     hola = encuestas['T1_Q10'].describe().to_frame().reset_index()
@@ -71,7 +106,7 @@ app = Dash(__name__,
 
 app.layout =html.Div([
 
-
+html.Div([
     html.Div([
         html.H3(children = 'Escoja la localidad a visualizar'),
 dcc.Dropdown(
@@ -85,7 +120,7 @@ dcc.Dropdown(
         html.H3(children = 'Escoja el sexo'),
         dcc.Dropdown(
         id="dropdown2",
-        options=["M","F","Ambos"],
+        options=["Hombres","Mujeres","Ambos"],
         value="Ambos",
         clearable=False,
     )
@@ -96,7 +131,15 @@ dcc.Dropdown(
             #clearable=False,
             #multi=True
         #)
-],  style={"width": "30%",'display': 'inline-block',"marginLeft": "5%"}),
+],  style={"width": "30%",'display': 'inline-block',"marginLeft": "5%"})],style={"width": "100%",'position':'fixed','z-index': '999'}),
+
+
+html.Br(),
+html.Br(),
+html.Br(),
+html.Br(),
+html.Br(),
+html.Br(),
 dcc.Tabs([
         dcc.Tab(label='Datos Demograficos', children=[
 html.Div(
@@ -106,22 +149,13 @@ html.Div(
     ],
     className="p-5 text-muted"
 ),
-            html.Div([
 
                 # Table container
                 html.Div([
                     dcc.Graph(id='sexo')
 
-                ], style={'width': '49%', 'display': 'inline-block'}),
+                ]),
 
-                # Graph container
-                html.Div([
-
-                    dcc.Graph(id='sexot2')
-
-                ], style={'width': '49%', 'display': 'inline-block'}),
-
-            ], style={'display': 'flex'}),
 html.Div([
     html.Button('Descripción', id='btn-nclicks-1', n_clicks=0, style={'width': '240px', 'height': '40px',
                    'cursor': 'pointer', 'border': '0px',
@@ -137,56 +171,12 @@ html.Div(
     ],
     className="p-5 text-muted"
 ),
-            html.Div([
-
                 # Table container
                 html.Div([
                     dcc.Graph(id='ocupacion')
 
-                ], style={'width': '49%', 'display': 'inline-block'}),
+                ]),
 
-                # Graph container
-                html.Div([
-
-                    dcc.Graph(id='ocupacion2')
-
-                ], style={'width': '49%', 'display': 'inline-block'}),
-
-            ], style={'display': 'flex'}),
-html.Div([
-    html.Button('Descripción', id='btn-nclicks-2', n_clicks=0, style={'width': '240px', 'height': '40px',
-                   'cursor': 'pointer', 'border': '0px',
-                   'borderRadius': '5px', 'backgroundColor':
-                   'black', 'color': 'white', 'textTransform':
-                   'uppercase', 'fontSize': '15px'}),
-    html.Div(id='container-button-timestamp2')
-],style={'textAlign': 'center'}),
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="target2"),
-        dbc.Tooltip("Histograma que muestra la distribución de edades de las personas que participaron en el estudio", target="target2"),
-    ],
-    className="p-5 text-muted"
-),
-
-    html.Div([
-
-        # Table container
-        html.Div([
-            dcc.Graph(id='edades')
-
-        ], style={'width': '49%', 'display': 'inline-block'}),
-
-
-        # Graph container
-        html.Div([
-            dcc.Graph(id='edades2')
-
-        ], style={'width': '49%', 'display': 'inline-block'}),
-
-
-
-    ], style={'display': 'flex'}),
 html.Div([
     html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
                    'cursor': 'pointer', 'border': '0px',
@@ -195,58 +185,20 @@ html.Div([
                    'uppercase', 'fontSize': '15px'}),
     html.Div(id='container-button-timestamp3')
 ],style={'textAlign': 'center'}),
-
-
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="target3"),
-        dbc.Tooltip("Pie-Chart que muestra el estado conyugal de las personas que participaron en el estudio", target="target3"),
-    ],
-    className="p-5 text-muted"
-),
-        # Table container
-        html.Div([
-            dcc.Graph(id='estado-conyugal')
-
-        ], style={'width': '49%', 'display': 'inline-block'}),
-        # Table container
-        html.Div([
-            dcc.Graph(id='estado-conyugal2')
-
-        ], style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    html.Button('Descripción', id='btn-nclicks-4', n_clicks=0, style={'width': '240px', 'height': '40px',
-                   'cursor': 'pointer', 'border': '0px',
-                   'borderRadius': '5px', 'backgroundColor':
-                   'black', 'color': 'white', 'textTransform':
-                   'uppercase', 'fontSize': '15px'}),
-    html.Div(id='container-button-timestamp4')
-],style={'textAlign': 'center'}),
 html.Div(
     [
         html.I(className="fas fa-question-circle fa-lg", id="target-localidad"),
-        dbc.Tooltip("Histograma que muestra la localdiad de las personas tomadas en cuenta en el estudio", target="target-localidad"),
+        dbc.Tooltip("Histograma que muestra la localidad de las personas tomadas en cuenta en el estudio", target="target-localidad"),
     ],
     className="p-5 text-muted"
 ),
-html.Div([
+
 
         # Table container
         html.Div([
             dcc.Graph(id='localidad')
 
-        ], style={'width': '49%', 'display': 'inline-block'}),
-
-
-        # Graph container
-        html.Div([
-            dcc.Graph(id='localidad2')
-
-        ], style={'width': '49%', 'display': 'inline-block'}),
-
-
-
-    ], style={'display': 'flex'}),
+        ]),
 html.Div([
     html.Button('Descripción', id='btn-nclicks-5', n_clicks=0, style={'width': '240px', 'height': '40px',
                    'cursor': 'pointer', 'border': '0px',
@@ -266,107 +218,33 @@ html.Div(
 ),
 html.Div([
     dcc.Graph(id='Preferencia Transporte'),
-], style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(id='Preferencia Transportehist'),
-], style={'width': '49%', 'display': 'inline-block'}),
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="targetsun"),
-        dbc.Tooltip("Sunburst Graph que muestra la cantidad de personas que usan determinado método de transporte para ir a su actividad principal", target="targetsun"),
-    ],
-    className="p-5 text-muted"
-),
-html.Div([
-    dcc.Graph(id='Preferencia Transporte2'),
-], style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(id='Preferencia Transporte3'),
-], style={'width': '49%', 'display': 'inline-block'}),
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="targetdiagram"),
-        dbc.Tooltip("Diagrama que muestra que transporte utilizan para diferentes actividades", target="targetdiagram"),
-    ],
-    className="p-5 text-muted"
-),
-html.Div([
-    dcc.Graph(
-        id='alter'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='alter2'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="targetdiagram2"),
-        dbc.Tooltip("Diagrama que muestra que transporte utilizan para diferentes actividades", target="targetdiagram2"),
-    ],
-    className="p-5 text-muted"
-),
-html.Div([
-    dcc.Graph(
-        id='alter3'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='alter4'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    html.H1("Transmicable")
 ]),
 html.Div([
-    dcc.Graph(id='Pie-Cable'),
-], style={'width': '49%', 'display': 'inline-block'}),
+    html.Div(id='viajes-promedio'),
+]),
 html.Div([
-    dcc.Graph(id='Pie-Cable2'),
-], style={'width': '49%', 'display': 'inline-block'})
-    ]),
-dcc.Tab(label='Análisis de tiempo', children=[
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="targetpie"),
-        dbc.Tooltip("Pie Chart que muestra la proporción del tiempo promedio de los encuestados en cada lugar", target="targetpie"),
-    ],
-    className="p-5 text-muted"
-),
-html.Div([
-    dcc.Graph(
-        id='pie-chart'
-    )
-], style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='pie-chart2'
-    )
-], style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='tiempos'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='tiempos2'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='tiempos3'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
-html.Div([
-    dcc.Graph(
-        id='tiempos4'
-    )
-],style={'width': '49%', 'display': 'inline-block'}),
+    dcc.RangeSlider(5, 23,1,
+               value=[5,9],
+               id='my-slider'
+               )],style={"width":"50%","marginLeft": "30%"},),
 
-    ])
+html.Div([
+    dcc.Graph(id='mapa-frecuencias'),
+]),
+html.Div([
+    dcc.Graph(id='suma-transporte'),
+]),
+html.Div([
+    dcc.RangeSlider(5, 23,1,
+               value=[5,9],
+               id='my-slider2'
+               )],style={"width":"50%","marginLeft": "30%"},),
+html.Div([
+    dcc.Graph(id='mapa-tiempos'),
+]),
+
+    ]),
+
 ])
 ])
 
@@ -385,10 +263,7 @@ def displayClick(btn1):
         else:
             return
 
-@app.callback(
-    Output('container-button-timestamp2', 'children'),
-    Input('btn-nclicks-2', 'n_clicks')
-)
+
 def displayClick(btn1):
     changed_id = [p['prop_id'] for p in callback_context.triggered][0]
     if 'btn-nclicks-2' in changed_id:
@@ -413,10 +288,7 @@ def displayClick(btn1):
         else:
             return
 
-@app.callback(
-    Output('container-button-timestamp4', 'children'),
-    Input('btn-nclicks-4', 'n_clicks')
-)
+
 def displayClick(btn1):
     changed_id = [p['prop_id'] for p in callback_context.triggered][0]
     if 'btn-nclicks-4' in changed_id:
@@ -442,735 +314,529 @@ def displayClick(btn1):
             return
 
 
-@app.callback([
+@app.callback(
     Output("localidad", "figure"),
-    Output("localidad2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value')])
 def update_localidad(localidad,sex):
-    datos = demograficos.sort_values("Género")
+    datos1 = encuestast1.copy()
+    datos2 = encuestast2.copy()
     if sex != "Ambos":
-        datos = datos[datos["Género"] == sex]
+        datos1 = datos1[datos1["Sexo"] == sex]
+        datos2 = datos2[datos2["Sexo"] == sex]
+
     if localidad != "Ambos":
-        datos = datos[datos["Zona"] == localidad]
-    fig = px.histogram(datos, x="Zona",title = "Número de personas por localidad",color = "Zona",opacity=0.6,
-                         color_discrete_sequence=['#32373B',
-                                                  '#C83E4D'])
-    fig.update_layout(title_x=0.5)
-    return fig,fig
+        datos1 = datos1[datos1["localidad"] == localidad]
+        datos2 = datos2[datos2["localidad"] == localidad]
+    fig = make_subplots(rows=1, cols=2, specs=[[{"type": "pie"}, {"type": "pie"}]], vertical_spacing=0.001)
+
+    datos1 = datos1.groupby("localidad").agg({'localidad':'count'}).sort_index()
+    datos2 = datos2.groupby("localidad").agg({'localidad':'count'}).sort_index()
+
+
+    fig.add_trace(go.Pie(
+        labels=datos1.index,
+        values=datos1.localidad,
+        textinfo='label+percent',
+        insidetextorientation='radial',
+        name="Antes de la pandemia",
+        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+    ), 1, 1)
+    fig.add_trace(go.Pie(
+        labels=datos2.index,
+        values=datos2.localidad,
+        textinfo='label+percent',
+        insidetextorientation='radial',
+        name = "Despues de la pandemia",
+        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+    ), 1, 2)
+
+   # fig.update_layout(title_x=0.5)
+    return fig
 
 
 # Histograma de sexo
-@app.callback([
+@app.callback(
     Output("sexo", "figure"),
-    Output("sexot2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value')])
 def update_sexo(localidad,sex):
-    datos = demograficos.sort_values("Género")
+    datos1 = encuestast1.copy()
+    datos2 = encuestast2.copy()
     if sex != "Ambos":
-        datos = datos[datos["Género"] == sex]
+        datos1 = datos1[datos1["Sexo"] == sex]
+        datos2= datos2[datos2["Sexo"] == sex]
+
     if localidad != "Ambos":
-        datos = datos[datos["Zona"] == localidad]
-    fig = px.histogram(datos, x="Género",title = "Distribución de Género antes de la pandemia",color = "Género",opacity=0.6,
-                         color_discrete_sequence=['#32373B',
-                                                  '#C83E4D'])
-    fig.update_layout(title_x=0.5,font_family='Tahoma', plot_bgcolor='rgba(67, 129, 193)')
-    return fig,fig
+        datos1 = datos1[datos1["localidad"] == localidad]
+        datos2 = datos2[datos2["localidad"] == localidad]
+    fig = make_subplots(rows=1, cols=2, specs=[[{"type": "pie"}, {"type": "pie"}]],vertical_spacing=0.001)
 
+    datos1 = datos1.groupby("Sexo").agg({"Sexo":"count"})
+    datos2 = datos2.groupby("Sexo").agg({"Sexo":"count"})
 
-@app.callback(
-    Output("tiempos", "figure"),
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_sexo3(localidad,sex):
-    datos = tiempo_movimiento
-    if sex != "Ambos":
-        datos = datos[datos["sexo"] == sex]
-    if localidad != "Ambos":
-        datos = datos[datos["localidad"] == localidad]
-    datos = datos.groupby("Tipo").agg({"promedio_semana": "mean"}).reset_index().sort_values("promedio_semana",ascending = False)
-    fig = px.bar(datos, x="Tipo",y="promedio_semana",title = "Tiempos promedio por semana por cada tipo de transporte").update_layout(yaxis_title="Tiempo promedio por semana")
+    fig.add_trace(go.Pie(
+        labels = datos1.index,
+        values = datos1.Sexo,
+        textinfo='label+percent',
+        insidetextorientation='radial',
+        name = "Antes de la pandemia",
+        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+   ), 1, 1)
 
-    fig.update_layout(title_x=0.5)
+    fig.add_trace(go.Pie(
+        labels=datos2.index,
+        values=datos2.Sexo,
+        textinfo='label+percent',
+        insidetextorientation='radial',
+        name = "Despues de la pandemia",
+        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+    ), 1, 2)
+                        # color_discrete_sequence=['#32373B',   '#C83E4D'])
+    #fig.update_layout(title_x=0.5,font_family='Tahoma', plot_bgcolor='rgba(67, 129, 193)')
     return fig
 
 @app.callback(
-    Output("tiempos2", "figure"),
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_sexo4(localidad,sex):
-    datos = tiempo_movimiento
-    if sex != "Ambos":
-        datos = datos[datos["sexo"] == sex]
-    if localidad != "Ambos":
-        datos = datos[datos["localidad"] == localidad]
-    datos = datos.groupby("Tipo").agg({"promedio_semana": "mean"}).reset_index().sort_values("promedio_semana",ascending = False)
-    fig = px.bar(datos, x="Tipo",y="promedio_semana",title = "Tiempos promedio por semana por cada tipo de transporte").update_layout(yaxis_title="Tiempo promedio por semana")
-
-    fig.update_layout(title_x=0.5)
-    return fig
-
-@app.callback(
-    Output("tiempos3", "figure"),
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_sexo5(localidad,sex):
-    datos = tiempo_movimiento
-    if sex != "Ambos":
-        datos = datos[datos["sexo"] == sex]
-    if localidad != "Ambos":
-        datos = datos[datos["localidad"] == localidad]
-    datos = datos.groupby("Tipo").agg({"promedio_semana": "mean"}).reset_index().sort_values("promedio_semana",ascending = False)
-    fig = go.Figure(data=[go.Pie(labels=datos["Tipo"], values=datos["promedio_semana"],textinfo='label+percent', hole=.3)])
-
-    fig.update_layout(title_x=0.5)
-    return fig
-
-@app.callback(
-    Output("tiempos4", "figure"),
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_sexo6(localidad,sex):
-    datos = tiempo_movimiento
-    if sex != "Ambos":
-        datos = datos[datos["sexo"] == sex]
-    if localidad != "Ambos":
-        datos = datos[datos["localidad"] == localidad]
-    datos = datos.groupby("Tipo").agg({"promedio_semana": "mean"}).reset_index().sort_values("promedio_semana",ascending = False)
-
-    fig = go.Figure(data=[go.Pie(labels=datos["Tipo"], values=datos["promedio_semana"],textinfo='label+percent', hole=.3)])
-    fig.update_layout(title_x=0.5)
-    return fig
-
-@app.callback(
-    Output("pie-chart", "figure"),
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_pie_chart(day,sex):
-    datos = df2
-    if sex != "Ambos":
-        datos = datos[df2["sexo"] == sex]
-    if day != "Ambos":
-        datos = datos[df2["localidad"] == day]
-    grupo = datos.groupby('Tipo_total')['mean(TIEMPO_MINUTO)'].mean().to_frame()
-    grupo["Porcentaje"] = grupo / grupo.sum()
-    grupo = grupo[grupo["Porcentaje"] >= 0.04]
-    fig = px.pie(values=grupo["mean(TIEMPO_MINUTO)"], names=grupo.index, title='Tiempo Promedio en Cada Lugar')
-    fig.update_layout(title_x=0.5)
-    return fig
-
-@app.callback(
-    Output("pie-chart2", "figure"),
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_pie_chart2(day,sex):
-    datos = df2
-    if sex != "Ambos":
-        datos = datos[df2["sexo"] == sex]
-    if day != "Ambos":
-        datos = datos[df2["localidad"] == day]
-    grupo = datos.groupby('Tipo_total')['mean(TIEMPO_MINUTO)'].mean().to_frame()
-    grupo["Porcentaje"] = grupo / grupo.sum()
-    grupo = grupo[grupo["Porcentaje"] >= 0.04]
-    fig = px.pie(values= grupo["mean(TIEMPO_MINUTO)"], names=grupo.index, title='Tiempo Promedio en Cada Lugar')
-    fig.update_layout(title_x=0.5)
-    return fig
-
-
-
-#Histograma de edades
-@app.callback([
-    Output("edades", "figure"),
-    Output("edades2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_edades(localidad,sex):
-    datos = demograficos
-    if sex != "Ambos":
-        datos = datos[datos["Género"] == sex]
-    if localidad != "Ambos":
-        datos = datos[datos["Zona"] == localidad]
-    fig = px.histogram(datos, x="Edad",title = "Distribución de las edades",opacity=0.6,color_discrete_sequence=['#32373B'])
-    fig.update_layout(title_x=0.5)
-    return fig,fig
-
-
-#Pie de estado conyugal
-@app.callback([
-    Output("estado-conyugal", "figure"),
-    Output("estado-conyugal2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_estado_conyugal(localidad,sex):
-    dic = {1: "Soltero",
-           2: "Viudo",
-           3: "Casado",
-           4: "Unión Libre",
-           5: "Divorciado",
-           6: "Separado"}
-    datos = encuestas
-    if sex != "Ambos":
-        datos = datos[datos["Género"] == sex]
-    if localidad != "Ambos":
-        datos = datos[datos["T1_localidad"] == localidad]
-
-    fig = px.pie(datos, values=datos["T1_Q12"].value_counts(),
-           names=list(map(lambda x: dic[x],datos["T1_Q12"].value_counts().index)), title='Estado Conyugal',opacity=0.7, color_discrete_sequence=px.colors.sequential.RdBu)
-    fig.update_layout(title_x=0.5,font_family='Tahoma')
-
-    return fig,fig
-
-@app.callback([
     Output("ocupacion", "figure"),
-    Output("ocupacion2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value')])
 def ocupacion(localidad,sex):
-    datos = encuestas
+    datos1 = encuestast1.copy()
+    datos2 = encuestast2.copy()
+
+    datos1 = datos1[(datos1.T1_Q15 != "888") & (datos1.T1_Q15 != "Otros") ]
+    datos2 = datos2[datos2.T2_Q13.isin(datos1.T1_Q15.unique())]
+
     if sex != "Ambos":
-        datos = datos[datos["Género"] == sex]
+        datos1 = datos1[datos1["Sexo"] == sex]
+        datos2 = datos2[datos2["Sexo"] == sex]
+
     if localidad != "Ambos":
-        datos = datos[datos["T1_localidad"] == localidad]
-    fig = px.pie(values=datos["T1_Q15"].value_counts(),
-                 names= datos["T1_Q15"].value_counts().index, title='Ocupación',opacity=0.7,color_discrete_sequence=px.colors.sequential.RdBu)
-    fig.update_layout(title_x=0.5)
-    return fig,fig
+        datos1 = datos1[datos1["localidad"] == localidad]
+        datos2 = datos2[datos2["localidad"] == localidad]
+
+    fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=False,
+                        shared_yaxes=True, vertical_spacing=0.001)
+
+    datos_x1 = datos1.T1_Q15.value_counts().sort_index()
+    datos_x2 = datos2.T2_Q13.value_counts().sort_index()
+
+    fig.add_trace(go.Bar(
+        y=datos_x1,
+        x=datos_x1.index,
+        name='Antes de la pandemia',
+        marker=dict(
+            color='rgba(38, 24, 74, 0.6)',
+            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+        )), 1, 1)
+
+    fig.add_trace(go.Bar(
+        y=datos_x2,
+        x=datos_x2.index,
+        name='Despues de la pandemia',
+        marker=dict(
+            color='rgba(38, 24, 74, 0.6)',
+            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+        )), 1, 2)
+    #fig.update_layout(title_x=0.5)
+    return fig
 
 #Histograma preferencia transporte
-@app.callback([
+@app.callback(
     Output("Preferencia Transporte", "figure"),
-    Output("Preferencia Transportehist", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value')])
 def update_preferencias(localidad,sex):
-    dff = encuestas
+
+    datos1 = encuestast1.copy()
+    datos2= encuestast2.copy()
+
     if sex != "Ambos":
-        dff = dff[dff["Género"] == sex]
+        datos1 = datos1[datos1["Sexo"] == sex]
+        datos2 = datos2[datos2["Sexo"] == sex]
+
     if localidad != "Ambos":
-        dff = dff[dff["T1_localidad"] == localidad]
-    diccio = {1: "Reducir el tiempo de viaje",
-              2: "Mejorar el confort en el vehiculo",
-              3: "Mejorar la confiabilidad del horario de llegada del servicio",
-              4: "Mejorar la seguridad en el vehiculo",
-              5: "Mejorar la seguridad durante la espera en la parada o estación",
-              6: "Mejorar la seguridad vial",
-              7: "Aumentar la cobertura geografica",
-              8: "Aumentar la cobertura horaria",
-              9: "Mejorar la frecuencia del servicio",
-              10: "Reducir la tarifa",
-              11: "Reducir la contaminación",
-              12: "No hay nada que mejorar",
-              13: "No usa el servicio",
-              98: "Otro"}
-    diccioAlimen = {1: "Reducir el tiempo de viaje",
-                    2: "Mejorar el confort en el vehiculo",
-                    3: "Mejorar la confiabilidad del horario de llegada del servicio",
-                    4: "Mejorar la seguridad en el vehiculo",
-                    5: "Mejorar la seguridad durante la espera en la parada o estación",
-                    6: "Mejorar la seguridad vial",
-                    7: "Aumentar la cobertura geografica",
-                    8: "Aumentar la cobertura horaria",
-                    9: "Mejorar la frecuencia del servicio",
-                    10: "Reducir la contaminación",
-                    11: "No hay nada que mejorar",
-                    12: "No usa el servicio",
-                    98: "Otro"}
+        datos1 = datos1[datos1["localidad"] == localidad]
+        datos2 = datos2[datos2["localidad"] == localidad]
 
-    diccioCable = {1: "Reducir el tiempo de viaje",
-                   2: "Mejorar el confort en el vehiculo",
-                   3: "Mejorar la confiabilidad del horario de llegada del servicio",
-                   4: "Mejorar la seguridad en el vehiculo",
-                   5: "Mejorar la seguridad durante la espera en la parada o estación",
-                   6: "Mejorar la seguridad vial",
-                   7: "Mejorar la facilidad para entrar",
-                   8: "Reducir la fila para entrar",
-                   9: "Aumentar la cobertura geografica",
-                   10: "Aumentar la cobertura horaria",
-                   11: "Mejorar la frecuencia del servicio",
-                   12: "Reducir la tarifa",
-                   13: "Reducir la contaminación",
-                   14: "No hay nada que mejorar",
-                   15: "No usa el servicio",
-                   98: "Otro"}
-    dff = dff.replace({"T1_Q36": diccio,"T1_Q37":diccioAlimen,"T1_Q38":diccioCable,"T1_Q39":diccio})
-    transmi = dff[["T1_Q36"]].value_counts()
-    y_val = (list(map(lambda x: x[0],list(transmi.index))))
-    x_val = list(transmi[y_val])
+    fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
+                        shared_yaxes=True, vertical_spacing=0.001)
+    top_labels = ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']
+    x_data1 = []
+    for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
+        x_data1.append(len(datos1[datos1["modes"] == nombre]))
+    x_data1 = list(map(lambda x: x / sum(x_data1), x_data1))
 
-    cable = dff[["T1_Q38"]].value_counts()
-    y_val2 = (list(map(lambda x: x[0], list(cable.index))))
-    x_val2 = list(cable[y_val2])
+    x_data2 = []
+    for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
+        x_data2.append(len(datos2[datos2["modes"] == nombre]))
+    x_data2 = list(map(lambda x: x / sum(x_data2), x_data2))
 
-    alimenta = dff[["T1_Q37"]].value_counts()
-    y_val3 = (list(map(lambda x: x[0], list(alimenta.index))))
-    x_val3 = list(alimenta[y_val3])
 
-    sitp = dff[["T1_Q39"]].value_counts()
-    y_val4 = (list(map(lambda x: x[0], list(sitp.index))))
-    x_val4 = list(sitp[y_val4])
-    fig = go.Figure(layout=go.Layout(title=go.layout.Title(text="Aspectos a mejorar por tipo de transporte")))
     fig.add_trace(go.Bar(
-        y=y_val,
-        x=x_val,
-        name='Transmilenio',
+        y=top_labels,
+        x=x_data1,
+        name='Antes de la pandemia',
         orientation='h',
         marker=dict(
-            color='rgba(200, 62, 77, 0.6)',
-            line=dict(color='rgba(200, 62, 77, 0.6)', width=4)
-        )
+            color='rgba(38, 24, 74, 0.6)',
+            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+        )),1,1)
 
-    ))
     fig.add_trace(go.Bar(
-        y=y_val2,
-        x=x_val2,
-        name='TransMicable',
+        y=top_labels,
+        x=x_data2,
+        name='Despues de la pandemia',
         orientation='h',
-    marker = dict(
-        color='rgba(58, 71, 80, 0.6)',
-        line=dict(color='rgba(58, 71, 80, 1.0)', width=4)
+        marker=dict(
+            color='rgba(49,130,189, 0.6)',
+            line=dict(color='rgba(49,130,189, 1)', width=3)
+        )), 1, 2)
+
+    return fig
+
+
+def patrones_movimiento(localidad,sexo,hora):
+    data_frame = primeros
+    inicio,fin = [datetime.time(num) for num in hora]    #inicio,fin = pd.to_datetime(hora.split(","))
+    #print(type(data_frame.hora_inicio.loc[0]))
+    #inicio,fin = inicio.time(),fin.time()
+    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
+    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
+    data_frame.columns = ["frecuencia"]
+    data_frame.reset_index().groupby("inicio").agg({"frecuencia":"mean"})
+    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
+    data_frame = (data_frame/data_frame.sum()).reset_index()
+    figure1 = px.choropleth(data_frame=data_frame,
+                            geojson=bog_regions_geo,
+                            locations='inicio',
+                            featureidkey='properties.LocNombre',
+                            # ruta al campo del archivo GeoJSON con el que se hará la relación (nombre de los estados)
+                            color='frecuencia',  # El color depende de las cantidades
+                            color_continuous_scale="Greens"  # greens
+                            )
+    figure1.update_geos(showcountries=True, showcoastlines=True, showland=True, fitbounds="locations")
+
+    data_frame = primerost2
+    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
+    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
+    data_frame.columns = ["frecuencia"]
+    data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
+    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
+    data_frame = (data_frame / data_frame.sum()).reset_index()
+    figure2 = px.choropleth(data_frame=data_frame,
+                            geojson=bog_regions_geo,
+                            locations='inicio',
+                            featureidkey='properties.LocNombre',
+                            # ruta al campo del archivo GeoJSON con el que se hará la relación (nombre de los estados)
+                            color='frecuencia',  # El color depende de las cantidades
+                            color_continuous_scale="Greens"  # greens
+                            )
+    figure2.update_geos(showcountries=True, showcoastlines=True, showland=True, fitbounds="locations")
+
+    return figure1,figure2
+
+
+@app.callback(
+    Output("mapa-frecuencias", "figure"),
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value'),
+     Input('my-slider', 'value')])
+def prueba(localidad,sex,hora):
+    fig = make_subplots(
+        rows=2, cols=2,
+        specs=[
+            [{"type": "choropleth"}, {"type": "choropleth"}],[{"type": "choropleth"},{"type": "choropleth"}]
+        ],
+        vertical_spacing=0.075,
+        horizontal_spacing=0.08,
+        subplot_titles=("Inicio de viajes pre pandemia", "Inicio de viajes post pandemia", "Fin de viajes pre pandemia", "Fin de viajes post pandemia")
     )
-    ))
-    fig.add_trace(go.Bar(
-        y=y_val3,
-        x=x_val3,
-        name='Alimentador',
-        orientation='h',
-        marker=dict(
-            color='rgba(49,163,84, 0.6)',
-            line=dict(color='rgba(49,163,84, 0.6)', width=4)
-        )
-    ))
-    fig.add_trace(go.Bar(
-        y=y_val4,
-        x=x_val4,
-        name='SITP',
-        orientation='h',
-        marker=dict(
-            color='rgba(49,130,189, 0.6)',
-            line=dict(color='rgba(49,130,189, 0.6)', width=4)
-        )
-    ))
-
-    fig.update_layout(title_x=0.5)
-    fig.update_layout(barmode='stack',yaxis={'categoryorder':'total descending'},
-        autosize=False,
-        height=700,
-        width = 900,
-        margin=dict(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ))
-    return fig,fig
-
-
-
-@app.callback([
-    Output("Preferencia Transporte2", "figure"),
-    Output("Preferencia Transporte3", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def update_preferenciasSun(localidad,sex):
-    dff = encuestas
+    data_frame = primeros
     if sex != "Ambos":
-        dff = dff[dff["Género"] == sex]
+        data_frame = data_frame[data_frame["Sexo"] == sex]
     if localidad != "Ambos":
-        dff = dff[dff["T1_localidad"] == localidad]
+        data_frame = data_frame[data_frame["localidad"] == localidad]
 
-    dff = dff.assign(transporte=dff.T1_Q28.str.split(" ")).explode('transporte')
-    lista = list(map(str, range(1, 21)))
-    dff = dff[dff.transporte.isin(lista)]
-    diccio = {}
-    publico = ["1", "2", "3", "4", "5", "6", "7", "8","9","10"]
-    privado = ["11", "14", "15", "16", "17", "18", "19"]
-    otros = ["12", "13", "20"]
-    for i in publico:
-        diccio[i] = "Transporte Publico"
-    for i in privado:
-        diccio[i] = "Transporte Privado"
-    for i in otros:
-        diccio[i] = "Transporte Activo"
+    inicio, fin = [datetime.time(num) for num in hora]
+    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
+    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
+    data_frame.columns = ["frecuencia"]
+    data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
+    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
+    data_frame = (data_frame / data_frame.sum()).reset_index()
+    diff = localidades - set(data_frame.inicio)
+    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
 
-    dff["Categoria"] = dff.replace({"transporte": diccio})["transporte"]
-    diccio = {"1": "Buses del SITP (azul, naranja o vinotinto",
-              "2": "SITP provisionales",
-              "3": "Público tradicional (Bus, buseta, Microbus/Colectivo",
-              "4": "Transmilenio",
-              "5": "Alimentador",
-              "6": "TransmiCable",
-              "7": "Taxi",
-              "8": "Mototaxi/Bicitaxi",
-              "9": "Taxi Pirata",
-              "10": "Vehiculo Pirata",
-              "11": "Transporte especial informal",
-              "12": "Bicicleta",
-              "13": "Bicicleta con motor",
-              "14": "Moto como conductor",
-              "15": "Moto como pasajero",
-              "16": "Vehiculo privado como conductor",
-              "17": "Vehiculo privado como pasajero",
-              "18": "Bus privado",
-              "19": "Uber",
-              "20": "A pie"}
-    dff = dff.replace({"transporte": diccio})
-    dff["Count"] = 1
-    cuenta = dff.groupby("transporte").agg({"id": "count"}).sort_values("id")
-    dff = dff[dff["transporte"].isin(cuenta[cuenta.id >= 10].index)]
-    fig = px.sunburst(dff, path=['Categoria', 'transporte'], values='Count',color_discrete_sequence=['#32373B','#C83E4D','#4381C1','#59CD90','#D295BF'],title = "Tipo de transporte utilizado para ir a su actividad principal")
-    return fig,fig
-
-
-@app.callback([
-    Output("Pie-Cable", "figure"),
-    Output("Pie-Cable2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def transmicable(localidad,sex):
-    dff = encuestas
-    if sex != "Ambos":
-        dff = dff[dff["Género"] == sex]
-    if localidad != "Ambos":
-        dff = dff[dff["T1_localidad"] == localidad]
-
-    dff["T1_Q116"] = dff["T1_Q116"].replace({1:"Sí",2:"No"})
-    resp = dff["T1_Q116"].value_counts().reset_index().sort_values('index')
-    fig = px.pie(resp, values='T1_Q116', names='index', title='¿Ha utilizado el TransMicable?',opacity=0.7,color_discrete_sequence=['#32373B','#C83E4D'])
-    return fig,fig
-
-
-def dificil(localidad,sex):
-    colors = ['rgba(38, 24, 74, 0.8)', 'rgba(71, 58, 131, 0.8)',
-              'rgba(122, 120, 168, 0.8)', 'rgba(164, 163, 204, 0.85)',
-              'rgba(190, 192, 213, 1)','rgba(70, 70, 30, 1)','rgba(120, 120, 213, 1)']
-    top_labels = ['Diligencias y tramites', 'Recreación o deporte ', 'Socializar', 'Atención de salud',
-                  'Compras y mercado',"Llevar o recoger a alguien","Otro"]
-
-    y_data = ['Buses del SITP (azul, naranja o vinotinto',
-     'SITP provisionales',
-     'Público tradicional (Bus, buseta, Microbus/Colectivo',
-     'Transmilenio',
-     'Alimentador',
-     'TransmiCable',
-     'Taxi',
-     'Mototaxi/Bicitaxi',
-     'Taxi Pirata',
-     'Vehiculo Pirata',
-     'Transporte especial informal',
-     'Bicicleta',
-     'Bicicleta con motor',
-     'Moto como conductor',
-     'Moto como pasajero',
-     'Vehiculo privado como conductor',
-     'Vehiculo privado como pasajero',
-     'Bus privado',
-     'Uber',
-     'A pie']
-
-    dff = encuestas
-    if sex != "Ambos":
-        dff = dff[dff["Género"] == sex]
-    if localidad != "Ambos":
-        dff = dff[dff["T1_localidad"] == localidad]
-    dff = dff[["T1_Q34_1","T1_Q34_2","T1_Q34_3","T1_Q34_4","T1_Q34_5","T1_Q34_6","T1_Q34_7"]]
-
-    diccio = {1: "Buses del SITP (azul, naranja o vinotinto",
-              2: "SITP provisionales",
-              3: "Público tradicional (Bus, buseta, Microbus/Colectivo",
-              4: "Transmilenio",
-              5: "Alimentador",
-              6: "TransmiCable",
-              7: "Taxi",
-              8: "Mototaxi/Bicitaxi",
-              9: "Taxi Pirata",
-              10: "Vehiculo Pirata",
-              11: "Transporte especial informal",
-              12: "Bicicleta",
-              13: "Bicicleta con motor",
-              14: "Moto como conductor",
-              15: "Moto como pasajero",
-              16: "Vehiculo privado como conductor",
-              17: "Vehiculo privado como pasajero",
-              18: "Bus privado",
-              19: "Uber",
-              20: "A pie"}
-    dff = dff.replace(diccio)
-    x_data = []
-    for columna in dff.columns:
-        agregar = []
-        for nombre in diccio.values():
-            agregar.append(len(dff[dff[columna] == nombre]))
-        x_data.append(agregar)
-    #x_data = list(map(lambda x: list(map(lambda y: y / sum(x), x)), x_data))
-    fig = go.Figure()
-
-    fig.add_trace(go.Bar(
-        y=list(diccio.values()),
-        x=x_data[1],
-        name=top_labels[1],
-        orientation='h',
-        marker=dict(
-            color='rgba(200, 62, 77, 0.6)',
-            line=dict(color='rgba(200, 62, 77, 0.6)', width=4)
-        )
-    ))
-    fig.add_trace(go.Bar(
-        y=list(diccio.values()),
-        x=x_data[2],
-        name=top_labels[2],
-        orientation='h',
-        marker=dict(
-            color='rgba(58, 71, 80, 0.6)',
-            line=dict(color='rgba(58, 71, 80, 0.6)', width=4)
-        )
-    ))
-    fig.add_trace(go.Bar(
-        y=list(diccio.values()),
-        x=x_data[3],
-        name=top_labels[3],
-        orientation='h',
-marker=dict(
-            color='rgba(49,163,84, 0.6)',
-            line=dict(color='rgba(49,163,84, 0.6)', width=4)
-        )
-    ))
-    fig.add_trace(go.Bar(
-        y=list(diccio.values()),
-        x=x_data[4],
-        name=top_labels[4],
-        orientation='h',
-        marker=dict(
-            color='rgba(49,130,189, 0.6)',
-            line=dict(color='rgba(49,130,189, 0.6)', width=4)
-        )
-    ))
-    fig.add_trace(go.Bar(
-        y=list(diccio.values()),
-        x=x_data[5],
-        name=top_labels[5],
-        orientation='h',
-        marker=dict(
-            color='rgba(230, 194, 41, 0.6)',
-            line=dict(color='rgba(230, 194, 41, 0.6)', width=4)
-        )
-
-    ))
-    fig.add_trace(go.Bar(
-        y=list(diccio.values()),
-        x=x_data[6],
-        name=top_labels[6],
-        orientation='h',
-        marker=dict(
-            color='rgba(198, 156, 114, 0.6)',
-            line=dict(color='rgba( 198, 156, 114, 0.6)', width=4)
-        )
-
-    ))
-
-
-    fig.update_layout(barmode='stack',yaxis={'categoryorder':'total descending'},
-        autosize=False,
-        height=700,
-        width = 900,
-        margin=dict(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ))
-    return fig,fig
-
-@app.callback([
-    Output("alter", "figure"),
-    Output("alter2", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def dificil(localidad,sex):
-    colors = ['rgba(38, 24, 74, 0.8)', 'rgba(71, 58, 131, 0.8)',
-              'rgba(122, 120, 168, 0.8)']
-    top_labels = ["Transporte<br>Publico","Transporte<br>Privado","Transporte<br>Activo"]
-    y_data = ['Diligencias y tramites', 'Recreación o deporte ', 'Socializar', 'Atención de salud',
-                  'Compras y mercado',"Llevar o recoger a alguien","Otro"]
-    dff = encuestas
-    if sex != "Ambos":
-        dff = dff[dff["Género"] == sex]
-    if localidad != "Ambos":
-        dff = dff[dff["T1_localidad"] == localidad]
-
-    dff = dff[["T1_Q34_1","T1_Q34_2","T1_Q34_3","T1_Q34_4","T1_Q34_5","T1_Q34_6","T1_Q34_7"]]
-    diccio = {}
-    publico = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    privado = [11, 14, 15, 16, 17, 18, 19]
-    otros = [12, 13, 20]
-    for i in publico:
-        diccio[i] = "Transporte Publico"
-    for i in privado:
-        diccio[i] = "Transporte Privado"
-    for i in otros:
-        diccio[i] = "Transporte Activo"
-    nombres = []
-    for columna in dff.columns:
-        nombre = "categoria_" + columna
-        nombres.append(nombre)
-        dff[nombre] = dff[columna].replace(diccio)
-
-    x_data = []
-    for columna in nombres:
-        agregar = []
-        for nombre in ["Transporte Publico","Transporte Privado","Transporte Activo"]:
-            agregar.append(len(dff[dff[columna] == nombre]))
-        x_data.append(agregar)
-    x_data = list(map(lambda x: list(map(lambda y: int((y / sum(x))*100), x)), x_data))
-    fig = go.Figure(layout=go.Layout( title=go.layout.Title(text="Tipo de actividad vs Tipo de transporte")))
-
-    for i in range(0, len(x_data[0])):
-        for xd, yd in zip(x_data, y_data):
-            fig.add_trace(go.Bar(
-                x=[xd[i]], y=[yd],
-                orientation='h',
-                marker=dict(
-                    color=colors[i],
-                    line=dict(color='rgb(248, 248, 249)', width=1)
-                )
-            ))
-    fig.update_layout(
-        xaxis=dict(
-            showgrid=False,
-            showline=False,
-            showticklabels=False,
-            zeroline=False,
-            domain=[0.15, 1]
-        ),
-        yaxis=dict(
-            showgrid=False,
-            showline=False,
-            showticklabels=False,
-            zeroline=False,
-        ),
-        barmode='stack',
-        paper_bgcolor='rgb(248, 248, 255)',
-        plot_bgcolor='rgb(248, 248, 255)',
-        margin=dict(l=120, r=10, t=140, b=80),
+    fig.add_trace(trace=go.Choropleth(
+        featureidkey='properties.LocNombre',
+        geojson=bog_regions_geo,
+        locations=data_frame.inicio,
+        z=data_frame['frecuencia'],
+        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorbar_title="Viajes",
+        zmin=data_frame['frecuencia'].min(),
+        zmax=data_frame['frecuencia'].max(),
+        name='Viajes iniciados pre pandemia',
+        hoverinfo='location+z',
         showlegend=False,
-    )
+        showscale=False,
+    ), row=1, col=1)
 
-    annotations = []
-
-    for yd, xd in zip(y_data, x_data):
-        # labeling the y-axis
-        annotations.append(dict(xref='paper', yref='y',
-                                x=0.14, y=yd,
-                                xanchor='right',
-                                text=str(yd),
-                                font=dict(family='Arial', size=14,
-                                          color='rgb(67, 67, 67)'),
-                                showarrow=False, align='right'))
-        # labeling the first percentage of each bar (x_axis)
-        annotations.append(dict(xref='x', yref='y',
-                                x=xd[0] / 2, y=yd,
-                                text=str(xd[0]) + '%',
-                                font=dict(family='Arial', size=14,
-                                          color='rgb(248, 248, 255)'),
-                                showarrow=False))
-        # labeling the first Likert scale (on the top)
-        if yd == y_data[-1]:
-            annotations.append(dict(xref='x', yref='paper',
-                                    x=xd[0] / 2, y=1.2,
-                                    text=top_labels[0],
-                                    font=dict(family='Arial', size=14,
-                                              color='rgb(67, 67, 67)'),
-                                    showarrow=False))
-        space = xd[0]
-        for i in range(1, len(xd)):
-            # labeling the rest of percentages for each bar (x_axis)
-            annotations.append(dict(xref='x', yref='y',
-                                    x=space + (xd[i] / 2), y=yd,
-                                    text=str(xd[i]) + '%',
-                                    font=dict(family='Arial', size=14,
-                                              color='rgb(248, 248, 255)'),
-                                    showarrow=False))
-            # labeling the Likert scale
-            if yd == y_data[-1]:
-                annotations.append(dict(xref='x', yref='paper',
-                                        x=space +1.8+ (xd[i] / 2), y=1.2,
-                                        text=top_labels[i],
-                                        font=dict(family='Arial', size=14,
-                                                  color='rgb(67, 67, 67)'),
-                                        showarrow=False))
-            space += xd[i]
-
-
-
-    fig.update_layout(
-            annotations=annotations
-        )
-    return fig,fig
-
-@app.callback([
-    Output("alter3", "figure"),
-    Output("alter4", "figure")],
-    [Input("dropdown", "value")], Input('dropdown2', 'value'))
-def dificil(localidad,sex):
-    colors = ['rgba(38, 24, 74, 0.8)', 'rgba(71, 58, 131, 0.8)',
-              'rgba(122, 120, 168, 0.8)']
-    top_labels = ["Transporte<br>Publico","Transporte<br>Privado","Transporte<br>Activo"]
-    y_data = ['Diligencias y tramites', 'Recreación o deporte ', 'Socializar', 'Atención de salud',
-                  'Compras y mercado',"Llevar o recoger a alguien","Otro"]
-    dff = encuestas
+    data_frame = primerost2
     if sex != "Ambos":
-        dff = dff[dff["Género"] == sex]
+        data_frame = data_frame[data_frame["Sexo"] == sex]
     if localidad != "Ambos":
-        dff = dff[dff["T1_localidad"] == localidad]
+        data_frame = data_frame[data_frame["localidad"] == localidad]
+    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
+    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
+    data_frame.columns = ["frecuencia"]
+    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
+    data_frame = (data_frame / data_frame.sum()).reset_index()
+    diff = localidades - set(data_frame.inicio)
+    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
+    fig.add_trace(trace=go.Choropleth(
+        featureidkey='properties.LocNombre',
+        geojson=bog_regions_geo,
+        locations=data_frame.inicio,
+        z=data_frame['frecuencia'],
+        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorbar_title="Viajes",
+        zmin=data_frame['frecuencia'].min(),
+        zmax=data_frame['frecuencia'].max(),
+        name='Viajes iniciados post pandemia',
+        hoverinfo='location+z',
 
-    dff = dff[["T1_Q34_1","T1_Q34_2","T1_Q34_3","T1_Q34_4","T1_Q34_5","T1_Q34_6","T1_Q34_7"]]
-    diccio = {}
-    publico = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    privado = [11, 14, 15, 16, 17, 18, 19]
-    otros = [12, 13, 20]
-    for i in publico:
-        diccio[i] = "Transporte Publico"
-    for i in privado:
-        diccio[i] = "Transporte Privado"
-    for i in otros:
-        diccio[i] = "Transporte Activo"
-    nombres = []
-    for columna in dff.columns:
-        nombre = "categoria_" + columna
-        nombres.append(nombre)
-        dff[nombre] = dff[columna].replace(diccio)
-    diccio = {1: "Buses del SITP (azul, naranja o vinotinto",
-              2: "SITP provisionales",
-              3: "Público tradicional (Bus, buseta, Microbus/Colectivo",
-              4: "Transmilenio",
-              5: "Alimentador",
-              6: "TransmiCable",
-              7: "Taxi",
-              8: "Mototaxi/Bicitaxi",
-              9: "Taxi Pirata",
-              10: "Vehiculo Pirata",
-              11: "Transporte especial informal",
-              12: "Bicicleta",
-              13: "Bicicleta con motor",
-              14: "Moto como conductor",
-              15: "Moto como pasajero",
-              16: "Vehiculo privado como conductor",
-              17: "Vehiculo privado como pasajero",
-              18: "Bus privado",
-              19: "Uber",
-              20: "A pie"}
+    ), row=1, col=2)
 
-    dff = dff.replace(diccio)
+    data_frame = ultimos
+    if sex != "Ambos":
+        data_frame = data_frame[data_frame["Sexo"] == sex]
+    if localidad != "Ambos":
+        data_frame = data_frame[data_frame["localidad"] == localidad]
+    inicio, fin = [datetime.time(num) for num in hora]
+    data_frame = data_frame[(data_frame.hora_fin >= inicio) & (data_frame.hora_fin <= fin)]
+    data_frame = data_frame.groupby("dia_fin")["fin"].value_counts().to_frame()
+    data_frame.columns = ["frecuencia"]
+    data_frame = data_frame.reset_index().groupby("fin").agg({"frecuencia": "mean"})
+    data_frame = (data_frame / data_frame.sum()).reset_index()
+    diff = localidades - set(data_frame.fin)
+    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
+    fig.add_trace(trace=go.Choropleth(
+        featureidkey='properties.LocNombre',
+        geojson=bog_regions_geo,
+        locations=data_frame.fin,
+        z=data_frame['frecuencia'],
+        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorbar_title="Viajes",
+        zmin=data_frame['frecuencia'].min(),
+        zmax=data_frame['frecuencia'].max(),
+        name='Pre pandemia',
+        hoverinfo='location+z',
+        showlegend=False,
+        showscale=False,
 
-    grande = pd.concat(
-        [dff["categoria_T1_Q34_1"], dff["categoria_T1_Q34_2"], dff["categoria_T1_Q34_3"], dff["categoria_T1_Q34_4"],
-         dff["categoria_T1_Q34_5"], dff["categoria_T1_Q34_6"], dff["categoria_T1_Q34_7"]])
-    chiquito = pd.concat(
-        [dff["T1_Q34_1"], dff["T1_Q34_2"], dff["T1_Q34_3"], dff["T1_Q34_4"], dff["T1_Q34_5"], dff["T1_Q34_6"],
-         dff["T1_Q34_7"]])
-    tamanio = len(dff["categoria_T1_Q34_1"])
-    dff = pd.DataFrame()
-    dff["grande"] = grande
-    dff["chiquito"] = chiquito
-    lista = ['Diligencias y tramites', 'Recreación o deporte ', 'Socializar', 'Atención de salud',
-             'Compras y mercado', "Llevar o recoger a alguien", "Otro"]
-    tipo = [lista[0]] * tamanio + [lista[1]] * tamanio + [lista[2]] * tamanio + [lista[3]] * tamanio + [
-        lista[4]] * tamanio + [lista[5]] * tamanio + [lista[6]] * tamanio
-    dff["tipo"] = tipo
-    dff = dff[(dff != 97) & (dff != 98)].dropna()
+    ), row=2, col=1)
+    data_frame = ultimost2
+    if sex != "Ambos":
+        data_frame = data_frame[data_frame["Sexo"] == sex]
+    if localidad != "Ambos":
+        data_frame = data_frame[data_frame["localidad"] == localidad]
+    data_frame = data_frame[(data_frame.hora_fin >= inicio) & (data_frame.hora_fin <= fin)]
+    data_frame = data_frame.groupby("dia_fin")["fin"].value_counts().to_frame()
+    data_frame.columns = ["frecuencia"]
+    data_frame = data_frame.reset_index().groupby("fin").agg({"frecuencia": "mean"})
+    data_frame = (data_frame / data_frame.sum()).reset_index()
+    diff = localidades - set(data_frame.fin)
+    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
+    fig.add_trace(trace=go.Choropleth(
+        featureidkey='properties.LocNombre',
+        geojson=bog_regions_geo,
+        locations=data_frame.fin,
+        z=data_frame['frecuencia'],
+        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorbar_title="Viajes",
+        zmin=data_frame['frecuencia'].min(),
+        zmax=data_frame['frecuencia'].max(),
+        name='Post pandemia',
+        hoverinfo='location+z',
+        showlegend=False,
+        showscale=False,
 
-    dff["Count"] = 1
-    fig = px.sunburst(dff, path=['tipo', 'grande','chiquito'], values='Count',color_discrete_sequence=['#32373B','#C83E4D','#4381C1','#59CD90','#D295BF'],title = "Tipo de actividad vs Tipo de transporte")
+    ), row=2, col=2)
+    fig.update_geos(fitbounds="locations",
+                    visible=False,
+                    )
+    hovertemp = '<i>Localidad:</i> %{location} <br>'
+    hovertemp += '<i>Porcentaje:</i> %{z:,}'
+    fig.update_traces(hovertemplate=hovertemp)
+    fig.update_layout(
+        title='Porcentaje de personas que inician o terminan un viaje en una localidad especifica dada la hora', title_x=0.5,height =1000)
 
-    return fig,fig
+    return fig
 
 
+
+
+@app.callback(
+    Output("viajes-promedio", "children"),
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value')])
+def viajes_prom(localidad,sex):
+    datos1 = viajes_promedio.copy()
+    datos2 = viajes_promedioT2.copy()
+
+    if sex != "Ambos":
+        datos1 = datos1[datos1["Sexo"] == sex]
+        datos2 = datos2[datos2["Sexo"] == sex]
+
+    if localidad != "Ambos":
+        datos1 = datos1[datos1["localidad"] == localidad]
+        datos2 = datos2[datos2["localidad"] == localidad]
+
+    viajest1 = datos1.viaje.mean()
+    viajest2 = datos2.viaje.mean()
+    return html.Div([
+        html.Div([
+            html.H2("En promedio una persona hace ", style={"textAlign": "center"}),
+            html.Br(),
+            html.H1(str(round(viajest1, 2)), style={"textAlign": "center", "color": "rgba(38, 24, 74, 1)"}),
+            html.H2(" viajes al día", style={"textAlign": "center"})
+        ], style={"width": "49%", "display": "inline-block"}),
+        html.Div([
+            html.H2("En promedio una persona hace ",style = {"textAlign":"center"}) ,
+            html.Br(),
+            html.H1(str(round(viajest2,2)),style = {"textAlign":"center","color":"rgba(49,130,189, 1)"}) ,
+            html.H2(" viajes al día",style = {"textAlign":"center"})
+        ],style={"width":"49%","display":"inline-block"}),
+    ],style={"display":"flex"})
+
+@app.callback(
+    Output("suma-transporte", "figure"),
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value')])
+def suma_transporte(localidad,sex):
+    datos1 = tiempos.copy()
+    datos2 = tiemposT2.copy()
+
+    if sex != "Ambos":
+        datos1 = datos1[datos1["Sexo"] == sex]
+        datos2 = datos2[datos2["Sexo"] == sex]
+
+    if localidad != "Ambos":
+        datos1 = datos1[datos1["localidad"] == localidad]
+        datos2 = datos2[datos2["localidad"] == localidad]
+
+    datos1 = datos1.groupby(["fecha","movimiento"]).agg({"minutos":"sum"}).reset_index().groupby("movimiento").agg({"minutos":"mean"})
+    datos2 = datos2.groupby(["fecha","movimiento"]).agg({"minutos":"sum"}).reset_index().groupby("movimiento").agg({"minutos":"mean"})
+
+    fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
+                        shared_yaxes=True, vertical_spacing=0.001)
+
+    fig.add_trace(go.Bar(
+        y=datos1.index,
+        x=datos1.minutos,
+        name='Antes de la pandemia',
+        orientation='h',
+        marker=dict(
+            color='rgba(38, 24, 74, 0.6)',
+            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+        )),1,1)
+
+    fig.add_trace(go.Bar(
+        y=datos2.index,
+        x=datos2.minutos,
+        name='Despues de la pandemia',
+        orientation='h',
+        marker=dict(
+            color='rgba(49,130,189, 0.6)',
+            line=dict(color='rgba(49,130,189, 1)', width=3)
+        )), 1, 2)
+
+    return fig
+
+@app.callback(
+    Output("mapa-tiempos", "figure"),
+    [Input("dropdown", "value"),
+     Input('dropdown2', 'value'),
+     Input('my-slider2', 'value')])
+def ultimo_mapa(localidad,sex,hora):
+    fig = make_subplots(
+        rows=1, cols=2,
+        specs=[
+            [{"type": "choropleth"}, {"type": "choropleth"}]
+        ],
+        vertical_spacing=0.075,
+        horizontal_spacing=0.08,
+        subplot_titles=("Inicio de viajes pre pandemia", "Inicio de viajes post pandemia")
+    )
+    data_frame = tiempos_viaje.copy()
+    if sex != "Ambos":
+        data_frame = data_frame[data_frame["Sexo"] == sex]
+    if localidad != "Ambos":
+        data_frame = data_frame[data_frame["localidad"] == localidad]
+        data_frame = data_frame[data_frame["inicio"] == localidad.upper()]
+
+    inicio, fin = [datetime.time(num) for num in hora]
+    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
+    data_frame = data_frame.groupby("fin").agg({"tiempo_viaje_minutos":"mean"})
+    data_frame = data_frame.reset_index()
+    diff = localidades - set(data_frame.fin)
+    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "tiempo_viaje_minutos"])])
+
+    fig.add_trace(trace=go.Choropleth(
+        featureidkey='properties.LocNombre',
+        geojson=bog_regions_geo,
+        locations=data_frame.fin,
+        z=data_frame['tiempo_viaje_minutos'],
+        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorbar_title="Minutos",
+        zmin=data_frame['tiempo_viaje_minutos'].min(),
+        zmax=data_frame['tiempo_viaje_minutos'].max(),
+        name='Minutos de viaje pre pandemia',
+        hoverinfo='location+z',
+
+    ), row=1, col=1)
+
+    data_frame = tiempos_viajeT2.copy()
+    if sex != "Ambos":
+        data_frame = data_frame[data_frame["Sexo"] == sex]
+    if localidad != "Ambos":
+        data_frame = data_frame[data_frame["localidad"] == localidad]
+        data_frame = data_frame[data_frame["inicio"] == localidad.upper()]
+
+    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
+    data_frame = data_frame.groupby("fin").agg({"tiempo_viaje_minutos": "mean"})
+    data_frame = data_frame.reset_index()
+    diff = localidades - set(data_frame.fin)
+    data_frame = pd.concat(
+        [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "tiempo_viaje_minutos"])])
+    fig.add_trace(trace=go.Choropleth(
+        featureidkey='properties.LocNombre',
+        geojson=bog_regions_geo,
+        locations=data_frame.fin,
+        z=data_frame['tiempo_viaje_minutos'],
+        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorbar_title="Minutos",
+        zmin=data_frame['tiempo_viaje_minutos'].min(),
+        zmax=data_frame['tiempo_viaje_minutos'].max(),
+        name='Minutos de viaje post pandemia',
+        hoverinfo='location+z',
+        showlegend=False,
+        showscale=False,
+
+    ), row=1, col=2)
+
+
+    fig.update_geos(fitbounds="locations",
+                    visible=False,
+                    )
+    hovertemp = '<i>Localidad:</i> %{location} <br>'
+    hovertemp += '<i>Minutos promedio:</i> %{z:,}'
+    fig.update_traces(hovertemplate=hovertemp)
+    fig.update_layout(
+        title='Porcentaje de personas que inician o terminan un viaje en una localidad especifica dada la hora', title_x=0.5,height = 1000)
+
+    return fig
 if __name__ == '__main__':
     app.run_server(debug=True)
