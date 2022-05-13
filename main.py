@@ -23,7 +23,18 @@ import datetime
 
 
 
+colors_pie = ['rgba(66, 0, 57, 0.8)', 'rgba(216, 30, 91, 0.8)']
+colors =["rgba(66, 0, 57, 0.8)","rgba(66, 0, 57, 1)",'rgba(216, 30, 91, 0.8)', 'rgba(216, 30, 91, 1)']
 
+
+porcentaje = "100%"
+
+horas = {0:(datetime.time(0,0,0),datetime.time(5,0,0)) ,
+         1:(datetime.time(5,0,0),datetime.time(9,0,0)) ,
+         2:(datetime.time(9,0,0),datetime.time(13,0,0)),
+         3:(datetime.time(13,0,0),datetime.time(17,0,0)),
+         4:(datetime.time(17,0,0),datetime.time(21,0,0)),
+         5:(datetime.time(21,0,0),datetime.time(23,59,59))}
 #Lectura de datos de encuestas
 #T1
 
@@ -76,13 +87,11 @@ tiempos_viaje.hora_inicio = tiempos_viaje.hora_inicio.apply(lambda x: datetime.d
 tiempos_viajeT2 = pd.read_csv("tiempo_viajes_T2.csv")
 tiempos_viajeT2.hora_inicio = tiempos_viajeT2.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
 
+
 with open('bogota.json', 'r') as openfile:
     # Reading from json file
     bog_regions_geo = json.load(openfile)
 
-def generate_table(max_rows=10):
-    hola = encuestas['T1_Q10'].describe().to_frame().reset_index()
-    return dash_table.DataTable(hola.to_dict('records'), [{"name": i, "id": i} for i in hola.columns])
 
 external_scripts = [
     'https://www.google-analytics.com/analytics.js',
@@ -95,158 +104,532 @@ external_scripts = [
 ]
 
 # external CSS stylesheets
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = [dbc.themes.BOOTSTRAP]
 
 
 FONT_AWESOME = "https://use.fontawesome.com/releases/v5.10.2/css/all.css"
 
 app = Dash(__name__,
-                external_stylesheets= [dbc.themes.BOOTSTRAP, FONT_AWESOME])
+                external_stylesheets= [dbc.themes.BOOTSTRAP, FONT_AWESOME],
+           suppress_callback_exceptions = True)
 
+# styling the sidebar
+SIDEBAR_STYLE = {
+    "position": "fixed",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    "width": "16rem",
+    "padding": "2rem 1rem",
+    "background-color": "#f8f9fa",
+}
 
-app.layout =html.Div([
+# padding for the page content
+CONTENT_STYLE = {
+    "margin-left": "18rem",
+    "margin-right": "2rem",
+    "padding": "2rem 1rem",
+}
 
-html.Div([
-    html.Div([
-        html.H3(children = 'Escoja la localidad a visualizar'),
-dcc.Dropdown(
-        id="dropdown",
-        options=["Ciudad Bolivar","San Cristobal","Ambos"],
-        value="Ambos",
-        clearable=False)
-
-],  style={"width": "30%",'display': 'inline-block',"marginLeft": "5%"}),
-  html.Div([
-        html.H3(children = 'Escoja el sexo'),
-        dcc.Dropdown(
-        id="dropdown2",
-        options=["Hombres","Mujeres","Ambos"],
-        value="Ambos",
-        clearable=False,
-    )
-        #dcc.Dropdown(
-         #   id="dropdown3",
-          #  options=["Trabajando","No trabajó pero tenía trabajo","Buscando trabajo","Estudiando","Oficios del hogar","Incapacitado permanente"],
-           # value="Trabajando",
-            #clearable=False,
-            #multi=True
-        #)
-],  style={"width": "30%",'display': 'inline-block',"marginLeft": "5%"})],style={"width": "100%",'position':'fixed','z-index': '999'}),
-
-
-html.Br(),
-html.Br(),
-html.Br(),
-html.Br(),
-html.Br(),
-html.Br(),
-dcc.Tabs([
-        dcc.Tab(label='Datos Demograficos', children=[
-html.Div(
+sidebar = html.Div(
     [
-        html.I(className="fas fa-question-circle fa-lg", id="target"),
-        dbc.Tooltip("Gráfico de barras que muestra la proporción de hombres y mujeres tomados en cuenta en el estudio", target="target"),
+        html.H2("Muévelo", className="display-4"),
+        html.Hr(),
+        html.P(
+            "Visualización de datos del proyecto Muévelo", className="lead"
+        ),
+        dbc.Nav(
+            [
+                dbc.NavLink("Introducción", href="/", active="exact"),
+                dbc.NavLink("Datos demográficos", href="/page-1", active="exact"),
+                dbc.NavLink("Patrones de transporte", href="/page-2", active="exact"),
+                dbc.NavLink("Mapas", href="/page-3", active="exact"),
+
+            ],
+            vertical=True,
+            pills=True,
+        ),
     ],
-    className="p-5 text-muted"
-),
+    style=SIDEBAR_STYLE,
+)
+
+content = html.Div(id="page-content", children=[], style=CONTENT_STYLE)
+
+app.layout = html.Div([
+    dcc.Location(id="url"),
+    sidebar,
+    content
+])
+
+
+@app.callback(
+    Output("page-content", "children"),
+    [Input("url", "pathname")]
+)
+def render_page_content(pathname):
+    if pathname == "/":
+        return [
+
+        ]
+    elif pathname == "/page-1":
+        return [
+            dbc.Row(
+                dbc.Col(html.H2(children=["Distribución de género \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="target",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip("Pie Chart que muestra la proporción de hombres y mujeres tomados en cuenta en el estudio",
+                        target="target"),
+            html.Center(html.Div([
+
+                html.Div([
+                    html.H5(children='Escoja la localidad a visualizar'),
+                    dcc.Checklist(
+                        id="dropdown-sexo-localidad",
+                        options=["Ciudad Bolivar", "San Cristobal"],
+                        value=["Ciudad Bolivar", "San Cristobal"],
+                        inline=True,
+                        inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                ]),
 
                 # Table container
                 html.Div([
                     dcc.Graph(id='sexo')
 
                 ]),
-
-html.Div([
-    html.Button('Descripción', id='btn-nclicks-1', n_clicks=0, style={'width': '240px', 'height': '40px',
-                   'cursor': 'pointer', 'border': '0px',
-                   'borderRadius': '5px', 'backgroundColor':
-                   'black', 'color': 'white', 'textTransform':
-                   'uppercase', 'fontSize': '15px'}),
-    html.Div(id='container-button-timestamp')
-],style={'textAlign': 'center'}),
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="target-ocupaciones"),
-        dbc.Tooltip("Pie-Chart que muestra las ocupaciones de las personas tomadas en cuenta en el estudio", target="target-ocupaciones"),
-    ],
-    className="p-5 text-muted"
-),
-                # Table container
                 html.Div([
-                    dcc.Graph(id='ocupacion')
+                    html.Button('Descripción', id='btn-nclicks-1', n_clicks=0,
+                                style={'width': '240px', 'height': '40px',
+                                       'cursor': 'pointer', 'border': '0px',
+                                       'borderRadius': '5px', 'backgroundColor':
+                                           'black', 'color': 'white', 'textTransform':
+                                           'uppercase', 'fontSize': '15px'}),
+                    html.Div(id='container-button-timestamp')
+                ], style={'textAlign': 'center'}),
+                html.Br()
+            ], style={"width": porcentaje}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+            dbc.Row(
+                dbc.Col(html.H2(children=["Ocupación de los participantes \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="target-ocupaciones",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip(
+                "Diagrama de barras que muestra las ocupaciones de las personas tomadas en cuenta en el estudio",
+                target="target-ocupaciones"),
+
+            html.Center(
+                html.Div([
+                    html.Div([
+
+                        html.Div([
+                            html.H5(children='Escoja la localidad a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-ocupacion-localidad",
+                                options=["Ciudad Bolivar", "San Cristobal"],
+                                value=["Ciudad Bolivar", "San Cristobal"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ]),
+
+                        html.Div([
+                            html.H5(children='Escoja el sexo a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-ocupacion-sexo",
+                                options=["Hombres", "Mujeres"],
+                                value=["Hombres", "Mujeres"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
+
+                    # Table container
+                    html.Div([
+                        dcc.Graph(id='ocupacion')
+
+                    ]),
+                    html.Br(),
+                    html.Div([
+                        html.Button('Descripción', id='btn-nclicks-3', n_clicks=0,
+                                    style={'width': '240px', 'height': '40px',
+                                           'cursor': 'pointer', 'border': '0px',
+                                           'borderRadius': '5px', 'backgroundColor':
+                                               'black', 'color': 'white', 'textTransform':
+                                               'uppercase', 'fontSize': '15px'}),
+                        html.Div(id='container-button-timestamp3')
+                    ], style={'textAlign': 'center'}),
+                    html.Br()
+
+                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+            dbc.Row(
+                dbc.Col(html.H2(children=["Distribución de personas por localidad \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="target-localidad",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip("Pie Chart que muestra la localidad de las personas tomadas en cuenta en el estudio",
+                        target="target-localidad"),
+            html.Center(html.Div([
+
+                html.Div([
+                    html.H5(children='Escoja la localidad a visualizar'),
+                    dcc.Checklist(
+                        id="dropdown-localidad-sexo",
+                        options=["Hombres", "Mujeres"],
+                        value=["Hombres", "Mujeres"],
+                        inline=True,
+                        inputStyle={"margin-right": "5px", "margin-left": "10px"}),
 
                 ]),
 
-html.Div([
-    html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
-                   'cursor': 'pointer', 'border': '0px',
-                   'borderRadius': '5px', 'backgroundColor':
-                   'black', 'color': 'white', 'textTransform':
-                   'uppercase', 'fontSize': '15px'}),
-    html.Div(id='container-button-timestamp3')
-],style={'textAlign': 'center'}),
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="target-localidad"),
-        dbc.Tooltip("Histograma que muestra la localidad de las personas tomadas en cuenta en el estudio", target="target-localidad"),
-    ],
-    className="p-5 text-muted"
-),
+                # Table container
+                html.Div([
+                    dcc.Graph(id='localidad',)
+
+                ]),
+                html.Div([
+                    html.Button('Descripción', id='btn-nclicks-5', n_clicks=0,
+                                style={'width': '240px', 'height': '40px',
+                                       'cursor': 'pointer', 'border': '0px',
+                                       'borderRadius': '5px', 'backgroundColor':
+                                           'black', 'color': 'white', 'textTransform':
+                                           'uppercase', 'fontSize': '15px'}),
+                    html.Div(id='container-button-timestamp5')
+                ], style={'textAlign': 'center'}),
+                html.Br()
+            ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+
+        ]
+    elif pathname == "/page-2":
+        return [
+            dbc.Row(
+                dbc.Col(html.H2(children=["Viajes promedio por persona \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="texto_viajes",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip("Se muestra la cantidad de viajes que una persona realiza en promedio al día",
+                        target="texto_viajes"),
+
+            html.Center(
+                html.Div([
+                    html.Div([
+
+                        html.Div([
+                            html.H5(children='Escoja la localidad a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-texto-localidad",
+                                options=["Ciudad Bolivar", "San Cristobal"],
+                                value=["Ciudad Bolivar", "San Cristobal"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ]),
+
+                        html.Div([
+                            html.H5(children='Escoja el sexo a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-texto-sexo",
+                                options=["Hombres", "Mujeres"],
+                                value=["Hombres", "Mujeres"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
+                    html.Br(),
+                    html.Br(),
+
+                    # Table container
+                    html.Div(id='viajes-promedio'),
+                    html.Br(),
+                    # html.Div([
+                    #   html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
+                    #        'cursor': 'pointer', 'border': '0px',
+                    #       'borderRadius': '5px', 'backgroundColor':
+                    #      'black', 'color': 'white', 'textTransform':
+                    #     'uppercase', 'fontSize': '15px'}),
+                    #  html.Div(id='container-button-timestamp3')
+                    # ],style={'textAlign': 'center'}),
+                    html.Br(),
+
+                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+
+            dbc.Row(
+                dbc.Col(html.H2(children=["Porcentaje de personas que prefieren un tipo de transporte \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="target-preferencia",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip(
+                "Diagrama de barras que muestra el porcentaje de personas que prefieren un tipo de transporte especifico para ir a su actividad principal",
+                target="target-preferencia"),
+            html.Center(
+                html.Div([
+                    html.Div([
+
+                        html.Div([
+                            html.H5(children='Escoja la localidad a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-preferido-localidad",
+                                options=["Ciudad Bolivar", "San Cristobal"],
+                                value=["Ciudad Bolivar", "San Cristobal"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ]),
+
+                        html.Div([
+                            html.H5(children='Escoja el sexo a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-preferido-sexo",
+                                options=["Hombres", "Mujeres"],
+                                value=["Hombres", "Mujeres"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
+
+                    # Table container
+                    html.Div([
+                        dcc.Graph(id='Preferencia Transporte')
+
+                    ]),
+                    html.Br(),
+                    # html.Div([
+                    # html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
+                    #              'cursor': 'pointer', 'border': '0px',
+                    #             'borderRadius': '5px', 'backgroundColor':
+                    #            'black', 'color': 'white', 'textTransform':
+                    #           'uppercase', 'fontSize': '15px'}),
+                    # html.Div(id='container-button-timestamp3')
+                    # ],style={'textAlign': 'center'}),
+                    html.Br()
+
+                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+
+            dbc.Row(
+                dbc.Col(html.H2(children=["Minutos diarios promedio por medio de transporte \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="target-minutos",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip(
+                "Diagrama de barras que muestra las ocupaciones de las personas tomadas en cuenta en el estudio",
+                target="target-minutos"),
+
+            html.Center(
+                html.Div([
+                    html.Div([
+
+                        html.Div([
+                            html.H5(children='Escoja la localidad a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-suma1-localidad",
+                                options=["Ciudad Bolivar", "San Cristobal"],
+                                value=["Ciudad Bolivar", "San Cristobal"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ]),
+
+                        html.Div([
+                            html.H5(children='Escoja el sexo a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-suma1-sexo",
+                                options=["Hombres", "Mujeres"],
+                                value=["Hombres", "Mujeres"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
+
+                    # Table container
+                    html.Div([
+                        dcc.Graph(id='suma-transporte')
+
+                    ]),
+                    html.Br(),
+                    # html.Div([
+                    # html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
+                    #              'cursor': 'pointer', 'border': '0px',
+                    #             'borderRadius': '5px', 'backgroundColor':
+                    #            'black', 'color': 'white', 'textTransform':
+                    #           'uppercase', 'fontSize': '15px'}),
+                    #  html.Div(id='container-button-timestamp3')
+                    # ],style={'textAlign': 'center'}),
+                    html.Br()
+
+                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+
+        ]
+    elif pathname == "/page-3":
+        return [
+            dbc.Row(
+                dbc.Col(html.H2(children=["Porcentaje de personas iniciando o terminando un viaje \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="target-mapa-salidas",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip(
+                "Mapa de calor que muestra la cantidad de personas que estan iniciando o terminando un viaje en una determinada localidad dado el sexo y la localidad a la que pertenecen",
+                target="target-mapa-salidas"),
+
+            html.Center(
+                html.Div([
+                    html.Div([
+
+                        html.Div([
+                            html.H5(children='Escoja la localidad a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-mapa-localidad",
+                                options=["Ciudad Bolivar", "San Cristobal"],
+                                value=["Ciudad Bolivar", "San Cristobal"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ]),
+
+                        html.Div([
+                            html.H5(children='Escoja el sexo a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-mapa-sexo",
+                                options=["Hombres", "Mujeres"],
+                                value=["Hombres", "Mujeres"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
+                    html.Br(),
+                    html.H5(children='Escoja el intervalo de tiempo',
+                            style={"width": "30%", 'display': 'inline-block', "marginLeft": "5%"}),
+                    html.Div([
+                        dcc.Slider(0, 5, step=None,
+                                   marks={
+                                       0: '12AM-5AM',
+                                       1: '5AM-9AM',
+                                       2: '9AM-1PM',
+                                       3: '1PM-5PM',
+                                       4: '5PM-9PM',
+                                       5: '9PM-12AM'
+                                   },
+                                   value=0,
+                                   id='my-slider')], style={"width": "60%", "marginLeft": "0%"}),
+                    html.Br(),
+                    # Table container
+                    dcc.Loading(
+                        id='loading2',
+                        children=[html.Div([
+                            dcc.Graph(id='mapa-frecuencias')
+
+                        ])],
+                        type="circle"),
+                    html.Br(),
+                    # html.Div([
+                    #   html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
+                    #                 'cursor': 'pointer', 'border': '0px',
+                    #                'borderRadius': '5px', 'backgroundColor':
+                    #               'black', 'color': 'white', 'textTransform':
+                    #              'uppercase', 'fontSize': '15px'}),
+                    # html.Div(id='container-button-timestamp3')
+                    # ],style={'textAlign': 'center'}),
+                    html.Br()
+
+                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+            dbc.Row(
+                dbc.Col(html.H2(
+                    children=["Tiempo promedio en minutos a cada localidad saliendo de una localidad especifica \t",
+                              html.I(className="fas fa-info-circle fa-xs", id="target-mapa-horas",
+                                     style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip(
+                "Mapas de calor que muestran el tiempo promedio en minutos que una persona se demora saliendo de Ciudad Bolivar, San Cristobal o ambas a otras localidades",
+                target="target-mapa-horas"),
+
+            html.Center(
+                html.Div([
+                    html.Div([
+
+                        html.Div([
+                            html.H5(children='Escoja la localidad a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-mapa2-localidad",
+                                options=["Ciudad Bolivar", "San Cristobal"],
+                                value=["Ciudad Bolivar", "San Cristobal"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ]),
+
+                        html.Div([
+                            html.H5(children='Escoja el sexo a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-mapa2-sexo",
+                                options=["Hombres", "Mujeres"],
+                                value=["Hombres", "Mujeres"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
+                    html.Br(),
+                    html.H3(children='Escoja el intervalo de tiempo',
+                            style={"width": "30%", 'display': 'inline-block', "marginLeft": "5%"}),
+                    html.Div([
+                        dcc.Slider(0, 5, step=None,
+                                   marks={
+                                       0: '12AM-5AM',
+                                       1: '5AM-9AM',
+                                       2: '9AM-1PM',
+                                       3: '1PM-5PM',
+                                       4: '5PM-9PM',
+                                       5: '9PM-12AM'
+                                   },
+                                   value=0,
+                                   id='my-slider2')], style={"width": "60%", "marginLeft": "5%"}),
+
+                    html.Br(),
+                    # Table container
+                    dcc.Loading(
+                        id = 'loading',
+                    children = [html.Div([
+                        dcc.Graph(id='mapa-tiempos')
+
+                    ])],
+                    type = "circle"),
+                    html.Br(),
+                    # html.Div([
+                    #   html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
+                    #                 'cursor': 'pointer', 'border': '0px',
+                    #                'borderRadius': '5px', 'backgroundColor':
+                    #               'black', 'color': 'white', 'textTransform':
+                    #              'uppercase', 'fontSize': '15px'}),
+                    # html.Div(id='container-button-timestamp3')
+                    # ],style={'textAlign': 'center'}),
+                    html.Br()
+
+                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
+        ]
+    # If the user tries to reach a different page, return a 404 message
+    return dbc.Jumbotron(
+        [
+            html.H1("404: Not found", className="text-danger"),
+            html.Hr(),
+            html.P(f"The pathname {pathname} was not recognised..."),
+        ]
+    )
 
 
-        # Table container
-        html.Div([
-            dcc.Graph(id='localidad')
-
-        ]),
-html.Div([
-    html.Button('Descripción', id='btn-nclicks-5', n_clicks=0, style={'width': '240px', 'height': '40px',
-                   'cursor': 'pointer', 'border': '0px',
-                   'borderRadius': '5px', 'backgroundColor':
-                   'black', 'color': 'white', 'textTransform':
-                   'uppercase', 'fontSize': '15px'}),
-    html.Div(id='container-button-timestamp5')
-],style={'textAlign': 'center'}),
-]),
-dcc.Tab(label='Patrones de transporte', children=[
-html.Div(
-    [
-        html.I(className="fas fa-question-circle fa-lg", id="targethisto"),
-        dbc.Tooltip("Diagrama de barras apiladas que muestra los principales aspectos a mejorar discriminados por el tipo de transporte", target="targethisto"),
-    ],
-    className="p-5 text-muted"
-),
-html.Div([
-    dcc.Graph(id='Preferencia Transporte'),
-]),
-html.Div([
-    html.Div(id='viajes-promedio'),
-]),
-html.Div([
-    dcc.RangeSlider(5, 23,1,
-               value=[5,9],
-               id='my-slider'
-               )],style={"width":"50%","marginLeft": "30%"},),
-
-html.Div([
-    dcc.Graph(id='mapa-frecuencias'),
-]),
-html.Div([
-    dcc.Graph(id='suma-transporte'),
-]),
-html.Div([
-    dcc.RangeSlider(5, 23,1,
-               value=[5,9],
-               id='my-slider2'
-               )],style={"width":"50%","marginLeft": "30%"},),
-html.Div([
-    dcc.Graph(id='mapa-tiempos'),
-]),
-
-    ]),
-
-])
-])
 
 
 @app.callback(
@@ -316,61 +699,58 @@ def displayClick(btn1):
 
 @app.callback(
     Output("localidad", "figure"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value')])
-def update_localidad(localidad,sex):
+    Input("dropdown-localidad-sexo", "value"))
+def update_localidad(sex):
     datos1 = encuestast1.copy()
     datos2 = encuestast2.copy()
-    if sex != "Ambos":
-        datos1 = datos1[datos1["Sexo"] == sex]
-        datos2 = datos2[datos2["Sexo"] == sex]
+    datos1 = datos1[datos1["Sexo"].isin(sex)]
+    datos2 = datos2[datos2["Sexo"].isin(sex)]
 
-    if localidad != "Ambos":
-        datos1 = datos1[datos1["localidad"] == localidad]
-        datos2 = datos2[datos2["localidad"] == localidad]
-    fig = make_subplots(rows=1, cols=2, specs=[[{"type": "pie"}, {"type": "pie"}]], vertical_spacing=0.001)
+    fig = make_subplots(rows=1, cols=2, specs=[[{"type": "pie"}, {"type": "pie"}]], vertical_spacing=0.001,
+                        subplot_titles=("Proporción de personas por localidad<br>antes de la pandemia",
+                                        "Proporción de personas por localidad<br>después de la pandemia"))
 
-    datos1 = datos1.groupby("localidad").agg({'localidad':'count'}).sort_index()
-    datos2 = datos2.groupby("localidad").agg({'localidad':'count'}).sort_index()
-
-
+    datos1 = datos1.groupby("localidad").agg({'localidad':'count'})
+    datos1.columns = ["cantidad"]
+    datos2 = datos2.groupby("localidad").agg({'localidad':'count'})
+    datos2.columns = ["cantidad"]
+    datos1 = datos1.sort_index()
+    datos2 = datos2.sort_index()
     fig.add_trace(go.Pie(
         labels=datos1.index,
-        values=datos1.localidad,
+        values=datos1.cantidad,
         textinfo='label+percent',
         insidetextorientation='radial',
         name="Antes de la pandemia",
-        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+        sort=False,
+        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
     ), 1, 1)
     fig.add_trace(go.Pie(
         labels=datos2.index,
-        values=datos2.localidad,
+        values=datos2.cantidad,
         textinfo='label+percent',
         insidetextorientation='radial',
         name = "Despues de la pandemia",
-        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+        sort=False,
+        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
     ), 1, 2)
 
-   # fig.update_layout(title_x=0.5)
+
+    #fig.update_layout(title = "Distribución de personas por localidad antes y despues de la pandemia")
     return fig
 
 
 # Histograma de sexo
 @app.callback(
     Output("sexo", "figure"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value')])
-def update_sexo(localidad,sex):
+    Input("dropdown-sexo-localidad", "value"))
+def update_sexo(localidad):
     datos1 = encuestast1.copy()
     datos2 = encuestast2.copy()
-    if sex != "Ambos":
-        datos1 = datos1[datos1["Sexo"] == sex]
-        datos2= datos2[datos2["Sexo"] == sex]
 
-    if localidad != "Ambos":
-        datos1 = datos1[datos1["localidad"] == localidad]
-        datos2 = datos2[datos2["localidad"] == localidad]
-    fig = make_subplots(rows=1, cols=2, specs=[[{"type": "pie"}, {"type": "pie"}]],vertical_spacing=0.001)
+    datos1 = datos1[datos1["localidad"].isin(localidad)]
+    datos2 = datos2[datos2["localidad"].isin(localidad)]
+    fig = make_subplots(rows=1, cols=2,specs=[[{"type": "pie"}, {"type": "pie"}]],vertical_spacing=0.001,subplot_titles=("Distribución de género antes de la pandemia", "Distribución de género después de la pandemia"))
 
     datos1 = datos1.groupby("Sexo").agg({"Sexo":"count"})
     datos2 = datos2.groupby("Sexo").agg({"Sexo":"count"})
@@ -381,7 +761,8 @@ def update_sexo(localidad,sex):
         textinfo='label+percent',
         insidetextorientation='radial',
         name = "Antes de la pandemia",
-        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+        sort=False,
+        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
    ), 1, 1)
 
     fig.add_trace(go.Pie(
@@ -390,16 +771,16 @@ def update_sexo(localidad,sex):
         textinfo='label+percent',
         insidetextorientation='radial',
         name = "Despues de la pandemia",
-        marker=dict(colors=['rgba(38, 24, 74, 0.8)', 'rgba(49,130,189, 0.8)'], line=dict(color='#000000', width=2)),
+        sort=False,
+        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
     ), 1, 2)
                         # color_discrete_sequence=['#32373B',   '#C83E4D'])
-    #fig.update_layout(title_x=0.5,font_family='Tahoma', plot_bgcolor='rgba(67, 129, 193)')
     return fig
 
 @app.callback(
     Output("ocupacion", "figure"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value')])
+    [Input("dropdown-ocupacion-localidad", "value"),
+     Input('dropdown-ocupacion-sexo', 'value')])
 def ocupacion(localidad,sex):
     datos1 = encuestast1.copy()
     datos2 = encuestast2.copy()
@@ -407,16 +788,13 @@ def ocupacion(localidad,sex):
     datos1 = datos1[(datos1.T1_Q15 != "888") & (datos1.T1_Q15 != "Otros") ]
     datos2 = datos2[datos2.T2_Q13.isin(datos1.T1_Q15.unique())]
 
-    if sex != "Ambos":
-        datos1 = datos1[datos1["Sexo"] == sex]
-        datos2 = datos2[datos2["Sexo"] == sex]
-
-    if localidad != "Ambos":
-        datos1 = datos1[datos1["localidad"] == localidad]
-        datos2 = datos2[datos2["localidad"] == localidad]
+    datos1 = datos1[datos1["localidad"].isin(localidad)]
+    datos2 = datos2[datos2["localidad"].isin(localidad)]
+    datos1 = datos1[datos1["Sexo"].isin(sex)]
+    datos2 = datos2[datos2["Sexo"].isin(sex)]
 
     fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=False,
-                        shared_yaxes=True, vertical_spacing=0.001)
+                        shared_yaxes=True, vertical_spacing=0.001,subplot_titles=("Cantidad de personas por<br>ocupación antes de la pandemia", "Cantidad de personas por<br>ocupación después de la pandemia"))
 
     datos_x1 = datos1.T1_Q15.value_counts().sort_index()
     datos_x2 = datos2.T2_Q13.value_counts().sort_index()
@@ -424,43 +802,45 @@ def ocupacion(localidad,sex):
     fig.add_trace(go.Bar(
         y=datos_x1,
         x=datos_x1.index,
-        name='Antes de la pandemia',
+        name='Antes de<br>la pandemia',
         marker=dict(
-            color='rgba(38, 24, 74, 0.6)',
-            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+            color=colors[0],
+            line=dict(color=colors[1], width=3)
         )), 1, 1)
 
     fig.add_trace(go.Bar(
         y=datos_x2,
         x=datos_x2.index,
-        name='Despues de la pandemia',
+        name='Despues de<br>la pandemia',
         marker=dict(
-            color='rgba(38, 24, 74, 0.6)',
-            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+            color=colors[2],
+            line=dict(color=colors[3], width=3)
         )), 1, 2)
-    #fig.update_layout(title_x=0.5)
+
+    fig.update_xaxes(title_text="Ocupación", row=1, col=1)
+    fig.update_xaxes(title_text="Ocupación", row=1, col=2)
+
+    fig.update_yaxes(title_text="Número de personas", row=1, col=1)
+    fig.update_yaxes(title_text="Número de personas",row=1, col=2)
     return fig
 
 #Histograma preferencia transporte
 @app.callback(
     Output("Preferencia Transporte", "figure"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value')])
+    [Input("dropdown-preferido-localidad", "value"),
+     Input('dropdown-preferido-sexo', 'value')])
 def update_preferencias(localidad,sex):
 
     datos1 = encuestast1.copy()
     datos2= encuestast2.copy()
 
-    if sex != "Ambos":
-        datos1 = datos1[datos1["Sexo"] == sex]
-        datos2 = datos2[datos2["Sexo"] == sex]
-
-    if localidad != "Ambos":
-        datos1 = datos1[datos1["localidad"] == localidad]
-        datos2 = datos2[datos2["localidad"] == localidad]
+    datos1 = datos1[datos1["localidad"].isin(localidad)]
+    datos2 = datos2[datos2["localidad"].isin(localidad)]
+    datos1 = datos1[datos1["Sexo"].isin(sex)]
+    datos2 = datos2[datos2["Sexo"].isin(sex)]
 
     fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
-                        shared_yaxes=True, vertical_spacing=0.001)
+                        shared_yaxes=True, vertical_spacing=0.001,subplot_titles=("Proporción antes de la pandemia", "Proporción después de la pandemia"))
     top_labels = ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']
     x_data1 = []
     for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
@@ -479,8 +859,8 @@ def update_preferencias(localidad,sex):
         name='Antes de la pandemia',
         orientation='h',
         marker=dict(
-            color='rgba(38, 24, 74, 0.6)',
-            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+            color=colors[0],
+            line=dict(color=colors[1], width=3)
         )),1,1)
 
     fig.add_trace(go.Bar(
@@ -489,76 +869,40 @@ def update_preferencias(localidad,sex):
         name='Despues de la pandemia',
         orientation='h',
         marker=dict(
-            color='rgba(49,130,189, 0.6)',
-            line=dict(color='rgba(49,130,189, 1)', width=3)
+            color=colors[2],
+            line=dict(color=colors[3], width=3)
         )), 1, 2)
+
+    fig.update_xaxes(title_text="Porcentaje (%)", row=1, col=1)
+    fig.update_xaxes(title_text="Porcentaje (%)", row=1, col=2)
+
+    fig.update_yaxes(title_text="Medio de transporte preferido", row=1, col=1)
+    fig.update_yaxes(title_text="Medio de transporte preferido",row=1, col=2)
 
     return fig
 
 
-def patrones_movimiento(localidad,sexo,hora):
-    data_frame = primeros
-    inicio,fin = [datetime.time(num) for num in hora]    #inicio,fin = pd.to_datetime(hora.split(","))
-    #print(type(data_frame.hora_inicio.loc[0]))
-    #inicio,fin = inicio.time(),fin.time()
-    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
-    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
-    data_frame.columns = ["frecuencia"]
-    data_frame.reset_index().groupby("inicio").agg({"frecuencia":"mean"})
-    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
-    data_frame = (data_frame/data_frame.sum()).reset_index()
-    figure1 = px.choropleth(data_frame=data_frame,
-                            geojson=bog_regions_geo,
-                            locations='inicio',
-                            featureidkey='properties.LocNombre',
-                            # ruta al campo del archivo GeoJSON con el que se hará la relación (nombre de los estados)
-                            color='frecuencia',  # El color depende de las cantidades
-                            color_continuous_scale="Greens"  # greens
-                            )
-    figure1.update_geos(showcountries=True, showcoastlines=True, showland=True, fitbounds="locations")
-
-    data_frame = primerost2
-    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
-    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
-    data_frame.columns = ["frecuencia"]
-    data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
-    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
-    data_frame = (data_frame / data_frame.sum()).reset_index()
-    figure2 = px.choropleth(data_frame=data_frame,
-                            geojson=bog_regions_geo,
-                            locations='inicio',
-                            featureidkey='properties.LocNombre',
-                            # ruta al campo del archivo GeoJSON con el que se hará la relación (nombre de los estados)
-                            color='frecuencia',  # El color depende de las cantidades
-                            color_continuous_scale="Greens"  # greens
-                            )
-    figure2.update_geos(showcountries=True, showcoastlines=True, showland=True, fitbounds="locations")
-
-    return figure1,figure2
-
-
 @app.callback(
     Output("mapa-frecuencias", "figure"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value'),
+    [Input("dropdown-mapa-localidad", "value"),
+     Input('dropdown-mapa-sexo', 'value'),
      Input('my-slider', 'value')])
-def prueba(localidad,sex,hora):
+def prueba(localidad, sex, hora):
     fig = make_subplots(
         rows=2, cols=2,
         specs=[
-            [{"type": "choropleth"}, {"type": "choropleth"}],[{"type": "choropleth"},{"type": "choropleth"}]
+            [{"type": "choropleth"}, {"type": "choropleth"}], [{"type": "choropleth"}, {"type": "choropleth"}]
         ],
         vertical_spacing=0.075,
         horizontal_spacing=0.08,
-        subplot_titles=("Inicio de viajes pre pandemia", "Inicio de viajes post pandemia", "Fin de viajes pre pandemia", "Fin de viajes post pandemia")
+        subplot_titles=("Inicio de viajes pre pandemia", "Inicio de viajes post pandemia", "Fin de viajes pre pandemia",
+                        "Fin de viajes post pandemia")
     )
     data_frame = primeros
-    if sex != "Ambos":
-        data_frame = data_frame[data_frame["Sexo"] == sex]
-    if localidad != "Ambos":
-        data_frame = data_frame[data_frame["localidad"] == localidad]
+    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
+    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
 
-    inicio, fin = [datetime.time(num) for num in hora]
+    inicio, fin = horas[hora]
     data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
     data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
     data_frame.columns = ["frecuencia"]
@@ -566,17 +910,18 @@ def prueba(localidad,sex,hora):
     data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
     data_frame = (data_frame / data_frame.sum()).reset_index()
     diff = localidades - set(data_frame.inicio)
-    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
+    data_frame = pd.concat(
+        [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
 
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
         locations=data_frame.inicio,
         z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Viajes",
-        zmin=data_frame['frecuencia'].min(),
-        zmax=data_frame['frecuencia'].max(),
+        zmin=0,
+        zmax=0.15,
         name='Viajes iniciados pre pandemia',
         hoverinfo='location+z',
         showlegend=False,
@@ -584,53 +929,51 @@ def prueba(localidad,sex,hora):
     ), row=1, col=1)
 
     data_frame = primerost2
-    if sex != "Ambos":
-        data_frame = data_frame[data_frame["Sexo"] == sex]
-    if localidad != "Ambos":
-        data_frame = data_frame[data_frame["localidad"] == localidad]
+    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
+    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
+
     data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
     data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
     data_frame.columns = ["frecuencia"]
     data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
     data_frame = (data_frame / data_frame.sum()).reset_index()
     diff = localidades - set(data_frame.inicio)
-    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
+    data_frame = pd.concat(
+        [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
         locations=data_frame.inicio,
         z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Viajes",
-        zmin=data_frame['frecuencia'].min(),
-        zmax=data_frame['frecuencia'].max(),
+        zmin=0,
+        zmax=0.15,
         name='Viajes iniciados post pandemia',
         hoverinfo='location+z',
 
     ), row=1, col=2)
 
     data_frame = ultimos
-    if sex != "Ambos":
-        data_frame = data_frame[data_frame["Sexo"] == sex]
-    if localidad != "Ambos":
-        data_frame = data_frame[data_frame["localidad"] == localidad]
-    inicio, fin = [datetime.time(num) for num in hora]
+    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
+    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
     data_frame = data_frame[(data_frame.hora_fin >= inicio) & (data_frame.hora_fin <= fin)]
     data_frame = data_frame.groupby("dia_fin")["fin"].value_counts().to_frame()
     data_frame.columns = ["frecuencia"]
     data_frame = data_frame.reset_index().groupby("fin").agg({"frecuencia": "mean"})
     data_frame = (data_frame / data_frame.sum()).reset_index()
     diff = localidades - set(data_frame.fin)
-    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
+    data_frame = pd.concat(
+        [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Viajes",
-        zmin=data_frame['frecuencia'].min(),
-        zmax=data_frame['frecuencia'].max(),
+        zmin=0,
+        zmax=0.15,
         name='Pre pandemia',
         hoverinfo='location+z',
         showlegend=False,
@@ -638,26 +981,26 @@ def prueba(localidad,sex,hora):
 
     ), row=2, col=1)
     data_frame = ultimost2
-    if sex != "Ambos":
-        data_frame = data_frame[data_frame["Sexo"] == sex]
-    if localidad != "Ambos":
-        data_frame = data_frame[data_frame["localidad"] == localidad]
+    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
+    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
+
     data_frame = data_frame[(data_frame.hora_fin >= inicio) & (data_frame.hora_fin <= fin)]
     data_frame = data_frame.groupby("dia_fin")["fin"].value_counts().to_frame()
     data_frame.columns = ["frecuencia"]
     data_frame = data_frame.reset_index().groupby("fin").agg({"frecuencia": "mean"})
     data_frame = (data_frame / data_frame.sum()).reset_index()
     diff = localidades - set(data_frame.fin)
-    data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
+    data_frame = pd.concat(
+        [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Viajes",
-        zmin=data_frame['frecuencia'].min(),
-        zmax=data_frame['frecuencia'].max(),
+        zmin=0,
+        zmax=0.15,
         name='Post pandemia',
         hoverinfo='location+z',
         showlegend=False,
@@ -670,8 +1013,7 @@ def prueba(localidad,sex,hora):
     hovertemp = '<i>Localidad:</i> %{location} <br>'
     hovertemp += '<i>Porcentaje:</i> %{z:,}'
     fig.update_traces(hovertemplate=hovertemp)
-    fig.update_layout(
-        title='Porcentaje de personas que inician o terminan un viaje en una localidad especifica dada la hora', title_x=0.5,height =1000)
+    fig.update_layout(height=1000, dragmode=False)
 
     return fig
 
@@ -680,58 +1022,52 @@ def prueba(localidad,sex,hora):
 
 @app.callback(
     Output("viajes-promedio", "children"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value')])
+    [Input("dropdown-texto-localidad", "value"),
+     Input('dropdown-texto-sexo', 'value')])
 def viajes_prom(localidad,sex):
     datos1 = viajes_promedio.copy()
     datos2 = viajes_promedioT2.copy()
 
-    if sex != "Ambos":
-        datos1 = datos1[datos1["Sexo"] == sex]
-        datos2 = datos2[datos2["Sexo"] == sex]
+    datos1 = datos1[datos1["Sexo"].isin(sex)]
+    datos2 = datos2[datos2["Sexo"].isin(sex)]
 
-    if localidad != "Ambos":
-        datos1 = datos1[datos1["localidad"] == localidad]
-        datos2 = datos2[datos2["localidad"] == localidad]
+    datos1 = datos1[datos1["localidad"].isin(localidad)]
+    datos2 = datos2[datos2["localidad"].isin(localidad)]
 
     viajest1 = datos1.viaje.mean()
     viajest2 = datos2.viaje.mean()
+
     return html.Div([
         html.Div([
-            html.H2("En promedio una persona hace ", style={"textAlign": "center"}),
-            html.Br(),
-            html.H1(str(round(viajest1, 2)), style={"textAlign": "center", "color": "rgba(38, 24, 74, 1)"}),
-            html.H2(" viajes al día", style={"textAlign": "center"})
+            html.H5("En promedio una persona hace ", style={"textAlign": "center"}),
+            html.H1(str(round(viajest1, 2)), style={"textAlign": "center", "color": colors[1]}),
+            html.H5(" viajes al día antes de la pandemia", style={"textAlign": "center"})
         ], style={"width": "49%", "display": "inline-block"}),
         html.Div([
-            html.H2("En promedio una persona hace ",style = {"textAlign":"center"}) ,
-            html.Br(),
-            html.H1(str(round(viajest2,2)),style = {"textAlign":"center","color":"rgba(49,130,189, 1)"}) ,
-            html.H2(" viajes al día",style = {"textAlign":"center"})
+            html.H5("En promedio una persona hace ",style = {"textAlign":"center"}) ,
+            html.H1(str(round(viajest2,2)),style = {"textAlign":"center","color":colors[3]}) ,
+            html.H5(" viajes al día después de la pandemia",style = {"textAlign":"center"})
         ],style={"width":"49%","display":"inline-block"}),
-    ],style={"display":"flex"})
+    ],style={"display":"flex"},className="shadow-sm p-3 mb-5 bg-white rounded")
 
 @app.callback(
     Output("suma-transporte", "figure"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value')])
+    [Input("dropdown-suma1-localidad", "value"),
+     Input('dropdown-suma1-sexo', 'value')])
 def suma_transporte(localidad,sex):
     datos1 = tiempos.copy()
     datos2 = tiemposT2.copy()
 
-    if sex != "Ambos":
-        datos1 = datos1[datos1["Sexo"] == sex]
-        datos2 = datos2[datos2["Sexo"] == sex]
-
-    if localidad != "Ambos":
-        datos1 = datos1[datos1["localidad"] == localidad]
-        datos2 = datos2[datos2["localidad"] == localidad]
+    datos1 = datos1[datos1["localidad"].isin(localidad)]
+    datos2 = datos2[datos2["localidad"].isin(localidad)]
+    datos1 = datos1[datos1["Sexo"].isin(sex)]
+    datos2 = datos2[datos2["Sexo"].isin(sex)]
 
     datos1 = datos1.groupby(["fecha","movimiento"]).agg({"minutos":"sum"}).reset_index().groupby("movimiento").agg({"minutos":"mean"})
     datos2 = datos2.groupby(["fecha","movimiento"]).agg({"minutos":"sum"}).reset_index().groupby("movimiento").agg({"minutos":"mean"})
 
     fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
-                        shared_yaxes=True, vertical_spacing=0.001)
+                        shared_yaxes=True, vertical_spacing=0.001,subplot_titles=("Tiempos antes de la pandemia", "Tiempos despues de la pandemia"))
 
     fig.add_trace(go.Bar(
         y=datos1.index,
@@ -739,26 +1075,35 @@ def suma_transporte(localidad,sex):
         name='Antes de la pandemia',
         orientation='h',
         marker=dict(
-            color='rgba(38, 24, 74, 0.6)',
-            line=dict(color='rgba(38, 24, 74, 1)', width=3)
+            color=colors[0],
+            line=dict(color=colors[1], width=3)
         )),1,1)
-
+    max1 = datos1.minutos.max()
     fig.add_trace(go.Bar(
         y=datos2.index,
         x=datos2.minutos,
         name='Despues de la pandemia',
         orientation='h',
         marker=dict(
-            color='rgba(49,130,189, 0.6)',
-            line=dict(color='rgba(49,130,189, 1)', width=3)
+            color=colors[2],
+            line=dict(color=colors[3], width=3)
         )), 1, 2)
+
+    max2 = datos2.minutos.max()
+
+    maximo = max(max1,max2)
+    fig.update_xaxes(title_text="Tiempo diario promedio (min)",range=[0, maximo+30], row=1, col=1)
+    fig.update_xaxes(title_text="Tiempo diario promedio (min)", range=[0, maximo+30],row=1, col=2)
+
+    fig.update_yaxes(title_text="Medio de transporte utilizado", row=1, col=1)
+    fig.update_yaxes(title_text="Medio de transporte utilizado",row=1, col=2)
 
     return fig
 
 @app.callback(
     Output("mapa-tiempos", "figure"),
-    [Input("dropdown", "value"),
-     Input('dropdown2', 'value'),
+    [Input("dropdown-mapa2-localidad", "value"),
+     Input('dropdown-mapa2-sexo', 'value'),
      Input('my-slider2', 'value')])
 def ultimo_mapa(localidad,sex,hora):
     fig = make_subplots(
@@ -771,13 +1116,11 @@ def ultimo_mapa(localidad,sex,hora):
         subplot_titles=("Inicio de viajes pre pandemia", "Inicio de viajes post pandemia")
     )
     data_frame = tiempos_viaje.copy()
-    if sex != "Ambos":
-        data_frame = data_frame[data_frame["Sexo"] == sex]
-    if localidad != "Ambos":
-        data_frame = data_frame[data_frame["localidad"] == localidad]
-        data_frame = data_frame[data_frame["inicio"] == localidad.upper()]
+    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
+    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
+    data_frame = data_frame[data_frame["inicio"].isin(map(lambda x: x.upper(),localidad))]
 
-    inicio, fin = [datetime.time(num) for num in hora]
+    inicio, fin = horas[hora]
     data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
     data_frame = data_frame.groupby("fin").agg({"tiempo_viaje_minutos":"mean"})
     data_frame = data_frame.reset_index()
@@ -789,21 +1132,19 @@ def ultimo_mapa(localidad,sex,hora):
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['tiempo_viaje_minutos'],
-        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Minutos",
-        zmin=data_frame['tiempo_viaje_minutos'].min(),
-        zmax=data_frame['tiempo_viaje_minutos'].max(),
+        zmin=0,
+        zmax=180,
         name='Minutos de viaje pre pandemia',
         hoverinfo='location+z',
 
     ), row=1, col=1)
 
     data_frame = tiempos_viajeT2.copy()
-    if sex != "Ambos":
-        data_frame = data_frame[data_frame["Sexo"] == sex]
-    if localidad != "Ambos":
-        data_frame = data_frame[data_frame["localidad"] == localidad]
-        data_frame = data_frame[data_frame["inicio"] == localidad.upper()]
+    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
+    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
+    data_frame = data_frame[data_frame["inicio"].isin(map(lambda x: x.upper(), localidad))]
 
     data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
     data_frame = data_frame.groupby("fin").agg({"tiempo_viaje_minutos": "mean"})
@@ -816,10 +1157,10 @@ def ultimo_mapa(localidad,sex,hora):
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['tiempo_viaje_minutos'],
-        colorscale=['rgb(255,255,255)', "rgba(38, 24, 74, 1)"],
+        colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Minutos",
-        zmin=data_frame['tiempo_viaje_minutos'].min(),
-        zmax=data_frame['tiempo_viaje_minutos'].max(),
+        zmin=0,
+        zmax=180,
         name='Minutos de viaje post pandemia',
         hoverinfo='location+z',
         showlegend=False,
@@ -834,8 +1175,7 @@ def ultimo_mapa(localidad,sex,hora):
     hovertemp = '<i>Localidad:</i> %{location} <br>'
     hovertemp += '<i>Minutos promedio:</i> %{z:,}'
     fig.update_traces(hovertemplate=hovertemp)
-    fig.update_layout(
-        title='Porcentaje de personas que inician o terminan un viaje en una localidad especifica dada la hora', title_x=0.5,height = 1000)
+    fig.update_layout(height = 1000,dragmode=False)
 
     return fig
 if __name__ == '__main__':
