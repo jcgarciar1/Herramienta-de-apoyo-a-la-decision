@@ -81,11 +81,18 @@ viajes_promedioT2 = pd.read_csv("viajes_diarios_promedioT2.csv")
 tiempos = pd.read_csv("tiempos_tipo.csv")
 tiemposT2 = pd.read_csv("tiempos_tipoT2.csv")
 
+tiempos = tiempos[tiempos.movimiento != "UNKNOWN"]
+tiemposT2 = tiemposT2[tiemposT2.movimiento != "UNKNOWN"]
+
+
+
 tiempos_viaje = pd.read_csv("tiempo_viajes_T1.csv")
 tiempos_viaje.hora_inicio = tiempos_viaje.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+tiempos_viaje.tiempo_viaje_minutos = tiempos_viaje.tiempo_viaje_minutos.apply(lambda x: round(x,2))
 
 tiempos_viajeT2 = pd.read_csv("tiempo_viajes_T2.csv")
 tiempos_viajeT2.hora_inicio = tiempos_viajeT2.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
+tiempos_viajeT2.tiempo_viaje_minutos = tiempos_viajeT2.tiempo_viaje_minutos.apply(lambda x: round(x,2))
 
 
 with open('bogota.json', 'r') as openfile:
@@ -423,7 +430,7 @@ def render_page_content(pathname):
                 justify="end"
             ),
             dbc.Tooltip(
-                "Diagrama de barras que muestra las ocupaciones de las personas tomadas en cuenta en el estudio",
+                "Diagrama de barras que muestra los minutos promedios diarios por tipo de transporte",
                 target="target-minutos"),
 
             html.Center(
@@ -730,13 +737,13 @@ def update_localidad(sex):
         values=datos2.cantidad,
         textinfo='label+percent',
         insidetextorientation='radial',
-        name = "Despues de la pandemia",
+        name = "Después de la pandemia",
         sort=False,
         marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
     ), 1, 2)
 
 
-    #fig.update_layout(title = "Distribución de personas por localidad antes y despues de la pandemia")
+    #fig.update_layout(title = "Distribución de personas por localidad antes y después de la pandemia")
     return fig
 
 
@@ -770,7 +777,7 @@ def update_sexo(localidad):
         values=datos2.Sexo,
         textinfo='label+percent',
         insidetextorientation='radial',
-        name = "Despues de la pandemia",
+        name = "Después de la pandemia",
         sort=False,
         marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
     ), 1, 2)
@@ -811,7 +818,7 @@ def ocupacion(localidad,sex):
     fig.add_trace(go.Bar(
         y=datos_x2,
         x=datos_x2.index,
-        name='Despues de<br>la pandemia',
+        name='Después de<br>la pandemia',
         marker=dict(
             color=colors[2],
             line=dict(color=colors[3], width=3)
@@ -845,12 +852,12 @@ def update_preferencias(localidad,sex):
     x_data1 = []
     for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
         x_data1.append(len(datos1[datos1["modes"] == nombre]))
-    x_data1 = list(map(lambda x: x / sum(x_data1), x_data1))
+    x_data1 = list(map(lambda x: round(x / sum(x_data1),2), x_data1))
 
     x_data2 = []
     for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
         x_data2.append(len(datos2[datos2["modes"] == nombre]))
-    x_data2 = list(map(lambda x: x / sum(x_data2), x_data2))
+    x_data2 = list(map(lambda x: round(x / sum(x_data2),2), x_data2))
 
 
     fig.add_trace(go.Bar(
@@ -866,7 +873,7 @@ def update_preferencias(localidad,sex):
     fig.add_trace(go.Bar(
         y=top_labels,
         x=x_data2,
-        name='Despues de la pandemia',
+        name='Después de la pandemia',
         orientation='h',
         marker=dict(
             color=colors[2],
@@ -895,8 +902,8 @@ def prueba(localidad, sex, hora):
         ],
         vertical_spacing=0.075,
         horizontal_spacing=0.08,
-        subplot_titles=("Inicio de viajes pre pandemia", "Inicio de viajes post pandemia", "Fin de viajes pre pandemia",
-                        "Fin de viajes post pandemia")
+        subplot_titles=("Porcentaje de inicio de viajes por localidad<br>antes de la pandemia", "Porcentaje de inicio de viajes por localidad<br>después de la pandemia", "Porcentaje de fin de viajes por localidad<br>antes de la pandemia",
+                        "Porcentaje de fin de viajes por localidad<br>después de la pandemia")
     )
     data_frame = primeros
     data_frame = data_frame[data_frame["localidad"].isin(localidad)]
@@ -912,6 +919,7 @@ def prueba(localidad, sex, hora):
     diff = localidades - set(data_frame.inicio)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
 
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
@@ -940,6 +948,8 @@ def prueba(localidad, sex, hora):
     diff = localidades - set(data_frame.inicio)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
+
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
@@ -965,6 +975,8 @@ def prueba(localidad, sex, hora):
     diff = localidades - set(data_frame.fin)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
+
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
@@ -992,6 +1004,8 @@ def prueba(localidad, sex, hora):
     diff = localidades - set(data_frame.fin)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
+
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
@@ -1063,33 +1077,35 @@ def suma_transporte(localidad,sex):
     datos1 = datos1[datos1["Sexo"].isin(sex)]
     datos2 = datos2[datos2["Sexo"].isin(sex)]
 
-    datos1 = datos1.groupby(["fecha","movimiento"]).agg({"minutos":"sum"}).reset_index().groupby("movimiento").agg({"minutos":"mean"})
-    datos2 = datos2.groupby(["fecha","movimiento"]).agg({"minutos":"sum"}).reset_index().groupby("movimiento").agg({"minutos":"mean"})
+    datos1 = datos1.groupby(["fecha_inicio_viaje","movimiento","ID"]).agg({"tiempo_minutos":"sum"}).reset_index().groupby(["fecha_inicio_viaje","movimiento"]).agg({"tiempo_minutos":"mean"}).reset_index().groupby("movimiento").agg({"tiempo_minutos":"mean"})
+    datos2 = datos2.groupby(["fecha_inicio_viaje","movimiento","ID"]).agg({"tiempo_minutos":"sum"}).reset_index().groupby(["fecha_inicio_viaje","movimiento"]).agg({"tiempo_minutos":"mean"}).reset_index().groupby("movimiento").agg({"tiempo_minutos":"mean"})
 
     fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
-                        shared_yaxes=True, vertical_spacing=0.001,subplot_titles=("Tiempos antes de la pandemia", "Tiempos despues de la pandemia"))
+                        shared_yaxes=True, vertical_spacing=0.001,subplot_titles=("Tiempos antes de la pandemia", "Tiempos después de la pandemia"))
 
+    datos1.tiempo_minutos = datos1.tiempo_minutos.apply(lambda x: round(x,2))
+    datos2.tiempo_minutos = datos2.tiempo_minutos.apply(lambda x: round(x,2))
     fig.add_trace(go.Bar(
         y=datos1.index,
-        x=datos1.minutos,
+        x=datos1.tiempo_minutos,
         name='Antes de la pandemia',
         orientation='h',
         marker=dict(
             color=colors[0],
             line=dict(color=colors[1], width=3)
         )),1,1)
-    max1 = datos1.minutos.max()
+    max1 = datos1.tiempo_minutos.max()
     fig.add_trace(go.Bar(
         y=datos2.index,
-        x=datos2.minutos,
-        name='Despues de la pandemia',
+        x=datos2.tiempo_minutos,
+        name='Después de la pandemia',
         orientation='h',
         marker=dict(
             color=colors[2],
             line=dict(color=colors[3], width=3)
         )), 1, 2)
 
-    max2 = datos2.minutos.max()
+    max2 = datos2.tiempo_minutos.max()
 
     maximo = max(max1,max2)
     fig.update_xaxes(title_text="Tiempo diario promedio (min)",range=[0, maximo+30], row=1, col=1)
@@ -1113,7 +1129,7 @@ def ultimo_mapa(localidad,sex,hora):
         ],
         vertical_spacing=0.075,
         horizontal_spacing=0.08,
-        subplot_titles=("Inicio de viajes pre pandemia", "Inicio de viajes post pandemia")
+        subplot_titles=("Tiempo promedio de viajes saliendo de<br>" +" y ".join(localidad) +" antes de la pandemia", "Tiempo promedio de viajes saliendo de<br>" +" y ".join(localidad) +" después de la pandemia")
     )
     data_frame = tiempos_viaje.copy()
     data_frame = data_frame[data_frame["Sexo"].isin(sex)]
@@ -1126,7 +1142,7 @@ def ultimo_mapa(localidad,sex,hora):
     data_frame = data_frame.reset_index()
     diff = localidades - set(data_frame.fin)
     data_frame = pd.concat([data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "tiempo_viaje_minutos"])])
-
+    data_frame['tiempo_viaje_minutos'] = data_frame['tiempo_viaje_minutos'].apply(lambda x: round(x,2))
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
@@ -1152,6 +1168,9 @@ def ultimo_mapa(localidad,sex,hora):
     diff = localidades - set(data_frame.fin)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "tiempo_viaje_minutos"])])
+
+    data_frame['tiempo_viaje_minutos'] = data_frame['tiempo_viaje_minutos'].apply(lambda x: round(x,2))
+
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,

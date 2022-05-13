@@ -1,29 +1,29 @@
 ID,modes,localidad,Sexo,T2_Q13
 ID03050090161991,Public transport,San Cristobal,Hombres,Trabajando
-ID03050090181992,Private Transport,San Cristobal,Mujeres,Pensionado
+ID03050090181992,Private Transport,San Cristobal,Mujeres,No está trabajando
 ID03050090211993,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03050090241994,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03050090371995,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03050110251976,Public transport,San Cristobal,Hombres,Trabajando
 ID03050110331977,Private Transport,San Cristobal,Hombres,Trabajando
-ID03050120120928,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03050120120928,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03050130091978,Public transport,San Cristobal,Hombres,Trabajando
 ID03050130121979,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03050130221980,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03050140120920,Private Transport,San Cristobal,Hombres,Diligencias y tramites
-ID03050140150921,Public transport,San Cristobal,Hombres,Diligencias y tramites
+ID03050140120920,Private Transport,San Cristobal,Hombres,No está trabajando
+ID03050140150921,Public transport,San Cristobal,Hombres,No está trabajando
 ID03050140840930,Active Transport,San Cristobal,Hombres,Trabajando
 ID03050170180924,Public transport,San Cristobal,Mujeres,Trabajando
-ID03050170300925,Active Transport,San Cristobal,Hombres,Diligencias y tramites
+ID03050170300925,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03050170330927,Public transport,San Cristobal,Hombres,Trabajando
 ID03050170370934,Private Transport,San Cristobal,Hombres,Trabajando
 ID03050170530935,Active Transport,San Cristobal,Hombres,Estudiando
 ID03050230121990,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03050450090936,Public transport,San Cristobal,Hombres,Trabajando
 ID03050450480941,Private Transport,San Cristobal,Hombres,Trabajando
-ID03050740091984,888,San Cristobal,Mujeres,Incapacitado permanente
+ID03050740091984,888,San Cristobal,Mujeres,No está trabajando
 ID03050740131985,Public transport,San Cristobal,Mujeres,Trabajando
-ID03050740221987,888,San Cristobal,Mujeres,Incapacitado permanente
+ID03050740221987,888,San Cristobal,Mujeres,No está trabajando
 ID03090070031931,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03090070061932,Private Transport,San Cristobal,Hombres,Trabajando
 ID03090070131934,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -44,12 +44,12 @@ ID03090270131946,Public transport,San Cristobal,Mujeres,Trabajando
 ID03090270341949,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03090280031941,Private Transport,San Cristobal,Hombres,Trabajando
 ID03090280151942,Private Transport,San Cristobal,Hombres,Trabajando
-ID03090280261943,Active Transport,San Cristobal,Hombres,Buscando trabajo
+ID03090280261943,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03090280291947,Private Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03090280331944,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03090300061960,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03090300181961,Active Transport,San Cristobal,Hombres,Oficios del hogar
-ID03100020061923,Active Transport,San Cristobal,Mujeres,Buscando trabajo
+ID03100020061923,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03100020431915,Active Transport,San Cristobal,Hombres,Trabajando
 ID03100090091918,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03100090161920,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -59,13 +59,13 @@ ID03100100270611,Public transport,San Cristobal,Mujeres,Trabajando
 ID03100100341602,Private Transport,San Cristobal,Mujeres,Trabajando
 ID03100120650870,Public transport,San Cristobal,Mujeres,Trabajando
 ID03100120700872,Active Transport,San Cristobal,Hombres,Trabajando
-ID03100120790919,Active Transport,San Cristobal,Hombres,Pensionado
+ID03100120790919,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03100140360860,Active Transport,San Cristobal,Hombres,Trabajando
 ID03100140370862,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03100140420861,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03100160030605,Active Transport,San Cristobal,Hombres,Oficios del hogar
 ID03100160181595,Private Transport,San Cristobal,Mujeres,Trabajando
-ID03100170390867,Active Transport,San Cristobal,Hombres,Pensionado
+ID03100170390867,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03100170550869,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03100230301601,Private Transport,San Cristobal,Hombres,Trabajando
 ID03100230360614,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -73,7 +73,7 @@ ID03100230690616,Private Transport,San Cristobal,Mujeres,Trabajando
 ID03100230781603,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03100320040596,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03100320091587,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03100370031598,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03100370031598,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03100370070607,Public transport,San Cristobal,Mujeres,Trabajando
 ID03100370091596,Public transport,San Cristobal,Hombres,Trabajando
 ID03100370150608,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -84,7 +84,7 @@ ID03100390480601,Active Transport,San Cristobal,Hombres,Trabajando
 ID03100390571593,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03100400031588,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03100400160598,Private Transport,San Cristobal,Hombres,Trabajando
-ID03100400190599,Private Transport,San Cristobal,Hombres,Pensionado
+ID03100400190599,Private Transport,San Cristobal,Hombres,No está trabajando
 ID03100400281597,Public transport,San Cristobal,Mujeres,Trabajando
 ID03100400311589,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03100440030879,Public transport,San Cristobal,Mujeres,Trabajando
@@ -96,7 +96,7 @@ ID03100500220868,Active Transport,San Cristobal,Mujeres,Estudiando
 ID03100500360877,Active Transport,San Cristobal,Hombres,Trabajando
 ID03100520160886,Public transport,San Cristobal,Hombres,Trabajando
 ID03100520500888,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03110150060393,Active Transport,San Cristobal,Mujeres,Trabajo de cuidado
+ID03110150060393,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03110150270394,Public-Informal,San Cristobal,Mujeres,Trabajando
 ID03110150450395,Public transport,San Cristobal,Mujeres,Trabajando
 ID03110220230854,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -114,7 +114,7 @@ ID03110260730923,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03110280041689,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03110280101893,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03110280191894,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03110280281896,Active Transport,San Cristobal,Mujeres,No trabajó pero tenía trabajo
+ID03110280281896,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03110290071903,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03110290091902,Active Transport,San Cristobal,Hombres,Estudiando
 ID03110290331905,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -123,16 +123,16 @@ ID03110320071582,Public-Private,San Cristobal,Hombres,Trabajando
 ID03110320090592,Private Transport,San Cristobal,Mujeres,Trabajando
 ID03110320150594,Private Transport,San Cristobal,Mujeres,Trabajando
 ID03110320271584,Public transport,San Cristobal,Mujeres,Trabajando
-ID03110330121909,Public transport,San Cristobal,Mujeres,Pensionado
+ID03110330121909,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03110330181910,Active Transport,San Cristobal,Hombres,Oficios del hogar
-ID03110330221916,Active Transport,San Cristobal,Hombres,Incapacitado permanente
+ID03110330221916,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03110340070593,Private Transport,San Cristobal,Hombres,Trabajando
 ID03110340101583,Public transport,San Cristobal,Hombres,Trabajando
-ID03110340181585,Active Transport,San Cristobal,Hombres,Pensionado
+ID03110340181585,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03110340210595,Active Transport,San Cristobal,Hombres,Trabajando
 ID03110460061577,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03110460120587,Active Transport,San Cristobal,Mujeres,Estudiando
-ID03110460180588,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03110460180588,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03110460331579,Public transport,San Cristobal,Mujeres,Trabajando
 ID03110460420589,Public transport,San Cristobal,Hombres,Incapacitado
 ID03110480030590,Public transport,San Cristobal,Hombres,Trabajando
@@ -141,14 +141,14 @@ ID03110480391581,Public transport,San Cristobal,Mujeres,Trabajando
 ID03120020190913,Public transport,San Cristobal,Mujeres,Trabajando
 ID03120020220904,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03120020240890,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03120020370916,Active Transport,San Cristobal,Hombres,Deporte
+ID03120020370916,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03120090091965,888,San Cristobal,Hombres,Oficios del hogar
-ID03120130340910,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03120130340910,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03120130370914,Private Transport,San Cristobal,Hombres,Trabajando
 ID03120130470915,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03120180031966,Active Transport,San Cristobal,Hombres,Incapacitado permanente
+ID03120180031966,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03120180191970,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03120180211969,Private Transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03120180211969,Private Transport,San Cristobal,Mujeres,No está trabajando
 ID03120240031622,888,San Cristobal,Hombres,Oficios del hogar
 ID03120240160905,Public transport,San Cristobal,Mujeres,Trabajando
 ID03120240200908,Private Transport,San Cristobal,Mujeres,Estudiando
@@ -163,14 +163,14 @@ ID03130070280903,Active Transport,San Cristobal,Hombres,Trabajando
 ID03130090031605,888,San Cristobal,Mujeres,Oficios del hogar
 ID03130090301606,Private Transport,San Cristobal,Mujeres,Trabajando
 ID03130090331607,Public transport,San Cristobal,Mujeres,Trabajando
-ID03130090391608,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03130090391608,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03130100030618,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03130100070615,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03130100210619,Public transport,San Cristobal,Hombres,Diligencias y tramites
+ID03130100210619,Public transport,San Cristobal,Hombres,No está trabajando
 ID03130100240631,Public transport,San Cristobal,Mujeres,Trabajando
-ID03130100820620,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03130100820620,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03130140121614,Public transport,San Cristobal,Mujeres,Trabajando
-ID03130140571615,Active Transport,San Cristobal,Hombres,Buscando trabajo
+ID03130140571615,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03130140690917,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03130140760918,Public transport,San Cristobal,Hombres,Trabajando
 ID03130150040625,Public transport,San Cristobal,Hombres,Estudiando
@@ -179,7 +179,7 @@ ID03130150450622,Active Transport,San Cristobal,Hombres,Estudiando
 ID03130150570623,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03130150690624,Active Transport,San Cristobal,Hombres,Oficios del hogar
 ID03130160091616,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03130170180628,Active Transport,San Cristobal,Hombres,Pensionado
+ID03130170180628,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03130290131610,Private Transport,San Cristobal,Hombres,Trabajando
 ID03130290391612,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03130370330892,Private Transport,San Cristobal,Mujeres,Estudiando
@@ -188,22 +188,22 @@ ID03130370440894,Public transport,San Cristobal,Hombres,Trabajando
 ID03130370780912,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03140010271535,Public transport,San Cristobal,Mujeres,Trabajando
 ID03140010301542,Public transport,San Cristobal,Mujeres,Trabajando
-ID03140030150534,Active Transport,San Cristobal,Hombres,Buscando trabajo
-ID03140030210533,Active Transport,San Cristobal,Hombres,Deporte
+ID03140030150534,Active Transport,San Cristobal,Hombres,No está trabajando
+ID03140030210533,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03140030240528,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03140030270527,Active Transport,San Cristobal,Hombres,Pensionado
+ID03140030270527,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03140030300531,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03140050060529,Public-Private,San Cristobal,Hombres,Trabajando
 ID03140050090541,Public transport,San Cristobal,Hombres,Trabajando
 ID03140050120530,Active Transport,San Cristobal,Hombres,Trabajando
 ID03140050330782,Private Transport,San Cristobal,Hombres,Trabajando
 ID03140060090778,Active Transport,San Cristobal,Hombres,Oficios del hogar
-ID03140060390779,Active Transport,San Cristobal,Mujeres,Buscando trabajo
+ID03140060390779,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03140060490780,Public transport,San Cristobal,Hombres,Trabajando
 ID03140060530781,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03140060561531,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03140170151533,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03140170330784,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03140170330784,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03140170390532,Active Transport,San Cristobal,Hombres,Trabajando
 ID03140170420783,Active Transport,San Cristobal,Hombres,Trabajando
 ID03140170561534,Public transport,San Cristobal,Mujeres,Trabajando
@@ -214,7 +214,7 @@ ID03140240151536,Public transport,San Cristobal,Hombres,Trabajando
 ID03140240180787,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03140290060389,Public transport,San Cristobal,Mujeres,Trabajando
 ID03140290120386,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03140290180388,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03140290180388,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03140370060788,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03140370181538,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03140370300536,Public transport,San Cristobal,Mujeres,Trabajando
@@ -224,18 +224,18 @@ ID03140510121529,Public transport,San Cristobal,Mujeres,Trabajando
 ID03140510150791,Active Transport,San Cristobal,Hombres,Oficios del hogar
 ID03140510390540,Active Transport,San Cristobal,Mujeres,Incapacitado
 ID03140510421541,Public transport,San Cristobal,Mujeres,Trabajando
-ID03150010030806,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03150010030806,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03150010061549,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03150010090548,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03150010180793,Private Transport,San Cristobal,Mujeres,Incapacitado
 ID03150010210796,Active Transport,San Cristobal,Hombres,Trabajando
 ID03150010301544,Public transport,San Cristobal,Mujeres,Trabajando
-ID03150010330543,Public transport,San Cristobal,Mujeres,No trabajó pero tenía trabajo
+ID03150010330543,Public transport,San Cristobal,Mujeres,Trabajando
 ID03150010360556,Public transport,San Cristobal,Mujeres,Trabajando
 ID03150020120545,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03150020271545,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03150020360794,Public transport,San Cristobal,Hombres,Oficios del hogar
-ID03150040031790,Public transport,San Cristobal,Hombres,Buscando trabajo
+ID03150040031790,Public transport,San Cristobal,Hombres,No está trabajando
 ID03150040061793,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03150040091795,Public transport,San Cristobal,Hombres,Trabajando
 ID03150040151794,Active Transport,San Cristobal,Hombres,Trabajando
@@ -293,23 +293,23 @@ ID03150260180277,Active Transport,San Cristobal,Hombres,Trabajando
 ID03150260300282,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03150260330308,Private Transport,San Cristobal,Hombres,Trabajando
 ID03150260390278,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03150300030299,Active Transport,San Cristobal,Hombres,Trabajo de cuidado
+ID03150300030299,Active Transport,San Cristobal,Hombres,Oficios del hogar
 ID03150300180281,888,San Cristobal,Mujeres,Oficios del hogar
 ID03150300270289,Public transport,San Cristobal,Hombres,Trabajando
 ID03150300300296,Private Transport,San Cristobal,Hombres,Trabajando
 ID03150310061770,Public transport,San Cristobal,Mujeres,Trabajando
 ID03150310351773,Private Transport,San Cristobal,Hombres,Trabajando
-ID03150340210309,Active Transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03150340210309,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03150340420306,Public transport,San Cristobal,Mujeres,Trabajando
 ID03150340480305,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03150360271780,Public transport,San Cristobal,Mujeres,Oficios del hogar
-ID03150360301779,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03150360301779,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03150770150551,Active Transport,San Cristobal,Hombres,Trabajando
 ID03150770210802,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03150770270552,Public transport,San Cristobal,Mujeres,Trabajando
-ID03150770330804,888,San Cristobal,Hombres,Incapacitado permanente
+ID03150770330804,888,San Cristobal,Hombres,No está trabajando
 ID03150770360553,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03150770390803,Public transport,San Cristobal,Mujeres,No trabajó pero tenía trabajo
+ID03150770390803,Public transport,San Cristobal,Mujeres,Trabajando
 ID03150770660554,Private Transport,San Cristobal,Hombres,Trabajando
 ID03150770721554,Private Transport,San Cristobal,Hombres,Trabajando
 ID03150980150300,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -322,16 +322,16 @@ ID03160050051758,Public transport,San Cristobal,Hombres,Oficios del hogar
 ID03160050061521,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160050061528,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160050080272,Public transport,San Cristobal,Mujeres,Trabajando
-ID03160060020258,Public transport,San Cristobal,Mujeres,Pensionado
+ID03160060020258,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03160060020270,Active Transport,San Cristobal,Hombres,Trabajando
-ID03160060050260,Public transport,San Cristobal,Hombres,No trabajó pero tenía trabajo
+ID03160060050260,Public transport,San Cristobal,Hombres,Trabajando
 ID03160060050262,Private Transport,San Cristobal,Hombres,Trabajando
 ID03160110010510,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160110021520,Public transport,San Cristobal,Hombres,Trabajando
 ID03160110060770,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160110070519,Public transport,San Cristobal,Hombres,Trabajando
 ID03160490021764,Public transport,San Cristobal,Mujeres,Trabajando
-ID03160490031522,Public transport,San Cristobal,Hombres,Pensionado
+ID03160490031522,Public transport,San Cristobal,Hombres,No está trabajando
 ID03160490051523,Public transport,San Cristobal,Hombres,Trabajando
 ID03160490090772,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160490120325,Active Transport,San Cristobal,Mujeres,Trabajando
@@ -344,20 +344,20 @@ ID03160510090369,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160510270370,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160510390372,Public transport,San Cristobal,Mujeres,Trabajando
 ID03160610060759,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03160610090317,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03160610090317,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03160610180319,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03160610210320,Public transport,San Cristobal,Mujeres,Trabajando
 ID03160610240321,Public transport,San Cristobal,Hombres,Trabajando
 ID03160620010760,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03160620010761,Public transport,San Cristobal,Mujeres,Deporte
-ID03160620010763,Public transport,San Cristobal,Mujeres,Pensionado
+ID03160620010761,Public transport,San Cristobal,Mujeres,No está trabajando
+ID03160620010763,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03160620030776,Active Transport,San Cristobal,Hombres,Trabajando
 ID03160620090512,Active Transport,San Cristobal,Hombres,Trabajando
 ID03160630011761,Active Transport,San Cristobal,Hombres,Trabajando
 ID03160630011762,Public transport,San Cristobal,Mujeres,Trabajando
 ID03160630030329,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03160630031767,Public transport,San Cristobal,Hombres,Pensionado
-ID03160630041759,888,San Cristobal,Hombres,Descansando
+ID03160630031767,Public transport,San Cristobal,Hombres,No está trabajando
+ID03160630041759,888,San Cristobal,Hombres,No está trabajando
 ID03160690041510,Public transport,San Cristobal,Mujeres,Trabajando
 ID03160690041512,Active Transport,San Cristobal,Hombres,Trabajando
 ID03160690071508,Active Transport,San Cristobal,Hombres,Trabajando
@@ -378,8 +378,8 @@ ID03170070030313,Active Transport,San Cristobal,Hombres,Trabajando
 ID03170140060323,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03170140150324,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03170150020758,Active Transport,San Cristobal,Hombres,Oficios del hogar
-ID03170150040757,Active Transport,San Cristobal,Mujeres,Trabajo de cuidado
-ID03170150070508,Public transport,San Cristobal,Hombres,Pensionado
+ID03170150040757,Active Transport,San Cristobal,Mujeres,Oficios del hogar
+ID03170150070508,Public transport,San Cristobal,Hombres,No está trabajando
 ID03170160011757,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03170170021507,Active Transport,San Cristobal,Hombres,Trabajando
 ID03170170050521,Public transport,San Cristobal,Mujeres,Trabajando
@@ -397,15 +397,15 @@ ID03180140091828,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03180190031820,Public transport,San Cristobal,Mujeres,Trabajando
 ID03180190051504,Public transport,San Cristobal,Hombres,Trabajando
 ID03180190061821,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03180190091822,Private Transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03180190091822,Private Transport,San Cristobal,Mujeres,No está trabajando
 ID03180210081752,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03180210121827,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03180220020755,Public transport,San Cristobal,Mujeres,Trabajando
 ID03180220091823,Public transport,San Cristobal,Hombres,Trabajando
 ID03180220121824,Private Transport,San Cristobal,Hombres,Trabajando
 ID03180220181825,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03180570041815,Public transport,San Cristobal,Hombres,Pensionado
-ID03180570061814,Public transport,San Cristobal,Hombres,Diligencias y tramites
+ID03180570041815,Public transport,San Cristobal,Hombres,No está trabajando
+ID03180570061814,Public transport,San Cristobal,Hombres,No está trabajando
 ID03190050060344,Public transport,San Cristobal,Hombres,Trabajando
 ID03190050090374,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190050150347,Private Transport,San Cristobal,Hombres,Trabajando
@@ -415,13 +415,13 @@ ID03190060330355,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190160041843,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190160121844,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03190160151845,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03190160211846,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03190160211846,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03190170080813,Private Transport,San Cristobal,Hombres,Trabajando
 ID03190170100815,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03190170200812,Active Transport,San Cristobal,Hombres,Pensionado
+ID03190170200812,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03190260010821,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190260300823,Public transport,San Cristobal,Mujeres,Trabajando
-ID03190260310826,Active Transport,San Cristobal,Hombres,Pensionado
+ID03190260310826,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03190260440824,Public transport,San Cristobal,Mujeres,Trabajando
 ID03190270031868,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190270121869,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -430,12 +430,12 @@ ID03190280221866,Public transport,San Cristobal,Mujeres,Trabajando
 ID03190280271867,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190330120383,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190330300390,Active Transport,San Cristobal,Hombres,Trabajando
-ID03190380060348,Active Transport,San Cristobal,Hombres,Pensionado
+ID03190380060348,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03190380090350,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190380180351,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190380210352,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190490031856,Public transport,San Cristobal,Hombres,Trabajando
-ID03190490061857,Active Transport,San Cristobal,Hombres,Pensionado
+ID03190490061857,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03190490151860,Active Transport,San Cristobal,Hombres,Trabajando
 ID03190520030354,Public transport,San Cristobal,Mujeres,Trabajando
 ID03190520210366,Public transport,San Cristobal,Mujeres,Trabajando
@@ -447,18 +447,18 @@ ID03190580151847,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03190610060814,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03190610090817,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190610120816,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03190610480818,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03190610480818,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03190780090340,Private Transport,San Cristobal,Hombres,Trabajando
-ID03190780120341,Active Transport,San Cristobal,Mujeres,No trabajó pero tenía trabajo
-ID03190780180338,Public transport,San Cristobal,Hombres,Diligencias y tramites
+ID03190780120341,Active Transport,San Cristobal,Mujeres,Trabajando
+ID03190780180338,Public transport,San Cristobal,Hombres,No está trabajando
 ID03190780270337,Public transport,San Cristobal,Mujeres,Trabajando
 ID03190780360349,888,San Cristobal,Hombres,Trabajando
 ID03190780360381,Private Transport,San Cristobal,Hombres,Trabajando
 ID03190800110819,Private Transport,San Cristobal,Hombres,Estudiando
-ID03190800210810,Active Transport,San Cristobal,Mujeres,Trabajo de cuidado
+ID03190800210810,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190800270561,Active Transport,San Cristobal,Hombres,Oficios del hogar
-ID03190840150343,Public transport,San Cristobal,Mujeres,Incapacitado permanente
-ID03190840210345,Private Transport,San Cristobal,Hombres,Buscando trabajo
+ID03190840150343,Public transport,San Cristobal,Mujeres,No está trabajando
+ID03190840210345,Private Transport,San Cristobal,Hombres,No está trabajando
 ID03190840240346,Public transport,San Cristobal,Hombres,Trabajando
 ID03190840420356,Private Transport,San Cristobal,Hombres,Trabajando
 ID03190930060379,Public transport,San Cristobal,Hombres,Trabajando
@@ -466,9 +466,9 @@ ID03190930180376,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03190930210377,Public transport,San Cristobal,Mujeres,Trabajando
 ID03200020061876,888,San Cristobal,Mujeres,Oficios del hogar
 ID03200020181878,Private Transport,San Cristobal,Hombres,Trabajando
-ID03200090210572,888,San Cristobal,Hombres,Incapacitado permanente
+ID03200090210572,888,San Cristobal,Hombres,No está trabajando
 ID03200090670575,Public transport,San Cristobal,Mujeres,Oficios del hogar
-ID03200100251561,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03200100251561,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03200100691562,Active Transport,San Cristobal,Hombres,Oficios del hogar
 ID03200100841564,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03200150221873,Private Transport,San Cristobal,Mujeres,Estudiando
@@ -476,7 +476,7 @@ ID03200150311874,Private Transport,San Cristobal,Hombres,Trabajando
 ID03200150511875,Private Transport,San Cristobal,Mujeres,Trabajando
 ID03200160030571,Public transport,San Cristobal,Hombres,Trabajando
 ID03200160120577,Public transport,San Cristobal,Mujeres,Trabajando
-ID03200160150578,Public-Informal,San Cristobal,Mujeres,Pensionado
+ID03200160150578,Public-Informal,San Cristobal,Mujeres,No está trabajando
 ID03200190041879,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03200190131881,Public transport,San Cristobal,Mujeres,Trabajando
 ID03200190241883,Active Transport,San Cristobal,Hombres,Trabajando
@@ -491,8 +491,8 @@ ID03200290020829,Public-Private,San Cristobal,Hombres,Trabajando
 ID03200290050830,Public transport,San Cristobal,Mujeres,Trabajando
 ID03200290120827,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03200290360831,Public transport,San Cristobal,Hombres,Trabajando
-ID03200320220833,Active Transport,San Cristobal,Hombres,Pensionado
-ID03200320300834,Public transport,San Cristobal,Hombres,Buscando trabajo
+ID03200320220833,Active Transport,San Cristobal,Hombres,No está trabajando
+ID03200320300834,Public transport,San Cristobal,Hombres,No está trabajando
 ID03200320450842,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03200320630843,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03210030070664,Active Transport,San Cristobal,Hombres,Trabajando
@@ -513,14 +513,14 @@ ID03210130150669,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03210130540673,Public transport,San Cristobal,Mujeres,Trabajando
 ID03210130590674,Private Transport,San Cristobal,Hombres,Trabajando
 ID03210130680675,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03210130840676,Public transport,San Cristobal,Mujeres,Pensionado
-ID03210250061685,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03210130840676,Public transport,San Cristobal,Mujeres,No está trabajando
+ID03210250061685,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03210250181686,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03210250211687,Active Transport,San Cristobal,Hombres,Oficios del hogar
 ID03210250241688,Active Transport,San Cristobal,Hombres,Trabajando
 ID03210260061691,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03210260181693,Active Transport,San Cristobal,Hombres,Pensionado
-ID03210260211694,Public transport,San Cristobal,Hombres,Buscando trabajo
+ID03210260181693,Active Transport,San Cristobal,Hombres,No está trabajando
+ID03210260211694,Public transport,San Cristobal,Hombres,No está trabajando
 ID03210260271695,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03210330060657,Private Transport,San Cristobal,Hombres,Trabajando
 ID03210330220659,Active Transport,San Cristobal,Mujeres,Trabajando
@@ -544,7 +544,7 @@ ID03210410211678,Public transport,San Cristobal,Hombres,Estudiando
 ID03210410361679,Public transport,San Cristobal,Hombres,Oficios del hogar
 ID03210450121000,Public transport,San Cristobal,Hombres,Oficios del hogar
 ID03210450390642,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03210450420643,Public transport,San Cristobal,Mujeres,Pensionado
+ID03210450420643,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03210450450644,Public transport,San Cristobal,Hombres,Trabajando
 ID03210470270652,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03210470570654,Public transport,San Cristobal,Mujeres,Trabajando
@@ -553,14 +553,14 @@ ID03210580440646,Private Transport,San Cristobal,Hombres,Trabajando
 ID03210580550647,Active Transport,San Cristobal,Hombres,Trabajando
 ID03210580580648,Private Transport,San Cristobal,Hombres,Trabajando
 ID03240470300849,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03240470600856,Public transport,San Cristobal,Mujeres,Buscando trabajo
+ID03240470600856,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03240810030583,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03240820201574,Public transport,San Cristobal,Mujeres,Trabajando
-ID03240820361572,Active Transport,San Cristobal,Hombres,Pensionado
-ID03240830120597,Public transport,San Cristobal,Mujeres,Pensionado
+ID03240820361572,Active Transport,San Cristobal,Hombres,No está trabajando
+ID03240830120597,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03240830210603,Public transport,San Cristobal,Mujeres,Trabajando
 ID03240830361590,Public transport,San Cristobal,Mujeres,Trabajando
-ID03240830401591,Public transport,San Cristobal,Hombres,No trabajó pero tenía trabajo
+ID03240830401591,Public transport,San Cristobal,Hombres,Trabajando
 ID03240830550604,Private Transport,San Cristobal,Hombres,Trabajando
 ID03240870030835,Public transport,San Cristobal,Hombres,Trabajando
 ID03240870260836,Active Transport,San Cristobal,Mujeres,Oficios del hogar
@@ -568,10 +568,10 @@ ID03240870900838,Public transport,San Cristobal,Hombres,Trabajando
 ID03240871020839,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03240871190841,Public transport,San Cristobal,Hombres,Trabajando
 ID03240890091884,Public transport,San Cristobal,Mujeres,Trabajando
-ID03240890211885,Public transport,San Cristobal,Hombres,No trabajó pero tenía trabajo
-ID03240890631897,Private Transport,San Cristobal,Mujeres,Pensionado
-ID03240890681898,Active Transport,San Cristobal,Mujeres,Pensionado
-ID03240920130585,Active Transport,San Cristobal,Hombres,Deporte
+ID03240890211885,Public transport,San Cristobal,Hombres,Trabajando
+ID03240890631897,Private Transport,San Cristobal,Mujeres,No está trabajando
+ID03240890681898,Active Transport,San Cristobal,Mujeres,No está trabajando
+ID03240920130585,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03240920720630,Public transport,San Cristobal,Mujeres,Trabajando
 ID03300010120945,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03300020110946,Active Transport,San Cristobal,Mujeres,Incapacitado
@@ -582,11 +582,11 @@ ID03300050320951,Public transport,San Cristobal,Mujeres,Trabajando
 ID03300060121997,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03300060161998,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03300280240944,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03300280310947,Active Transport,San Cristobal,Hombres,Pensionado
-ID03300300030939,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03300280310947,Active Transport,San Cristobal,Hombres,No está trabajando
+ID03300300030939,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03300300110940,Public transport,San Cristobal,Hombres,Trabajando
 ID03300300600942,Private Transport,San Cristobal,Hombres,Trabajando
-ID03310230030506,Active Transport,San Cristobal,Hombres,Pensionado
+ID03310230030506,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03310230261769,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03310240020524,Active Transport,San Cristobal,Mujeres,Estudiando
 ID03310240021506,Public transport,San Cristobal,Hombres,Trabajando
@@ -606,14 +606,14 @@ ID03310710020502,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03310710150276,Active Transport,San Cristobal,Hombres,Trabajando
 ID03310740021753,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03310740051502,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03310740060274,Public transport,San Cristobal,Mujeres,Buscando trabajo
+ID03310740060274,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03330060131707,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03330060211709,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03330070480690,Public transport,San Cristobal,Mujeres,Trabajando
 ID03330070520691,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03330070580693,Public transport,San Cristobal,Hombres,Trabajando
 ID03330140430687,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03330140550688,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03330140550688,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03330140660694,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03330140750696,Private Transport,San Cristobal,Hombres,Trabajando
 ID03330160210681,Private Transport,San Cristobal,Hombres,Trabajando
@@ -628,22 +628,22 @@ ID03420630070265,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03420630090518,Public transport,San Cristobal,Mujeres,Trabajando
 ID03420640010764,Public transport,San Cristobal,Mujeres,Trabajando
 ID03420640020263,888,San Cristobal,Mujeres,Oficios del hogar
-ID03420640020765,Active Transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03420640020765,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03420640030264,Public transport,San Cristobal,Hombres,Trabajando
 ID03420640090261,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03420650030266,Public transport,San Cristobal,Hombres,Buscando trabajo
+ID03420650030266,Public transport,San Cristobal,Hombres,No está trabajando
 ID03420650030774,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03420650060762,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03420650061760,Active Transport,San Cristobal,Hombres,Trabajando
-ID03420710061517,Active Transport,San Cristobal,Mujeres,Deporte
+ID03420710061517,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03420710070268,Public transport,San Cristobal,Mujeres,Trabajando
 ID03420710180697,Public-Informal,San Cristobal,Mujeres,Oficios del hogar
 ID03420710270331,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03420710360362,Public transport,San Cristobal,Mujeres,Trabajando
 ID03420720071516,Private Transport,San Cristobal,Hombres,Trabajando
-ID03420720080516,Public transport,San Cristobal,Mujeres,No trabajó pero tenía trabajo
+ID03420720080516,Public transport,San Cristobal,Mujeres,Trabajando
 ID03420720081514,Active Transport,San Cristobal,Mujeres,Trabajando
-ID03420730051513,888,San Cristobal,Mujeres,No trabajó pero tenía trabajo
+ID03420730051513,888,San Cristobal,Mujeres,Trabajando
 ID03420730060511,Active Transport,San Cristobal,Hombres,Trabajando
 ID03420730080513,Public transport,San Cristobal,Mujeres,Trabajando
 ID03420730090514,Active Transport,San Cristobal,Mujeres,Trabajando
@@ -662,24 +662,24 @@ ID03520150151640,Private Transport,San Cristobal,Mujeres,Incapacitado
 ID03520150211641,Public transport,San Cristobal,Mujeres,Trabajando
 ID03520310111651,Public transport,San Cristobal,Mujeres,Trabajando
 ID03520310151652,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03520390071654,888,San Cristobal,Mujeres,Pensionado
+ID03520390071654,888,San Cristobal,Mujeres,No está trabajando
 ID03520400131663,Public transport,San Cristobal,Mujeres,Trabajando
-ID03520470041646,Active Transport,San Cristobal,Mujeres,Buscando trabajo
-ID03520470091647,Active Transport,San Cristobal,Hombres,Pensionado
+ID03520470041646,Active Transport,San Cristobal,Mujeres,No está trabajando
+ID03520470091647,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03520530510995,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03520540090997,Active Transport,San Cristobal,Hombres,Buscando trabajo
-ID03520540110651,Active Transport,San Cristobal,Hombres,Buscando trabajo
+ID03520540090997,Active Transport,San Cristobal,Hombres,No está trabajando
+ID03520540110651,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03520540130650,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03520600220998,Private Transport,San Cristobal,Hombres,Trabajando
 ID03520610160987,Public transport,San Cristobal,Hombres,Oficios del hogar
-ID03520610230988,Public transport,San Cristobal,Mujeres,Diligencias y tramites
+ID03520610230988,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03520610280991,888,San Cristobal,Mujeres,Oficios del hogar
 ID03530020091661,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03530030031659,Public transport,San Cristobal,Hombres,Trabajando
 ID03540020070979,Public transport,San Cristobal,Mujeres,Oficios del hogar
-ID03540050350996,Active Transport,San Cristobal,Hombres,Pensionado
+ID03540050350996,Active Transport,San Cristobal,Hombres,No está trabajando
 ID03540080210980,Public transport,San Cristobal,Mujeres,Oficios del hogar
-ID03540110040981,Public transport,San Cristobal,Hombres,Diligencias y tramites
+ID03540110040981,Public transport,San Cristobal,Hombres,No está trabajando
 ID03550210031628,Public transport,San Cristobal,Hombres,Trabajando
 ID03550210131631,Public transport,San Cristobal,Mujeres,Oficios del hogar
 ID03550210161632,Private Transport,San Cristobal,Mujeres,Trabajando
@@ -688,12 +688,12 @@ ID03550310061634,888,San Cristobal,Mujeres,Trabajando
 ID03550310121635,888,San Cristobal,Mujeres,Oficios del hogar
 ID03550340061624,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03550340091625,888,San Cristobal,Mujeres,Oficios del hogar
-ID03550340121626,Public transport,San Cristobal,Mujeres,No trabajó pero tenía trabajo
+ID03550340121626,Public transport,San Cristobal,Mujeres,Trabajando
 ID03550340151627,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03550690090973,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03550690120974,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03550690210976,Public transport,San Cristobal,Hombres,Trabajando
-ID03550690270977,Public transport,San Cristobal,Hombres,No trabajó pero tenía trabajo
+ID03550690270977,Public transport,San Cristobal,Hombres,Trabajando
 ID03550710360972,Public transport,San Cristobal,Mujeres,Trabajando
 ID03550710370975,Public transport,San Cristobal,Mujeres,Trabajando
 ID03550720460963,Public transport,San Cristobal,Hombres,Trabajando
@@ -701,10 +701,10 @@ ID03550720600965,Private Transport,San Cristobal,Mujeres,Trabajando
 ID03550720630968,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03550720800971,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03550721200983,Public transport,San Cristobal,Mujeres,Oficios del hogar
-ID03550721290993,Public transport,San Cristobal,Mujeres,Buscando trabajo
+ID03550721290993,Public transport,San Cristobal,Mujeres,No está trabajando
 ID03550810090638,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03550810320640,Active Transport,San Cristobal,Mujeres,Oficios del hogar
-ID03550840270985,888,San Cristobal,Mujeres,Pensionado
+ID03550840270985,888,San Cristobal,Mujeres,No está trabajando
 ID03550840300986,Private Transport,San Cristobal,Hombres,Trabajando
 ID03550850270964,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03550850370966,Private Transport,San Cristobal,Hombres,Trabajando
@@ -713,7 +713,7 @@ ID03550860720992,Public transport,San Cristobal,Hombres,Trabajando
 ID03560310060635,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03560310090637,Public transport,San Cristobal,Mujeres,Trabajando
 ID03560320030632,Public-Informal,San Cristobal,Mujeres,Trabajando
-ID03560320060633,Active Transport,San Cristobal,Mujeres,Pensionado
+ID03560320060633,Active Transport,San Cristobal,Mujeres,No está trabajando
 ID03560320130634,Active Transport,San Cristobal,Mujeres,Trabajando
 ID03560340030955,Public transport,San Cristobal,Hombres,Trabajando
 ID03560340060956,Active Transport,San Cristobal,Mujeres,Trabajando
@@ -725,7 +725,7 @@ ID03560380110953,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID03560380150954,Active Transport,San Cristobal,Mujeres,Trabajando
 ID04080170061655,Active Transport,San Cristobal,Mujeres,Oficios del hogar
 ID11060170121129,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID11060170270211,Active Transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID11060170270211,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID11060230092012,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID11060250012108,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID11060250182043,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -737,7 +737,7 @@ ID15020020392437,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15020020541455,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15020020721456,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15020100032419,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15020100091443,Public transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15020100091443,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15020100661445,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15020100812422,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15020110151446,Public transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -746,7 +746,7 @@ ID15020110481448,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15020110691449,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15020120092420,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15020260061447,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15020260181450,Active Transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15020260181450,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15020260542429,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15020270152113,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15020270482435,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -761,12 +761,12 @@ ID15020420032427,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15020420092440,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15020420452111,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15020420692431,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15020430061156,Public transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15020430061156,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15020430241157,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040040151422,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15040070032405,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15040070121425,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15040100121440,Active Transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15040100121440,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15040100182421,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15040150061423,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15040150392404,Active Transport,Ciudad Bolivar,Hombres,Trabajando
@@ -775,20 +775,20 @@ ID15040310241431,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040310331432,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040310362413,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040310422411,888,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15040320032410,Private Transport,Ciudad Bolivar,Mujeres,Pensionado
+ID15040320032410,Private Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15040320151428,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15040320302409,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040370031438,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15040370091439,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15040370152415,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15040370152415,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15040370301441,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040380091433,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15040380331436,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040380392416,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15040390032412,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15040390092399,Active Transport,Ciudad Bolivar,Hombres,Incapacitado permanente
+ID15040390092399,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15040390122414,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15040390272418,Public transport,Ciudad Bolivar,Hombres,Pensionado
+ID15040390272418,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15040490091442,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15040540242460,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15040540302459,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -800,7 +800,7 @@ ID15130670060232,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15130680060233,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15130700090241,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15130700150246,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15130700420247,Public transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15130700420247,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15130720090243,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15130900241466,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15130910152446,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
@@ -812,15 +812,15 @@ ID15150150151133,888,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15150150241147,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15150150541146,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15150170061148,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15150170211150,Active Transport,Ciudad Bolivar,Mujeres,Incapacitado permanente
+ID15150170211150,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15150270061134,Active Transport,Ciudad Bolivar,Hombres,Estudiando
 ID15150270151137,Active Transport,Ciudad Bolivar,Hombres,Estudiando
 ID15150270181136,Active Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15150270211139,Active Transport,Ciudad Bolivar,Mujeres,No trabajó pero tenía trabajo
+ID15150270211139,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15150290512124,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15150300062127,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15150300272118,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15150300632120,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15150300632120,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15150310362117,Private Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15150310872116,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15150320091131,Public transport,Ciudad Bolivar,Hombres,Trabajando
@@ -839,15 +839,15 @@ ID15170460060229,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15170460090230,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15170460210231,Public-Informal,Ciudad Bolivar,Mujeres,Trabajando
 ID15170631142183,Public-Informal,Ciudad Bolivar,Mujeres,Trabajando
-ID15170720120227,Private Transport,Ciudad Bolivar,Hombres,Descansando
-ID15170720210228,Public transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15170720120227,Private Transport,Ciudad Bolivar,Hombres,No está trabajando
+ID15170720210228,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15170730092456,Active Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15170730182455,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15170730182455,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15170730482457,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15170740121469,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15170740181476,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15170740481471,Active Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15170740691475,Private Transport,Ciudad Bolivar,Mujeres,Descansando
+ID15170740691475,Private Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15170810092451,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15170810272452,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15170810542453,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -860,7 +860,7 @@ ID15210380270201,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15210400061111,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15210400150200,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15210560122154,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15210560662158,Active Transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15210560662158,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15210730030214,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15210730062147,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15210731142191,Public-Informal,Ciudad Bolivar,Hombres,Trabajando
@@ -875,14 +875,14 @@ ID15240080332480,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15240080362481,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240080482482,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240130362465,Public-Informal,Ciudad Bolivar,Mujeres,Trabajando
-ID15240131022464,Active Transport,Ciudad Bolivar,Hombres,Descansando
+ID15240131022464,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15240160031478,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240160151493,888,Ciudad Bolivar,Mujeres,Trabajando
-ID15240160241494,Public transport,Ciudad Bolivar,Hombres,Pensionado
+ID15240160241494,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15240160331495,Active Transport,Ciudad Bolivar,Hombres,Estudiando
 ID15240220031097,Private Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15240220151109,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
-ID15240220181102,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15240220181102,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15240220271110,TransMicable,Ciudad Bolivar,Mujeres,Estudiando
 ID15240220451107,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15240230121103,Public transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -890,18 +890,18 @@ ID15240230241104,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15240230271105,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15240230391108,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240260090248,Public transport,Ciudad Bolivar,Hombres,Oficios del hogar
-ID15240260150249,Active Transport,Ciudad Bolivar,Mujeres,Pensionado
+ID15240260150249,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15240260212150,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240300060198,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
-ID15240300090194,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15240300090194,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15240300420199,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15240450210185,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240450420196,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15240450600191,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15240460061499,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15240460481096,Active Transport,Ciudad Bolivar,Mujeres,Pensionado
+ID15240460481096,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15240470301496,Active Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15240490091123,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15240490091123,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15240490421125,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240490481122,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15240510061127,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -910,7 +910,7 @@ ID15240740031121,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240740181124,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15240740210213,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390050060114,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15390050150118,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15390050150118,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15390050210115,Private Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390050420116,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15390080032065,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -924,19 +924,19 @@ ID15390110090119,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15390110210120,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15390110270121,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15390230122324,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15390230152331,Public transport,Ciudad Bolivar,Mujeres,Pensionado
+ID15390230152331,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15390230272332,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15390230362333,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15390240120108,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390240180109,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
-ID15390240270111,Active Transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15390240270111,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15390240360112,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390250061338,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15390250151339,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390250181337,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15390250211336,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15390250631344,TransMicable,Ciudad Bolivar,Hombres,Trabajando
-ID15390260031334,Private Transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15390260031334,Private Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15390260211332,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15390260331333,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390260451335,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -956,18 +956,18 @@ ID15390600210155,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15390600510156,Informal transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15390650121385,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15390650241382,Active Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15390650271383,Private Transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15390650271383,Private Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15390730121342,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15390730181340,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15390730421341,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390730691343,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390740091360,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15390740151358,Public-Private,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15390740151358,Public-Private,Ciudad Bolivar,Mujeres,No está trabajando
 ID15390740331357,Active Transport,Ciudad Bolivar,Hombres,Estudiando
 ID15390780452079,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15390780662068,Public transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15390780752076,Public transport,Ciudad Bolivar,Mujeres,No trabajó pero tenía trabajo
-ID15390800182088,Active Transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15390780752076,Public transport,Ciudad Bolivar,Mujeres,Trabajando
+ID15390800182088,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15390800542087,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15400110030157,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15400110360159,Public transport,Ciudad Bolivar,Hombres,Trabajando
@@ -980,22 +980,22 @@ ID15400160422359,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15400160452363,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15400160482364,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15400250092352,Public transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15400670032375,Public transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15400670032375,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15400670242362,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15400670392376,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15400670422377,Public transport,Ciudad Bolivar,Mujeres,No trabajó pero tenía trabajo
+ID15400670422377,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15400670542378,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15400710420164,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15400710480170,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15460210210125,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15460210270126,Public transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15460210360127,Public transport,Ciudad Bolivar,Mujeres,No trabajó pero tenía trabajo
+ID15460210360127,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15460350031354,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15460360271352,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15460730092346,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15460980182338,Active Transport,Ciudad Bolivar,Hombres,Incapacitado
 ID15460980272342,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15490030122305,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15490030122305,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15490070031056,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490070241062,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490080031313,Public transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -1008,28 +1008,28 @@ ID15490190242053,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15490240090079,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490250091142,Informal transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490250151143,Public transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15490270060084,Active Transport,Ciudad Bolivar,Hombres,Pensionado
-ID15490310031140,Active Transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15490270060084,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
+ID15490310031140,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15490310090223,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15490330150087,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15490330180088,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15490330210089,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15490360150091,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490360210092,888,Ciudad Bolivar,Mujeres,Trabajando
-ID15490360450095,Active Transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15490360450095,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15490360510094,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15490370332335,Public transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15490370482330,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15490370572326,Informal transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490410030220,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15490410060221,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15490410150222,Active Transport,Ciudad Bolivar,Mujeres,Pensionado
+ID15490410150222,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15490420062313,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15490420092312,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15490420482328,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490420512329,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15490430061320,TransMicable,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15490430241321,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15490430241321,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15490430361322,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15490430451324,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15490430481328,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -1048,12 +1048,12 @@ ID15490870092302,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15490870122306,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15490870272309,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15490870302310,TransMicable,Ciudad Bolivar,Mujeres,Estudiando
-ID15520030032175,Public transport,Ciudad Bolivar,Mujeres,Incapacitado permanente
+ID15520030032175,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15520030092174,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15520030442177,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15520030442177,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15520040032486,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520040062492,Public-Private,Ciudad Bolivar,Hombres,Trabajando
-ID15520040092487,Public transport,Ciudad Bolivar,Hombres,No trabajó pero tenía trabajo
+ID15520040092487,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15520040242488,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520040302493,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520050121081,Informal transport,Ciudad Bolivar,Hombres,Trabajando
@@ -1062,17 +1062,17 @@ ID15520050241083,Public transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15520050271085,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520060031086,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15520060151089,Public transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15520060211090,Active Transport,Ciudad Bolivar,Hombres,Diligencias y tramites
+ID15520060211090,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15520060331088,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520220032496,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15520220061092,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520450092469,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15520450151481,Informal transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15520450391482,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15520450391482,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520530060189,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520530121098,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520530150187,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15520530240188,Public transport,Ciudad Bolivar,Mujeres,No trabajó pero tenía trabajo
+ID15520530240188,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520550241061,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15520590090186,Public-Private,Ciudad Bolivar,Mujeres,Trabajando
 ID15520590242048,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -1086,7 +1086,7 @@ ID15520620062319,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520620182315,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520620512322,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520680022163,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15520680032156,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15520680032156,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15520680332152,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520720512155,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520720812184,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -1104,9 +1104,9 @@ ID15520810331093,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15520810392497,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520810572498,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520840122181,Informal transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15520840212167,Public transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15520840212167,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15520840422185,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
-ID15520850062178,Active Transport,Ciudad Bolivar,Hombres,Diligencias y tramites
+ID15520850062178,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15520850362179,Private Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520850452176,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15520850932180,Private Transport,Ciudad Bolivar,Hombres,Trabajando
@@ -1124,29 +1124,29 @@ ID15520940122467,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15520940752473,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15520950061483,Public transport,Ciudad Bolivar,Mujeres,Estudiando
 ID15520950182470,Informal transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15520950451490,888,Ciudad Bolivar,Mujeres,Incapacitado permanente
-ID15520950511491,Active Transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15520950451490,888,Ciudad Bolivar,Mujeres,No está trabajando
+ID15520950511491,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15520960151484,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15520960181486,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15520960331487,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15520960481489,Active Transport,Ciudad Bolivar,Hombres,Incapacitado permanente
+ID15520960481489,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15530020091410,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15530020121413,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15530020181412,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15530020211411,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15530030092394,TransMicable,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15530030092394,TransMicable,Ciudad Bolivar,Mujeres,No está trabajando
 ID15530030362396,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15530030452397,Public transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15530030452397,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15530030692395,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15530030782398,Public transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15530030782398,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15530050060173,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15530050150175,TransMicable,Ciudad Bolivar,Hombres,Trabajando
-ID15530060302393,Active Transport,Ciudad Bolivar,Hombres,Pensionado
-ID15530060362390,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15530060302393,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
+ID15530060362390,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15530060392389,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15530060422391,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15530080061406,Private Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15530080181407,Public transport,Ciudad Bolivar,Hombres,Diligencias y tramites
+ID15530080181407,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15530080211409,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15530080271408,Active Transport,Ciudad Bolivar,Mujeres,Estudiando
 ID15530080361414,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -1158,18 +1158,18 @@ ID15530140482092,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15530140812091,Public transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15530140932106,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15530150272386,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15530150482388,Active Transport,Ciudad Bolivar,Mujeres,Pensionado
-ID15530150722387,Public transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15530150482388,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
+ID15530150722387,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15530160060168,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15530160090172,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15530170031401,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15530170301405,Private Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15530170451403,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15530200300166,TransMicable,Ciudad Bolivar,Hombres,Trabajando
-ID15530250032400,Private Transport,Ciudad Bolivar,Hombres,No trabajó pero tenía trabajo
+ID15530250032400,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15530250061418,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15530250121416,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
-ID15530250301417,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15530250301417,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15530270302379,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15530270392382,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15530270422384,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -1182,11 +1182,11 @@ ID15530600120190,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15530660062093,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15530660242097,Public transport,Ciudad Bolivar,Hombres,Incapacitado
 ID15530660482104,Active Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15530660752105,Active Transport,Ciudad Bolivar,Hombres,Incapacitado permanente
+ID15530660752105,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15530670242100,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15530670362103,Active Transport,Ciudad Bolivar,Hombres,Pensionado
+ID15530670362103,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15530670392098,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15530670482096,888,Ciudad Bolivar,Mujeres,Pensionado
+ID15530670482096,888,Ciudad Bolivar,Mujeres,No está trabajando
 ID15530780061386,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15530780181388,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15530780241389,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -1195,11 +1195,11 @@ ID15530790272374,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15530790572372,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15530790602373,Active Transport,Ciudad Bolivar,Mujeres,Incapacitado
 ID15570060032438,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15570060241454,Active Transport,Ciudad Bolivar,Mujeres,Descansando
+ID15570060241454,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15570930302443,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15570960151457,Active Transport,Ciudad Bolivar,Hombres,Estudiando
 ID15580200032082,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15580200091369,Public transport,Ciudad Bolivar,Hombres,Pensionado
+ID15580200091369,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15580200150142,Informal transport,Ciudad Bolivar,Hombres,Trabajando
 ID15580200242083,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15580200270143,Public transport,Ciudad Bolivar,Hombres,Trabajando
@@ -1226,21 +1226,21 @@ ID15590080060047,Public transport,Ciudad Bolivar,Mujeres,Estudiando
 ID15590080120046,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15590080150056,888,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15590080240057,Informal transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15600420271373,Public transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15600420271373,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15600420361372,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600500421359,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15600500481365,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15600500691364,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15600500841362,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15600520150141,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15600520180144,Public transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15600520180144,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15600520300145,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600520420146,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
-ID15600540090133,Public transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15600540090133,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15600540240134,Active Transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15600540390135,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600540450136,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15600540570137,Public transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15600540570137,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15600550092354,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600550182356,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600550362360,Public transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -1253,10 +1253,10 @@ ID15600640242081,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15600640452080,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600920090147,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15600920210152,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15600920420148,Active Transport,Ciudad Bolivar,Mujeres,Descansando
+ID15600920420148,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15600920450149,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600930031376,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
-ID15600930391379,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15600930391379,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15600930451380,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15650060032018,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650060071251,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -1265,7 +1265,7 @@ ID15650230030012,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15650230050078,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650250022007,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15650250042016,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
-ID15650250051017,Active Transport,Ciudad Bolivar,Hombres,Descansando
+ID15650250051017,Active Transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15650250071016,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650260032290,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15650260272293,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
@@ -1282,20 +1282,20 @@ ID15650330010021,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650330082010,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15650340020009,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650340050002,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15650340092002,Informal transport,Ciudad Bolivar,Hombres,Incapacitado permanente
+ID15650340092002,Informal transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15650360011254,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650360011255,Active Transport,Ciudad Bolivar,Mujeres,Incapacitado
 ID15650360071257,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650360091253,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650360091263,Informal transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15650370022001,TransMicable,Ciudad Bolivar,Hombres,No trabajó pero tenía trabajo
+ID15650370022001,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15650370042027,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650370092004,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650380041022,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650380091012,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650410011053,Public transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15650410031010,TransMicable,Ciudad Bolivar,Mujeres,Descansando
-ID15650520052251,TransMicable,Ciudad Bolivar,Mujeres,Incapacitado permanente
+ID15650410031010,TransMicable,Ciudad Bolivar,Mujeres,No está trabajando
+ID15650520052251,TransMicable,Ciudad Bolivar,Mujeres,No está trabajando
 ID15650520052255,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15650520082252,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650520092254,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
@@ -1311,13 +1311,13 @@ ID15650580091272,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650730012021,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15650730042003,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650730072022,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
-ID15650760030034,Public transport,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15650760030034,Public transport,Ciudad Bolivar,Hombres,No está trabajando
 ID15650760060008,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15650770012265,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650780042261,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650780072267,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650780082257,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15650800052009,TransMicable,Ciudad Bolivar,Hombres,Diligencias y tramites
+ID15650800052009,TransMicable,Ciudad Bolivar,Hombres,No está trabajando
 ID15650800082013,Public transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15650800092011,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650800092028,Public transport,Ciudad Bolivar,Hombres,Trabajando
@@ -1326,7 +1326,7 @@ ID15650810021271,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15650810061262,TransMicable,Ciudad Bolivar,Hombres,Trabajando
 ID15650810071261,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15650820071008,Private Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15650820081020,Active Transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15650820081020,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15700070032284,888,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15700300181048,Active Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15700300211055,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -1348,7 +1348,7 @@ ID15700700021023,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15700700031015,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15700700041045,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15700700051014,888,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15700730032288,888,Ciudad Bolivar,Mujeres,Incapacitado permanente
+ID15700730032288,888,Ciudad Bolivar,Mujeres,No está trabajando
 ID15700730032289,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15700730182291,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15700730272292,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
@@ -1357,14 +1357,14 @@ ID15700740071269,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15700740091264,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15700750032279,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15700750042266,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15700750092269,888,Ciudad Bolivar,Hombres,Descansando
+ID15700750092269,888,Ciudad Bolivar,Hombres,No está trabajando
 ID15700830022264,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15700830082270,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15700840021026,TransMicable,Ciudad Bolivar,Hombres,Buscando trabajo
+ID15700840021026,TransMicable,Ciudad Bolivar,Hombres,No está trabajando
 ID15800010052280,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15800010062271,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15800010062272,TransMicable,Ciudad Bolivar,Hombres,Trabajando
-ID15800010062281,Public transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15800010062281,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15800010062285,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15800020021033,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15800020031039,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
@@ -1383,7 +1383,7 @@ ID15800160092031,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15800160122032,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15800160152033,Public-Private,Ciudad Bolivar,Hombres,Trabajando
 ID15800190032034,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
-ID15800190092036,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15800190092036,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15800190302037,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15800200032047,TransMicable,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15800200092044,TransMicable,Ciudad Bolivar,Mujeres,Oficios del hogar
@@ -1393,7 +1393,7 @@ ID15800280082287,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15800280212297,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15800280242300,Public transport,Ciudad Bolivar,Hombres,Trabajando
 ID15800340041282,Public transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15800350052274,Public transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15800350052274,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15800350201279,TransMicable,Ciudad Bolivar,Mujeres,Trabajando
 ID15800350301292,Private Transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15800350451306,Public transport,Ciudad Bolivar,Hombres,Trabajando
@@ -1407,14 +1407,14 @@ ID15800390151118,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15800390210205,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15820070181052,Public transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15820070211054,Public transport,Ciudad Bolivar,Hombres,Trabajando
-ID15820090091042,Active Transport,Ciudad Bolivar,Mujeres,Diligencias y tramites
+ID15820090091042,Active Transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15820090181049,Public transport,Ciudad Bolivar,Hombres,Oficios del hogar
 ID15820100031041,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15820340031050,Private Transport,Ciudad Bolivar,Hombres,Trabajando
 ID15820350121047,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15870700032020,Public transport,Ciudad Bolivar,Mujeres,Trabajando
 ID15870700042026,Private Transport,Ciudad Bolivar,Hombres,Trabajando
-ID15870720050029,Public transport,Ciudad Bolivar,Mujeres,Buscando trabajo
+ID15870720050029,Public transport,Ciudad Bolivar,Mujeres,No está trabajando
 ID15870730032023,Active Transport,Ciudad Bolivar,Mujeres,Trabajando
-ID15870730062024,Active Transport,Ciudad Bolivar,Mujeres,Trabajo de cuidado
+ID15870730062024,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
 ID15870810012278,Active Transport,Ciudad Bolivar,Mujeres,Oficios del hogar
