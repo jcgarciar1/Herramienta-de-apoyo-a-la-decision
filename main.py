@@ -496,7 +496,7 @@ def render_page_content(pathname):
                     html.Div([
 
                         html.Div([
-                            html.H5(children='Escoja la localidad a visualizar'),
+                            html.H5(children='Escoja la localidad de las personas que inician o terminan el viaje'),
                             dcc.Checklist(
                                 id="dropdown-mapa-localidad",
                                 options=["Ciudad Bolivar", "San Cristobal"],
@@ -569,7 +569,7 @@ def render_page_content(pathname):
                     html.Div([
 
                         html.Div([
-                            html.H5(children='Escoja la localidad a visualizar'),
+                            html.H5(children='Escoja la localidad desde la que inicia el viaje'),
                             dcc.Checklist(
                                 id="dropdown-mapa2-localidad",
                                 options=["Ciudad Bolivar", "San Cristobal"],
@@ -1027,7 +1027,7 @@ def prueba(localidad, sex, hora):
     hovertemp = '<i>Localidad:</i> %{location} <br>'
     hovertemp += '<i>Porcentaje:</i> %{z:,}'
     fig.update_traces(hovertemplate=hovertemp)
-    fig.update_layout(height=1000, dragmode=False)
+    fig.update_layout(height=600, dragmode=False)
 
     return fig
 
@@ -1151,7 +1151,7 @@ def ultimo_mapa(localidad,sex,hora):
         colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Minutos",
         zmin=0,
-        zmax=180,
+        zmax=200,
         name='Minutos de viaje pre pandemia',
         hoverinfo='location+z',
 
@@ -1179,7 +1179,7 @@ def ultimo_mapa(localidad,sex,hora):
         colorscale=['rgb(255,255,255)', colors[1]],
         colorbar_title="Minutos",
         zmin=0,
-        zmax=180,
+        zmax=200,
         name='Minutos de viaje post pandemia',
         hoverinfo='location+z',
         showlegend=False,
@@ -1194,7 +1194,7 @@ def ultimo_mapa(localidad,sex,hora):
     hovertemp = '<i>Localidad:</i> %{location} <br>'
     hovertemp += '<i>Minutos promedio:</i> %{z:,}'
     fig.update_traces(hovertemplate=hovertemp)
-    fig.update_layout(height = 1000,dragmode=False)
+    fig.update_layout(height = 500,dragmode=False)
 
     return fig
 if __name__ == '__main__':
