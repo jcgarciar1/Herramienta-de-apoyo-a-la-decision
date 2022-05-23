@@ -24,9 +24,12 @@ import datetime
 
 
 colors_pie = ['rgba(66, 0, 57, 0.8)', 'rgba(216, 30, 91, 0.8)']
-colors =["rgba(66, 0, 57, 0.8)","rgba(66, 0, 57, 1)",'rgba(216, 30, 91, 0.8)', 'rgba(216, 30, 91, 1)']
+colors =["rgba(66, 0, 57, 0.8)","rgba(66, 0, 57, 1)",'rgba(229, 88, 18, 0.8)', 'rgba(229, 88, 18, 1)']
+colors_pie2 = ["rgba(226, 41, 79 ,1)", 'rgba(51, 49, 56, 1)']
+colors_pie3 = ["rgba(72,61,139, 1)", 'rgba(253,62,129, 1)']
 
-
+colors_2 = ["rgba(244, 211, 94 ,0.8)","rgba(244, 211, 94, 1)",'rgba(67, 129, 193, 0.8)', 'rgba(67, 129, 193, 1)']
+colors_m = ['rgba(237, 37, 78,1)','rgba(255, 0, 0,1)']
 porcentaje = "100%"
 
 horas = {0:(datetime.time(0,0,0),datetime.time(5,0,0)) ,
@@ -176,7 +179,36 @@ app.layout = html.Div([
 def render_page_content(pathname):
     if pathname == "/":
         return [
+            html.H1("Proyecto Muévelo"),
+            html.Div([
+            dbc.Row(children=[
+                dbc.Col(children=[
 
+                    html.P(
+                        "SALURBAL (Salud Urbana en América Latina) es una iniciativa lanzada en abril de 2017. Esta pretende evaluar el impacto de las políticas e intervenciones en la salud, el medio ambiente y la equidad, mediante la recopilación de datos sobre demografía, mortalidad, entorno social, salud y factores de riesgo de América Latina. Teniendo ese objetivo en mente, plantearon el proyecto TRUST  (Transformaciones Urbanas y Salud: El caso de TransMiCable en Bogotá) que tiene como propósito analizar los efectos de la implementación del TransMiCable en Bogotá, una de las principales transformaciones urbanas de la ciudad.",style = {"textAlign":"justify"}),
+                    html.P(
+                        "Dado que el proyecto gira en torno a los efectos e impactos generados por la implementación del TransMiCable, la población de estudio son los habitantes de Ciudad Bolívar Ciudad Bolívar, ya que es la única localidad que cuenta con este medio de transporte en Bogotá. Ciudad Bolívar es la tercera localidad más extensa de la ciudad de Bogotá y está compuesta por 360 barrios con 12.998 hectáreas de superficie. Está localizada en un punto estratégico de la ciudad porque limita con vías importantes, que hacen que la UPZ tenga condiciones privilegiadas para ubicar comercios, industrias y servicios a la comunidad. Sin embargo, el territorio tiene corredores viales estrechos, empinados, y una topografía quebrada y montañosa que hacen que las vías de acceso presenten fallas geológicas, perjudicando la movilidad del sector dificultando el acceso al transporte y dando lugar a largos tiempos de desplazamiento.",
+                        style={"textAlign": "justify"}),
+
+                ],
+
+                ),
+                dbc.Col(children=[
+            html.Div([
+                html.Br(),
+
+
+                html.Img(src="assets/transmicable.jpg",style={"width":"95%"})],style = {"textAlign":"center"})]),
+
+            ],justify="end"),
+                #html.Br(),
+                html.P(
+                    "Teniendo en cuenta lo anterior, la primera fase de TRUST consistió en una recolección de datos iniciales, previa a la implementación del TransMiCable, sobre los habitantes de Ciudad Bolívar y San Cristóbal, siendo los habitantes de San Cristóbal un grupo de control. Al finalizar esta fase se continuo con la recolección de datos relacionados con aspectos sociodemográficos, de salud, actividad física y percepciones generales además de mediciones sobre el posicionamiento, variación de velocidades y tiempos de desplazamiento de los individuos. La toma de estos últimos datos se realizó en dos periodos diferentes, antes y durante la pandemia de Covid-19, en los años 2019 y 2021, respectivamente. Dicha pandemia generó restricciones en la movilidad urbana causadas por la emergencia sanitaria, forzando cambios importantes en los hábitos y comportamientos de las personas.",
+                    style={"textAlign": "justify"}),
+                html.P(
+                    "El objetivo de este proyecto consiste en el desarrollo de una herramienta que permita concluir y tomar decisiones a partir de la información recolectada por el proyecto TRUST para el año 2019 y 2021. En este trabajo, el enfoque serán los patrones de movimiento y tiempos de desplazamiento de los habitantes de Ciudad Bolívar y San Cristóbal. Se busca facilitar el análisis de la información para que así se puedan tomar decisiones respecto a la movilidad en esta zona. Adicional a esto, se busca hacer una comparación entre estos patrones antes y después de la pandemia con el fin de entender los cambios de la movilidad y los tiempos de desplazamiento entre estos dos momentos. Conocer estas transformaciones y la manera en que son vividas por los habitantes de la zona permitirá realizar un balance oportuno del proyecto y orientar futuras intervenciones.",
+                    style={"textAlign": "justify"}),
+            ],className="shadow-lg p-3 mb-5 bg-white rounded"),
         ]
     elif pathname == "/page-1":
         return [
@@ -208,7 +240,7 @@ def render_page_content(pathname):
 
                 ]),
                 html.Div([
-                    html.Button('Descripción', id='btn-nclicks-1', n_clicks=0,
+                    html.Button('ANÁLISIS', id='btn-nclicks-1', n_clicks=0,
                                 style={'width': '240px', 'height': '40px',
                                        'cursor': 'pointer', 'border': '0px',
                                        'borderRadius': '5px', 'backgroundColor':
@@ -262,7 +294,7 @@ def render_page_content(pathname):
                     ]),
                     html.Br(),
                     html.Div([
-                        html.Button('Descripción', id='btn-nclicks-3', n_clicks=0,
+                        html.Button('ANÁLISIS', id='btn-nclicks-3', n_clicks=0,
                                     style={'width': '240px', 'height': '40px',
                                            'cursor': 'pointer', 'border': '0px',
                                            'borderRadius': '5px', 'backgroundColor':
@@ -301,7 +333,7 @@ def render_page_content(pathname):
 
                 ]),
                 html.Div([
-                    html.Button('Descripción', id='btn-nclicks-5', n_clicks=0,
+                    html.Button('ANÁLISIS', id='btn-nclicks-5', n_clicks=0,
                                 style={'width': '240px', 'height': '40px',
                                        'cursor': 'pointer', 'border': '0px',
                                        'borderRadius': '5px', 'backgroundColor':
@@ -356,14 +388,14 @@ def render_page_content(pathname):
                     # Table container
                     html.Div(id='viajes-promedio'),
                     html.Br(),
-                    # html.Div([
-                    #   html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
-                    #        'cursor': 'pointer', 'border': '0px',
-                    #       'borderRadius': '5px', 'backgroundColor':
-                    #      'black', 'color': 'white', 'textTransform':
-                    #     'uppercase', 'fontSize': '15px'}),
-                    #  html.Div(id='container-button-timestamp3')
-                    # ],style={'textAlign': 'center'}),
+                    html.Div([
+                       html.Button('ANÁLISIS', id='btn-nclicks-2', n_clicks=0, style={'width': '240px', 'height': '40px',
+                            'cursor': 'pointer', 'border': '0px',
+                           'borderRadius': '5px', 'backgroundColor':
+                          'black', 'color': 'white', 'textTransform':
+                         'uppercase', 'fontSize': '15px'}),
+                      html.Div(id='container-button-timestamp2')
+                     ],style={'textAlign': 'center'}),
                     html.Br(),
 
                 ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
@@ -410,14 +442,14 @@ def render_page_content(pathname):
 
                     ]),
                     html.Br(),
-                    # html.Div([
-                    # html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
-                    #              'cursor': 'pointer', 'border': '0px',
-                    #             'borderRadius': '5px', 'backgroundColor':
-                    #            'black', 'color': 'white', 'textTransform':
-                    #           'uppercase', 'fontSize': '15px'}),
-                    # html.Div(id='container-button-timestamp3')
-                    # ],style={'textAlign': 'center'}),
+                     html.Div([
+                     html.Button('ANÁLISIS', id='btn-nclicks-4', n_clicks=0, style={'width': '240px', 'height': '40px',
+                                  'cursor': 'pointer', 'border': '0px',
+                                 'borderRadius': '5px', 'backgroundColor':
+                                'black', 'color': 'white', 'textTransform':
+                               'uppercase', 'fontSize': '15px'}),
+                     html.Div(id='container-button-timestamp4')
+                     ],style={'textAlign': 'center'}),
                     html.Br()
 
                 ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
@@ -465,14 +497,14 @@ def render_page_content(pathname):
 
                     ]),
                     html.Br(),
-                    # html.Div([
-                    # html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
-                    #              'cursor': 'pointer', 'border': '0px',
-                    #             'borderRadius': '5px', 'backgroundColor':
-                    #            'black', 'color': 'white', 'textTransform':
-                    #           'uppercase', 'fontSize': '15px'}),
-                    #  html.Div(id='container-button-timestamp3')
-                    # ],style={'textAlign': 'center'}),
+                     html.Div([
+                     html.Button('ANÁLISIS', id='btn-nclicks-6', n_clicks=0, style={'width': '240px', 'height': '40px',
+                                  'cursor': 'pointer', 'border': '0px',
+                                 'borderRadius': '5px', 'backgroundColor':
+                                'black', 'color': 'white', 'textTransform':
+                               'uppercase', 'fontSize': '15px'}),
+                      html.Div(id='container-button-timestamp6')
+                     ],style={'textAlign': 'center'}),
                     html.Br()
 
                 ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
@@ -529,6 +561,7 @@ def render_page_content(pathname):
                                        4: '5PM-9PM',
                                        5: '9PM-12AM'
                                    },
+                                   included=False,
                                    value=0,
                                    id='my-slider')], style={"width": "60%", "marginLeft": "0%"}),
                     html.Br(),
@@ -536,13 +569,14 @@ def render_page_content(pathname):
                     dcc.Loading(
                         id='loading2',
                         children=[html.Div([
-                            dcc.Graph(id='mapa-frecuencias')
+                            dcc.Graph(id='mapa-frecuencias'),
+                            dcc.Graph(id='mapa-frecuencias2')
 
                         ])],
                         type="circle"),
                     html.Br(),
                     # html.Div([
-                    #   html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
+                    #   html.Button('ANÁLISIS', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
                     #                 'cursor': 'pointer', 'border': '0px',
                     #                'borderRadius': '5px', 'backgroundColor':
                     #               'black', 'color': 'white', 'textTransform':
@@ -590,7 +624,7 @@ def render_page_content(pathname):
 
                         ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
                     html.Br(),
-                    html.H3(children='Escoja el intervalo de tiempo',
+                    html.H5(children='Escoja el intervalo de tiempo',
                             style={"width": "30%", 'display': 'inline-block', "marginLeft": "5%"}),
                     html.Div([
                         dcc.Slider(0, 5, step=None,
@@ -602,6 +636,7 @@ def render_page_content(pathname):
                                        4: '5PM-9PM',
                                        5: '9PM-12AM'
                                    },
+                                   included=False,
                                    value=0,
                                    id='my-slider2')], style={"width": "60%", "marginLeft": "5%"}),
 
@@ -616,7 +651,7 @@ def render_page_content(pathname):
                     type = "circle"),
                     html.Br(),
                     # html.Div([
-                    #   html.Button('Descripción', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
+                    #   html.Button('ANÁLISIS', id='btn-nclicks-3', n_clicks=0, style={'width': '240px', 'height': '40px',
                     #                 'cursor': 'pointer', 'border': '0px',
                     #                'borderRadius': '5px', 'backgroundColor':
                     #               'black', 'color': 'white', 'textTransform':
@@ -648,43 +683,64 @@ def displayClick(btn1):
     if 'btn-nclicks-1' in changed_id:
         if btn1 % 2 != 0:
             return html.Br(),html.Div([
-    html.P('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', style={'textAlign': 'center',"border":"1px black solid"})
+    html.P('Se puede ver que hay una distribución donde la mayoria de la población son mujeres superando el 50% de las personas participantes en el estudio. También se observa que la proporción de hombres y mujeres se mantiene para antes y después de la pandemia.', style={'textAlign': 'center',"border":"1px black solid"})
 ],style={'width':'80%',"marginLeft": "10%"})
         else:
             return
 
-
-def displayClick(btn1):
+@app.callback(
+    Output('container-button-timestamp2', 'children'),
+    [Input('btn-nclicks-2', 'n_clicks'),
+     Input("dropdown-texto-localidad", "value"),
+     Input('dropdown-texto-sexo', 'value')])
+def displayClick(btn1,localidad,sexo):
     changed_id = [p['prop_id'] for p in callback_context.triggered][0]
+    texto = "Se observa que se hacian más viajes en promedio antes de la pandemia que después de la pandemia."
+    if localidad == ["Ciudad Bolivar"] and len(sexo) == 2:
+        texto = "Se observa que no hubo un cambio en el promedio de viajes diarios para los hombres y mujeres de Ciudad Bolivar"
+    if sexo == ["Mujeres"] and  localidad == ["Ciudad Bolivar"]:
+        texto = "Se observa como para el caso de las mujeres de Ciudad Bolivar ocurre lo contrario de lo que se estaba viendo, en promedio se hacen más viajes diarios promedio después de la pandemia"
     if 'btn-nclicks-2' in changed_id:
         if btn1 % 2 != 0:
             return html.Br(),html.Div([
-    html.P('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', style={'textAlign': 'center',"border":"1px black solid"})
+    html.P(texto, style={'textAlign': 'center',"border":"1px black solid"})
 ],style={'width':'80%',"marginLeft": "10%"})
         else:
             return
 
 @app.callback(
     Output('container-button-timestamp3', 'children'),
-    Input('btn-nclicks-3', 'n_clicks')
-)
-def displayClick(btn1):
+    [ Input('btn-nclicks-3', 'n_clicks'),
+        Input("dropdown-ocupacion-localidad", "value"),
+     Input('dropdown-ocupacion-sexo', 'value')])
+def displayClick(btn1,localidad,sexo):
     changed_id = [p['prop_id'] for p in callback_context.triggered][0]
+    texto = ""
+    if len(localidad) == 2 and len(sexo) == 2:
+        texto = "Se observa que para antes y después de la pandemia la actividad principal de las personas es el trabajo. Existe un ligero aumento en las personas que no están trabajando después de la pandemia y una ligera reducción en personas que estan trabajando o en oficios del hogar"
+    if sexo == ["Hombres"]:
+        texto ="Se observa que la actividad principal que predomina en los hombres es el trabajo. Se puede ver claramente como hubo una disminución de hombres que trabajaban después de la pandemia y un aumento en los hombres que no están trabajando "
+    if sexo == ["Mujeres"]:
+        texto = "Se observa como hay una gran cantidad de mujeres cuya actividad principal son los oficios del hogar. Esto contrasta con los hombres ya que eran muy pocos los que tenian los oficios del hogar como actividad principal. Después de la pandemia hubo una disminución en mujeres que estaban trabajando y en oficios del hogar y un aumento significativo en las mujeres que no están trabajando"
     if 'btn-nclicks-3' in changed_id:
         if btn1 % 2 != 0:
             return html.Br(),html.Div([
-    html.P('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', style={'textAlign': 'center',"border":"1px black solid"})
+    html.P(texto, style={'textAlign': 'center',"border":"1px black solid"})
 ],style={'width':'80%',"marginLeft": "10%"})
         else:
             return
 
-
-def displayClick(btn1):
+@app.callback(
+    Output('container-button-timestamp4', 'children'),
+    [ Input('btn-nclicks-4', 'n_clicks'),
+        Input("dropdown-preferido-localidad", "value"),
+     Input('dropdown-preferido-sexo', 'value')])
+def displayClick(btn1,localidad,sexo):
     changed_id = [p['prop_id'] for p in callback_context.triggered][0]
     if 'btn-nclicks-4' in changed_id:
         if btn1 % 2 != 0:
             return html.Br(),html.Div([
-    html.P('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', style={'textAlign': 'center',"border":"1px black solid"})
+    html.P('Se puede observar que las proporciones se mantienen igual exceptuando las de transporte publico y transporte activo. Se puede ver como el uso del transporte publico disminuyo significativamente y que el uso de transporte activo aumento sugiriendo que después de la pandemia las personas prefieren ir a pie, en bicicleta o corriendo que en transporte publico mostrando un claro cambio en los habitos de transporte', style={'textAlign': 'center',"border":"1px black solid"})
 ],style={'width':'80%',"marginLeft": "10%"})
         else:
             return
@@ -698,11 +754,24 @@ def displayClick(btn1):
     if 'btn-nclicks-5' in changed_id:
         if btn1 % 2 != 0:
             return html.Br(),html.Div([
-    html.P('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', style={'textAlign': 'center',"border":"1px black solid"})
+    html.P('Se puede observar que la distribucion de personas por localidad se mantiene casi en un 50-50. No hay un cambio significativo entre las personas que participaron antes y después de la pandemia', style={'textAlign': 'center',"border":"1px black solid"})
 ],style={'width':'80%',"marginLeft": "10%"})
         else:
             return
 
+@app.callback(
+    Output('container-button-timestamp6', 'children'),
+    Input('btn-nclicks-6', 'n_clicks')
+)
+def displayClick(btn1):
+    changed_id = [p['prop_id'] for p in callback_context.triggered][0]
+    if 'btn-nclicks-6' in changed_id:
+        if btn1 % 2 != 0:
+            return html.Br(),html.Div([
+    html.P('Se puede observar que en promedio una persona pasa más minutos en un vehiculo que en los demas medios de transporte. Le sigue caminando que se acerca mucho a los tiempos en vehiculo. No se observa un cambio significativo entre los tiempos antes y después de la pandemia.', style={'textAlign': 'center',"border":"1px black solid"})
+],style={'width':'80%',"marginLeft": "10%"})
+        else:
+            return
 
 @app.callback(
     Output("localidad", "figure"),
@@ -730,7 +799,7 @@ def update_localidad(sex):
         insidetextorientation='radial',
         name="Antes de la pandemia",
         sort=False,
-        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
+        marker=dict(colors=colors_pie2, line=dict(color='#000000', width=2)),
     ), 1, 1)
     fig.add_trace(go.Pie(
         labels=datos2.index,
@@ -739,7 +808,7 @@ def update_localidad(sex):
         insidetextorientation='radial',
         name = "Después de la pandemia",
         sort=False,
-        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
+        marker=dict(colors=colors_pie2, line=dict(color='#000000', width=2)),
     ), 1, 2)
 
 
@@ -769,7 +838,7 @@ def update_sexo(localidad):
         insidetextorientation='radial',
         name = "Antes de la pandemia",
         sort=False,
-        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
+        marker=dict(colors=colors_pie3, line=dict(color='#000000', width=2)),
    ), 1, 1)
 
     fig.add_trace(go.Pie(
@@ -779,7 +848,7 @@ def update_sexo(localidad):
         insidetextorientation='radial',
         name = "Después de la pandemia",
         sort=False,
-        marker=dict(colors=colors_pie, line=dict(color='#000000', width=2)),
+        marker=dict(colors=colors_pie3, line=dict(color='#000000', width=2)),
     ), 1, 2)
                         # color_discrete_sequence=['#32373B',   '#C83E4D'])
     return fig
@@ -829,6 +898,7 @@ def ocupacion(localidad,sex):
 
     fig.update_yaxes(title_text="Número de personas", row=1, col=1)
     fig.update_yaxes(title_text="Número de personas",row=1, col=2)
+
     return fig
 
 #Histograma preferencia transporte
@@ -852,17 +922,18 @@ def update_preferencias(localidad,sex):
     x_data1 = []
     for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
         x_data1.append(len(datos1[datos1["modes"] == nombre]))
-    x_data1 = list(map(lambda x: round(x / sum(x_data1),2), x_data1))
+    x_data1 = list(map(lambda x: 100*round(x / sum(x_data1),2), x_data1))
 
     x_data2 = []
     for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
         x_data2.append(len(datos2[datos2["modes"] == nombre]))
-    x_data2 = list(map(lambda x: round(x / sum(x_data2),2), x_data2))
+    x_data2 = list(map(lambda x: 100*round(x / sum(x_data2),2), x_data2))
 
 
     fig.add_trace(go.Bar(
         y=top_labels,
         x=x_data1,
+        xaxis="x1",
         name='Antes de la pandemia',
         orientation='h',
         marker=dict(
@@ -870,9 +941,11 @@ def update_preferencias(localidad,sex):
             line=dict(color=colors[1], width=3)
         )),1,1)
 
+
     fig.add_trace(go.Bar(
         y=top_labels,
         x=x_data2,
+        xaxis="x1",
         name='Después de la pandemia',
         orientation='h',
         marker=dict(
@@ -880,11 +953,14 @@ def update_preferencias(localidad,sex):
             line=dict(color=colors[3], width=3)
         )), 1, 2)
 
+
     fig.update_xaxes(title_text="Porcentaje (%)", row=1, col=1)
     fig.update_xaxes(title_text="Porcentaje (%)", row=1, col=2)
 
     fig.update_yaxes(title_text="Medio de transporte preferido", row=1, col=1)
     fig.update_yaxes(title_text="Medio de transporte preferido",row=1, col=2)
+
+    fig.update_layout(xaxis1=dict(range=[0,100]),xaxis2=dict(range=[0,100]))
 
     return fig
 
@@ -896,15 +972,16 @@ def update_preferencias(localidad,sex):
      Input('my-slider', 'value')])
 def prueba(localidad, sex, hora):
     fig = make_subplots(
-        rows=2, cols=2,
+        rows=1, cols=2,
         specs=[
-            [{"type": "choropleth"}, {"type": "choropleth"}], [{"type": "choropleth"}, {"type": "choropleth"}]
+            [{"type": "choropleth"}, {"type": "choropleth"}]
         ],
         vertical_spacing=0.075,
         horizontal_spacing=0.08,
-        subplot_titles=("Porcentaje de inicio de viajes por localidad<br>antes de la pandemia", "Porcentaje de inicio de viajes por localidad<br>después de la pandemia", "Porcentaje de fin de viajes por localidad<br>antes de la pandemia",
-                        "Porcentaje de fin de viajes por localidad<br>después de la pandemia")
+        subplot_titles=("Porcentaje de inicio de viajes por localidad<br>antes de la pandemia", "Porcentaje de fin de viajes por localidad<br>antes de la pandemia")
     )
+
+
     data_frame = primeros
     data_frame = data_frame[data_frame["localidad"].isin(localidad)]
     data_frame = data_frame[data_frame["Sexo"].isin(sex)]
@@ -919,50 +996,23 @@ def prueba(localidad, sex, hora):
     diff = localidades - set(data_frame.inicio)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2)*100)
 
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
         locations=data_frame.inicio,
         z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', colors[1]],
-        colorbar_title="Viajes",
+        colorscale=['rgb(255,255,255)', colors_m[1]],
+        colorbar_title="Porcentaje %",
         zmin=0,
-        zmax=0.15,
+        zmax=15,
         name='Viajes iniciados pre pandemia',
         hoverinfo='location+z',
         showlegend=False,
         showscale=False,
     ), row=1, col=1)
 
-    data_frame = primerost2
-    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
-    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
-
-    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
-    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
-    data_frame.columns = ["frecuencia"]
-    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
-    data_frame = (data_frame / data_frame.sum()).reset_index()
-    diff = localidades - set(data_frame.inicio)
-    data_frame = pd.concat(
-        [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
-
-    fig.add_trace(trace=go.Choropleth(
-        featureidkey='properties.LocNombre',
-        geojson=bog_regions_geo,
-        locations=data_frame.inicio,
-        z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', colors[1]],
-        colorbar_title="Viajes",
-        zmin=0,
-        zmax=0.15,
-        name='Viajes iniciados post pandemia',
-        hoverinfo='location+z',
-
-    ), row=1, col=2)
 
     data_frame = ultimos
     data_frame = data_frame[data_frame["localidad"].isin(localidad)]
@@ -976,22 +1026,82 @@ def prueba(localidad, sex, hora):
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
 
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x, 2)*100)
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', colors[1]],
-        colorbar_title="Viajes",
+        colorscale=['rgb(255,255,255)', colors_m[1]],
+        colorbar_title="Porcentaje %",
         zmin=0,
-        zmax=0.15,
-        name='Pre pandemia',
-        hoverinfo='location+z',
-        showlegend=False,
-        showscale=False,
+        zmax=15,
+        name='Viajes finalizados pre pandemia',
+        hoverinfo='location+z'
 
-    ), row=2, col=1)
+    ), row=1, col=2)
+
+
+    fig.update_geos(fitbounds="locations",
+                    visible=False,
+                    )
+    hovertemp = '<i>Localidad:</i> %{location} <br>'
+    hovertemp += '<i>Porcentaje:</i> %{z:,}'
+    fig.update_traces(hovertemplate=hovertemp)
+    fig.update_layout(dragmode=False)
+    fig.update_layout(title_text="Inicio y fin de viajes antes de la pandemia",title_x=0.5)
+
+    return fig
+
+@app.callback(
+    Output("mapa-frecuencias2", "figure"),
+    [Input("dropdown-mapa-localidad", "value"),
+     Input('dropdown-mapa-sexo', 'value'),
+     Input('my-slider', 'value')])
+def hola(localidad, sex, hora):
+    fig = make_subplots(
+        rows=1, cols=2,
+        specs=[
+            [{"type": "choropleth"}, {"type": "choropleth"}]
+        ],
+        vertical_spacing=0.075,
+        horizontal_spacing=0.08,
+        subplot_titles=("Porcentaje de inicio de viajes por localidad<br>después de la pandemia",
+                        "Porcentaje de fin de viajes por localidad<br>después de la pandemia")
+    )
+
+    data_frame = primerost2
+    data_frame = data_frame[data_frame["localidad"].isin(localidad)]
+    data_frame = data_frame[data_frame["Sexo"].isin(sex)]
+    inicio, fin = horas[hora]
+    data_frame = data_frame[(data_frame.hora_inicio >= inicio) & (data_frame.hora_inicio <= fin)]
+    data_frame = data_frame.groupby("dia_inicio")["inicio"].value_counts().to_frame()
+    data_frame.columns = ["frecuencia"]
+    data_frame = data_frame.reset_index().groupby("inicio").agg({"frecuencia": "mean"})
+    data_frame = (data_frame / data_frame.sum()).reset_index()
+    diff = localidades - set(data_frame.inicio)
+    data_frame = pd.concat(
+        [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x, 2)*100)
+
+    fig.add_trace(trace=go.Choropleth(
+        featureidkey='properties.LocNombre',
+        geojson=bog_regions_geo,
+        locations=data_frame.inicio,
+        z=data_frame['frecuencia'],
+        colorscale=['rgb(255,255,255)', colors_m[1]],
+        colorbar_title="Procentaje %",
+        zmin=0,
+        zmax=15,
+        name='Viajes iniciados post pandemia',
+        hoverinfo='location+z',
+
+    ), row=1, col=1)
+
+
+
+
+
     data_frame = ultimost2
     data_frame = data_frame[data_frame["localidad"].isin(localidad)]
     data_frame = data_frame[data_frame["Sexo"].isin(sex)]
@@ -1004,34 +1114,33 @@ def prueba(localidad, sex, hora):
     diff = localidades - set(data_frame.fin)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2))
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x, 2)*100)
 
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['frecuencia'],
-        colorscale=['rgb(255,255,255)', colors[1]],
-        colorbar_title="Viajes",
+        colorscale=['rgb(255,255,255)', colors_m[1]],
+        colorbar_title="Porcentaje %",
         zmin=0,
-        zmax=0.15,
-        name='Post pandemia',
+        zmax=15,
+        name='Viajes finalizados post pandemia',
         hoverinfo='location+z',
         showlegend=False,
         showscale=False,
 
-    ), row=2, col=2)
+    ), row=1, col=2)
     fig.update_geos(fitbounds="locations",
                     visible=False,
                     )
     hovertemp = '<i>Localidad:</i> %{location} <br>'
     hovertemp += '<i>Porcentaje:</i> %{z:,}'
     fig.update_traces(hovertemplate=hovertemp)
-    fig.update_layout(height=600, dragmode=False)
+    fig.update_layout(dragmode=False)
+    fig.update_layout(title_text="Inicio y fin de viajes después de la pandemia", title_x=0.5)
 
     return fig
-
-
 
 
 @app.callback(
@@ -1148,7 +1257,7 @@ def ultimo_mapa(localidad,sex,hora):
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['tiempo_viaje_minutos'],
-        colorscale=['rgb(255,255,255)', colors[1]],
+        colorscale=['rgb(255,255,255)', colors_m[1]],
         colorbar_title="Minutos",
         zmin=0,
         zmax=200,
@@ -1176,7 +1285,7 @@ def ultimo_mapa(localidad,sex,hora):
         geojson=bog_regions_geo,
         locations=data_frame.fin,
         z=data_frame['tiempo_viaje_minutos'],
-        colorscale=['rgb(255,255,255)', colors[1]],
+        colorscale=['rgb(255,255,255)', colors_m[1]],
         colorbar_title="Minutos",
         zmin=0,
         zmax=200,
