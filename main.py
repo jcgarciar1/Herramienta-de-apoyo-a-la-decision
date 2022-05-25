@@ -41,9 +41,12 @@ horas = {0:(datetime.time(0,0,0),datetime.time(5,0,0)) ,
 #Lectura de datos de encuestas
 #T1
 
+diccio = {"Private Transport":"Transporte Privado","Informal transport":"Transporte Informal","Active Transport":"Transporte Activo","Public transport":"Transporte Publico","TransMicable":"TransMicable"}
 encuestast1 = pd.read_csv("modos_t1_resumido.csv")
+encuestast1["modes"] = encuestast1["modes"].replace(diccio)
 #T2
 encuestast2 = pd.read_csv("modos_t2_resumido.csv")
+encuestast2["modes"] = encuestast2["modes"].replace(diccio)
 
 
 #Modos de transporte
@@ -86,7 +89,8 @@ tiemposT2 = pd.read_csv("tiempos_tipoT2.csv")
 
 tiempos = tiempos[tiempos.movimiento != "UNKNOWN"]
 tiemposT2 = tiemposT2[tiemposT2.movimiento != "UNKNOWN"]
-
+tiempos["movimiento"] = tiempos["movimiento"].replace({"WALKING":"Caminando","RUNNING":"Corriendo","ON_BICYCLE":"Bicicleta","IN_VEHICLE":"Vehículo"})
+tiemposT2["movimiento"] = tiemposT2["movimiento"].replace({"WALKING":"Caminando","RUNNING":"Corriendo","ON_BICYCLE":"Bicicleta","IN_VEHICLE":"Vehículo"})
 
 
 tiempos_viaje = pd.read_csv("tiempo_viajes_T1.csv")
@@ -152,8 +156,8 @@ sidebar = html.Div(
             [
                 dbc.NavLink("Introducción", href="/", active="exact"),
                 dbc.NavLink("Datos demográficos", href="/page-1", active="exact"),
-                dbc.NavLink("Patrones de transporte", href="/page-2", active="exact"),
-                dbc.NavLink("Mapas", href="/page-3", active="exact"),
+                dbc.NavLink("Modos de transporte", href="/page-2", active="exact"),
+                dbc.NavLink("Viajes", href="/page-3", active="exact"),
 
             ],
             vertical=True,
@@ -347,58 +351,7 @@ def render_page_content(pathname):
         ]
     elif pathname == "/page-2":
         return [
-            dbc.Row(
-                dbc.Col(html.H2(children=["Viajes promedio por persona \t",
-                                          html.I(className="fas fa-info-circle fa-xs", id="texto_viajes",
-                                                 style={"color": "black"})], style={"textAlign": "center"}),
-                        style={"align": "end"}),
-                justify="end"
-            ),
-            dbc.Tooltip("Se muestra la cantidad de viajes que una persona realiza en promedio al día",
-                        target="texto_viajes"),
 
-            html.Center(
-                html.Div([
-                    html.Div([
-
-                        html.Div([
-                            html.H5(children='Escoja la localidad a visualizar'),
-                            dcc.Checklist(
-                                id="dropdown-texto-localidad",
-                                options=["Ciudad Bolivar", "San Cristobal"],
-                                value=["Ciudad Bolivar", "San Cristobal"],
-                                inline=True,
-                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
-
-                        ]),
-
-                        html.Div([
-                            html.H5(children='Escoja el sexo a visualizar'),
-                            dcc.Checklist(
-                                id="dropdown-texto-sexo",
-                                options=["Hombres", "Mujeres"],
-                                value=["Hombres", "Mujeres"],
-                                inline=True,
-                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
-
-                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
-                    html.Br(),
-                    html.Br(),
-
-                    # Table container
-                    html.Div(id='viajes-promedio'),
-                    html.Br(),
-                    html.Div([
-                       html.Button('ANÁLISIS', id='btn-nclicks-2', n_clicks=0, style={'width': '240px', 'height': '40px',
-                            'cursor': 'pointer', 'border': '0px',
-                           'borderRadius': '5px', 'backgroundColor':
-                          'black', 'color': 'white', 'textTransform':
-                         'uppercase', 'fontSize': '15px'}),
-                      html.Div(id='container-button-timestamp2')
-                     ],style={'textAlign': 'center'}),
-                    html.Br(),
-
-                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
 
             dbc.Row(
                 dbc.Col(html.H2(children=["Porcentaje de personas que prefieren un tipo de transporte \t",
@@ -455,7 +408,7 @@ def render_page_content(pathname):
                 ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
 
             dbc.Row(
-                dbc.Col(html.H2(children=["Minutos diarios promedio por medio de transporte \t",
+                dbc.Col(html.H2(children=["Minutos diarios promedio por tipo de movimiento \t",
                                           html.I(className="fas fa-info-circle fa-xs", id="target-minutos",
                                                  style={"color": "black"})], style={"textAlign": "center"}),
                         style={"align": "end"}),
@@ -512,6 +465,59 @@ def render_page_content(pathname):
         ]
     elif pathname == "/page-3":
         return [
+            dbc.Row(
+                dbc.Col(html.H2(children=["Viajes promedio por persona \t",
+                                          html.I(className="fas fa-info-circle fa-xs", id="texto_viajes",
+                                                 style={"color": "black"})], style={"textAlign": "center"}),
+                        style={"align": "end"}),
+                justify="end"
+            ),
+            dbc.Tooltip("Se muestra la cantidad de viajes que una persona realiza en promedio al día",
+                        target="texto_viajes"),
+
+            html.Center(
+                html.Div([
+                    html.Div([
+
+                        html.Div([
+                            html.H5(children='Escoja la localidad a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-texto-localidad",
+                                options=["Ciudad Bolivar", "San Cristobal"],
+                                value=["Ciudad Bolivar", "San Cristobal"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ]),
+
+                        html.Div([
+                            html.H5(children='Escoja el sexo a visualizar'),
+                            dcc.Checklist(
+                                id="dropdown-texto-sexo",
+                                options=["Hombres", "Mujeres"],
+                                value=["Hombres", "Mujeres"],
+                                inline=True,
+                                inputStyle={"margin-right": "5px", "margin-left": "10px"}),
+
+                        ], style={"marginLeft": "5%"})], className="d-flex justify-content-center"),
+                    html.Br(),
+                    html.Br(),
+
+                    # Table container
+                    html.Div(id='viajes-promedio'),
+                    html.Br(),
+                    html.Div([
+                        html.Button('ANÁLISIS', id='btn-nclicks-2', n_clicks=0,
+                                    style={'width': '240px', 'height': '40px',
+                                           'cursor': 'pointer', 'border': '0px',
+                                           'borderRadius': '5px', 'backgroundColor':
+                                               'black', 'color': 'white', 'textTransform':
+                                               'uppercase', 'fontSize': '15px'}),
+                        html.Div(id='container-button-timestamp2')
+                    ], style={'textAlign': 'center'}),
+                    html.Br(),
+
+                ], style={"width": "100%"}, className="shadow-lg p-3 mb-5 bg-white rounded")),
             dbc.Row(
                 dbc.Col(html.H2(children=["Porcentaje de personas iniciando o terminando un viaje \t",
                                           html.I(className="fas fa-info-circle fa-xs", id="target-mapa-salidas",
@@ -918,14 +924,14 @@ def update_preferencias(localidad,sex):
 
     fig = make_subplots(rows=1, cols=2, specs=[[{}, {}]], shared_xaxes=True,
                         shared_yaxes=True, vertical_spacing=0.001,subplot_titles=("Proporción antes de la pandemia", "Proporción después de la pandemia"))
-    top_labels = ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']
+    top_labels =list(diccio.values())
     x_data1 = []
-    for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
+    for nombre in top_labels:
         x_data1.append(len(datos1[datos1["modes"] == nombre]))
     x_data1 = list(map(lambda x: 100*round(x / sum(x_data1),2), x_data1))
 
     x_data2 = []
-    for nombre in ['Public transport', 'Active Transport', 'TransMicable', 'Informal transport', 'Private Transport']:
+    for nombre in top_labels:
         x_data2.append(len(datos2[datos2["modes"] == nombre]))
     x_data2 = list(map(lambda x: 100*round(x / sum(x_data2),2), x_data2))
 
@@ -996,7 +1002,7 @@ def prueba(localidad, sex, hora):
     diff = localidades - set(data_frame.inicio)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x,2)*100)
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(100*x,2))
 
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
@@ -1006,7 +1012,7 @@ def prueba(localidad, sex, hora):
         colorscale=['rgb(255,255,255)', colors_m[1]],
         colorbar_title="Porcentaje %",
         zmin=0,
-        zmax=15,
+        zmax=25,
         name='Viajes iniciados pre pandemia',
         hoverinfo='location+z',
         showlegend=False,
@@ -1026,7 +1032,7 @@ def prueba(localidad, sex, hora):
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
 
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x, 2)*100)
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(100*x, 2))
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
         geojson=bog_regions_geo,
@@ -1035,7 +1041,7 @@ def prueba(localidad, sex, hora):
         colorscale=['rgb(255,255,255)', colors_m[1]],
         colorbar_title="Porcentaje %",
         zmin=0,
-        zmax=15,
+        zmax=25,
         name='Viajes finalizados pre pandemia',
         hoverinfo='location+z'
 
@@ -1082,7 +1088,7 @@ def hola(localidad, sex, hora):
     diff = localidades - set(data_frame.inicio)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["inicio", "frecuencia"])])
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x, 2)*100)
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(100*x, 2))
 
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
@@ -1092,7 +1098,7 @@ def hola(localidad, sex, hora):
         colorscale=['rgb(255,255,255)', colors_m[1]],
         colorbar_title="Procentaje %",
         zmin=0,
-        zmax=15,
+        zmax=25,
         name='Viajes iniciados post pandemia',
         hoverinfo='location+z',
 
@@ -1114,7 +1120,7 @@ def hola(localidad, sex, hora):
     diff = localidades - set(data_frame.fin)
     data_frame = pd.concat(
         [data_frame, pd.DataFrame(list(zip(diff, np.zeros(len(diff)))), columns=["fin", "frecuencia"])])
-    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(x, 2)*100)
+    data_frame['frecuencia'] = data_frame['frecuencia'].apply(lambda x: round(100*x, 2))
 
     fig.add_trace(trace=go.Choropleth(
         featureidkey='properties.LocNombre',
@@ -1124,7 +1130,7 @@ def hola(localidad, sex, hora):
         colorscale=['rgb(255,255,255)', colors_m[1]],
         colorbar_title="Porcentaje %",
         zmin=0,
-        zmax=15,
+        zmax=25,
         name='Viajes finalizados post pandemia',
         hoverinfo='location+z',
         showlegend=False,
