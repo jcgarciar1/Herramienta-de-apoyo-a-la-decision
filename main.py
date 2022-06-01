@@ -42,10 +42,10 @@ horas = {0:(datetime.time(0,0,0),datetime.time(5,0,0)) ,
 #T1
 
 diccio = {"Private Transport":"Transporte Privado","Informal transport":"Transporte Informal","Active Transport":"Transporte Activo","Public transport":"Transporte Publico","TransMicable":"TransMicable"}
-encuestast1 = pd.read_csv("modos_t1_resumido.csv")
+encuestast1 = pd.read_csv("assets/modos_t1_resumido.csv")
 encuestast1["modes"] = encuestast1["modes"].replace(diccio)
 #T2
-encuestast2 = pd.read_csv("modos_t2_resumido.csv")
+encuestast2 = pd.read_csv("assets/modos_t2_resumido.csv")
 encuestast2["modes"] = encuestast2["modes"].replace(diccio)
 
 
@@ -67,25 +67,25 @@ encuestast2["modes"] = encuestast2["modes"].replace(diccio)
 #Locaciones (Lat Lon) acelerometria
 #acelerometria = pd.read_excel("movimientos_acelerometria.xlsx")
 
-primeros = pd.read_csv("primeros.csv")
+primeros = pd.read_csv("assets/primeros.csv")
 primeros.hora_inicio = primeros.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
 
-primerost2 = pd.read_csv("primerosT2.csv")
+primerost2 = pd.read_csv("assets/primerosT2.csv")
 primerost2.hora_inicio = primerost2.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
 
-ultimos = pd.read_csv("ultimos.csv")
+ultimos = pd.read_csv("assets/ultimos.csv")
 ultimos.hora_fin = ultimos.hora_fin.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
 
-ultimost2 = pd.read_csv("ultimosT2.csv")
+ultimost2 = pd.read_csv("assets/ultimosT2.csv")
 ultimost2.hora_fin = ultimost2.hora_fin.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
 
-localidades = set(pd.read_csv("localidades.csv")["0"])
+localidades = set(pd.read_csv("assets/localidades.csv")["0"])
 
-viajes_promedio = pd.read_csv("viajes_diarios_promedioT1.csv")
-viajes_promedioT2 = pd.read_csv("viajes_diarios_promedioT2.csv")
+viajes_promedio = pd.read_csv("assets/viajes_diarios_promedioT1.csv")
+viajes_promedioT2 = pd.read_csv("assets/viajes_diarios_promedioT2.csv")
 
-tiempos = pd.read_csv("tiempos_tipo.csv")
-tiemposT2 = pd.read_csv("tiempos_tipoT2.csv")
+tiempos = pd.read_csv("assets/tiempos_tipo.csv")
+tiemposT2 = pd.read_csv("assets/tiempos_tipoT2.csv")
 
 tiempos = tiempos[tiempos.movimiento != "UNKNOWN"]
 tiemposT2 = tiemposT2[tiemposT2.movimiento != "UNKNOWN"]
@@ -93,16 +93,16 @@ tiempos["movimiento"] = tiempos["movimiento"].replace({"WALKING":"Caminando","RU
 tiemposT2["movimiento"] = tiemposT2["movimiento"].replace({"WALKING":"Caminando","RUNNING":"Corriendo","ON_BICYCLE":"Bicicleta","IN_VEHICLE":"Vehículo"})
 
 
-tiempos_viaje = pd.read_csv("tiempo_viajes_T1.csv")
+tiempos_viaje = pd.read_csv("assets/tiempo_viajes_T1.csv")
 tiempos_viaje.hora_inicio = tiempos_viaje.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
 tiempos_viaje.tiempo_viaje_minutos = tiempos_viaje.tiempo_viaje_minutos.apply(lambda x: round(x,2))
 
-tiempos_viajeT2 = pd.read_csv("tiempo_viajes_T2.csv")
+tiempos_viajeT2 = pd.read_csv("assets/tiempo_viajes_T2.csv")
 tiempos_viajeT2.hora_inicio = tiempos_viajeT2.hora_inicio.apply(lambda x: datetime.datetime.strptime(x.split(".")[0], '%H:%M:%S').time())
 tiempos_viajeT2.tiempo_viaje_minutos = tiempos_viajeT2.tiempo_viaje_minutos.apply(lambda x: round(x,2))
 
 
-with open('bogota.json', 'r') as openfile:
+with open('assets/bogota.json', 'r') as openfile:
     # Reading from json file
     bog_regions_geo = json.load(openfile)
 
@@ -1287,4 +1287,4 @@ def ultimo_mapa(localidad,sex,hora):
 
     return fig
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
