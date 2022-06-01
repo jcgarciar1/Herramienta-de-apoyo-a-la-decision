@@ -183,36 +183,10 @@ app.layout = html.Div([
 def render_page_content(pathname):
     if pathname == "/":
         return [
-            html.H1("Proyecto Muévelo"),
-            html.Div([
-            dbc.Row(children=[
-                dbc.Col(children=[
+            html.Img(src="assets/1.svg",style={"width":"100%"}),
+            html.Img(src="assets/2.svg", style={"width": "100%"}),
+            html.Img(src="assets/3.svg", style={"width": "100%"}),
 
-                    html.P(
-                        "SALURBAL (Salud Urbana en América Latina) es una iniciativa lanzada en abril de 2017. Esta pretende evaluar el impacto de las políticas e intervenciones en la salud, el medio ambiente y la equidad, mediante la recopilación de datos sobre demografía, mortalidad, entorno social, salud y factores de riesgo de América Latina. Teniendo ese objetivo en mente, plantearon el proyecto TRUST  (Transformaciones Urbanas y Salud: El caso de TransMiCable en Bogotá) que tiene como propósito analizar los efectos de la implementación del TransMiCable en Bogotá, una de las principales transformaciones urbanas de la ciudad.",style = {"textAlign":"justify"}),
-                    html.P(
-                        "Dado que el proyecto gira en torno a los efectos e impactos generados por la implementación del TransMiCable, la población de estudio son los habitantes de Ciudad Bolívar Ciudad Bolívar, ya que es la única localidad que cuenta con este medio de transporte en Bogotá. Ciudad Bolívar es la tercera localidad más extensa de la ciudad de Bogotá y está compuesta por 360 barrios con 12.998 hectáreas de superficie. Está localizada en un punto estratégico de la ciudad porque limita con vías importantes, que hacen que la UPZ tenga condiciones privilegiadas para ubicar comercios, industrias y servicios a la comunidad. Sin embargo, el territorio tiene corredores viales estrechos, empinados, y una topografía quebrada y montañosa que hacen que las vías de acceso presenten fallas geológicas, perjudicando la movilidad del sector dificultando el acceso al transporte y dando lugar a largos tiempos de desplazamiento.",
-                        style={"textAlign": "justify"}),
-
-                ],
-
-                ),
-                dbc.Col(children=[
-            html.Div([
-                html.Br(),
-
-
-                html.Img(src="assets/transmicable.jpg",style={"width":"95%"})],style = {"textAlign":"center"})]),
-
-            ],justify="end"),
-                #html.Br(),
-                html.P(
-                    "Teniendo en cuenta lo anterior, la primera fase de TRUST consistió en una recolección de datos iniciales, previa a la implementación del TransMiCable, sobre los habitantes de Ciudad Bolívar y San Cristóbal, siendo los habitantes de San Cristóbal un grupo de control. Al finalizar esta fase se continuo con la recolección de datos relacionados con aspectos sociodemográficos, de salud, actividad física y percepciones generales además de mediciones sobre el posicionamiento, variación de velocidades y tiempos de desplazamiento de los individuos. La toma de estos últimos datos se realizó en dos periodos diferentes, antes y durante la pandemia de Covid-19, en los años 2019 y 2021, respectivamente. Dicha pandemia generó restricciones en la movilidad urbana causadas por la emergencia sanitaria, forzando cambios importantes en los hábitos y comportamientos de las personas.",
-                    style={"textAlign": "justify"}),
-                html.P(
-                    "El objetivo de este proyecto consiste en el desarrollo de una herramienta que permita concluir y tomar decisiones a partir de la información recolectada por el proyecto TRUST para el año 2019 y 2021. En este trabajo, el enfoque serán los patrones de movimiento y tiempos de desplazamiento de los habitantes de Ciudad Bolívar y San Cristóbal. Se busca facilitar el análisis de la información para que así se puedan tomar decisiones respecto a la movilidad en esta zona. Adicional a esto, se busca hacer una comparación entre estos patrones antes y después de la pandemia con el fin de entender los cambios de la movilidad y los tiempos de desplazamiento entre estos dos momentos. Conocer estas transformaciones y la manera en que son vividas por los habitantes de la zona permitirá realizar un balance oportuno del proyecto y orientar futuras intervenciones.",
-                    style={"textAlign": "justify"}),
-            ],className="shadow-lg p-3 mb-5 bg-white rounded"),
         ]
     elif pathname == "/page-1":
         return [
@@ -1313,4 +1287,4 @@ def ultimo_mapa(localidad,sex,hora):
 
     return fig
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
