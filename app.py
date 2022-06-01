@@ -1287,6 +1287,8 @@ def ultimo_mapa(localidad,sex,hora):
 
     return fig
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
 
+app.title = 'Visualización Muévelo'
+app._favicon = ("assets/logo-uniandes.png")
 server = app.server
